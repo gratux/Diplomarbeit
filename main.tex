@@ -1,0 +1,117 @@
+% !TeX spellcheck = de_DE
+\documentclass[twoside]{article}
+\usepackage{hyperref}
+\usepackage[a4paper, margin=2cm, includeheadfoot]{geometry}
+\usepackage[british, german]{babel}
+\usepackage{fancyhdr, graphicx, multicol, datetime2, fontspec, titlesec}
+
+\hypersetup{
+	linkcolor=black,
+	linktoc=all,
+	colorlinks=true
+}
+
+\fancypagestyle{default}{
+	\fancyhf{} %clear header and footer
+	\lhead[\leftmark]{}
+	\rhead[]{\rightmark}
+	\lfoot[\thepage]{}
+	\rfoot[]{\thepage}
+}
+
+\fancypagestyle{title}{
+	\fancyhf{} %clear header and footer
+	\fancyhead[c]{\includegraphics[width=\linewidth]{images/HTLinn_Kopf_light}}
+	\rhead[]{}
+}
+
+\fancypagestyle{none}{
+	\fancyhf{} %clear header and footer
+	\renewcommand{\headrulewidth}{0pt} % remove lines as well
+	\renewcommand{\footrulewidth}{0pt}
+}
+
+\newcommand{\blankpage}{
+	\newpage
+	\null
+	\thispagestyle{none}
+	\newpage
+}
+
+\setlength{\parindent}{0pt}
+
+\setmainfont{Arial}
+
+\pagestyle{default}
+
+\begin{document}
+\begin{titlepage}
+	\newgeometry{margin=2cm, includeheadfoot, headheight=54pt}
+	\thispagestyle{title}
+	\begin{center}
+		\vspace*{2cm}
+		\Huge\textbf{Diplomarbeit}\\
+		\vspace*{2cm}
+		\huge Bidirektionale Videosprechanlage\\
+		\vspace*{0.5cm}
+		\normalsize Erweiterung einer RaspberryPi basierten Videogegensprechanlage\\
+		\vspace*{1.5cm}
+		\textbf{Höhere Technische Bundeslehr- und Versuchsanstalt Anichstraße}\\
+		\vspace*{0.5cm}
+		\hrule
+		\vspace*{0.5cm}
+		Abteilung Elektrotechnik\\
+		\vspace*{1cm}
+	\end{center}
+	\begin{multicols}{2}
+		Ausgeführt im Schuljahr 2019/20 von:\bigskip\par
+		Andreas Grain 5AHET (HV)\par
+		Matthias Mair 5AHET\par	
+		\columnbreak	
+		Betreuer:\bigskip\par
+		DI(FH) Mario Prantl\par
+	\end{multicols}
+	Projektpartner: keine
+	\vskip 1.5cm
+	Innsbruck, am \DTMnow
+	\vskip 1.5cm
+	\hrule
+	\vspace*{1cm}
+	\begin{multicols}{2}
+		Abgabevermerk:\\
+		Datum:
+		
+		\columnbreak
+		
+		Betreuer:
+	\end{multicols}
+	\restoregeometry
+\end{titlepage}
+\blankpage
+
+\tableofcontents
+\newpage
+
+\begin{abstract}
+	
+\end{abstract}
+\begin{otherlanguage}{british}
+\begin{abstract}
+	
+\end{abstract}
+\end{otherlanguage}
+\blankpage
+
+\section{Einleitung}
+\part{Hardware-Erweiterung}
+\section{Probleme des Ist-Standes}
+\section{Platine}
+\part{Smartphone-App}
+\section{Xamarin-Rahmenwerk}
+\section{LibVLC Sharp}
+\section{RTSP}
+\section{Entwicklung und Testen}
+\part{Server}
+\section{GStreamer}
+\section{Live555 Proxy}
+\end{document}
