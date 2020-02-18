@@ -1,117 +1,160 @@
 % !TeX spellcheck = de_DE
-\documentclass[twoside]{article}
-\usepackage{hyperref}
-\usepackage[a4paper, margin=2cm, includeheadfoot]{geometry}
+\documentclass[a4paper, 12pt, twoside, openright
+%, draft, showframe
+]{memoir}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\usepackage[margin=2cm, bindingoffset=5mm, includeheadfoot]{geometry}
 \usepackage[british, german]{babel}
-\usepackage{fancyhdr, graphicx, multicol, datetime2, fontspec, titlesec}
+
+\usepackage{fancyhdr, graphicx, datetime2, fontspec, microtype}
+
+\usepackage{hyperref}
+\usepackage[hyperref=true]{acro}
+
+\input{acronyms.tex}
 
 \hypersetup{
-	linkcolor=black,
-	linktoc=all,
-	colorlinks=true
+	linktoc=all
 }
 
-\fancypagestyle{default}{
+% pagestyles ------------------------------------------------------------------
+\fancypagestyle{normalpage}{
 	\fancyhf{} %clear header and footer
-	\lhead[\leftmark]{}
-	\rhead[]{\rightmark}
-	\lfoot[\thepage]{}
-	\rfoot[]{\thepage}
+	\rhead[\leftmark]{\thepage}
+	\lhead[\thepage]{\rightmark}
+	\cfoot{Andreas Grain / Matthias Mair}
 }
+\aliaspagestyle{chapter}{normalpage}
+\aliaspagestyle{part}{normalpage}
 
-\fancypagestyle{title}{
+\fancypagestyle{abstractpage}{
 	\fancyhf{} %clear header and footer
-	\fancyhead[c]{\includegraphics[width=\linewidth]{images/HTLinn_Kopf_light}}
-	\rhead[]{}
+	\rhead[]{\thepage}
+	\lhead[\thepage]{}
 }
 
-\fancypagestyle{none}{
+\fancypagestyle{titlepage}{
 	\fancyhf{} %clear header and footer
-	\renewcommand{\headrulewidth}{0pt} % remove lines as well
-	\renewcommand{\footrulewidth}{0pt}
+	\fancyhead[c]{\includegraphics[width=\linewidth]{images/HTL_Header}}
 }
+\aliaspagestyle{titlingpage}{titlepage}
 
+% memoir configuration ------------------------------------------------------
+\chapterstyle{section}
+\setsecnumdepth{subsection}
+\settocdepth{subsection}
+
+% custom commands -----------------------------------------------------------
 \newcommand{\blankpage}{
 	\newpage
 	\null
-	\thispagestyle{none}
+	\thispagestyle{empty}
 	\newpage
 }
 
+% text formatting ----------------------------------------------------------
 \setlength{\parindent}{0pt}
-
+\setlength{\parskip}{8pt}
 \setmainfont{Arial}
 
-\pagestyle{default}
-
 \begin{document}
-\begin{titlepage}
-	\newgeometry{margin=2cm, includeheadfoot, headheight=54pt}
-	\thispagestyle{title}
-	\begin{center}
-		\vspace*{2cm}
-		\Huge\textbf{Diplomarbeit}\\
-		\vspace*{2cm}
-		\huge Bidirektionale Videosprechanlage\\
-		\vspace*{0.5cm}
-		\normalsize Erweiterung einer RaspberryPi basierten Videogegensprechanlage\\
-		\vspace*{1.5cm}
-		\textbf{Höhere Technische Bundeslehr- und Versuchsanstalt Anichstraße}\\
-		\vspace*{0.5cm}
-		\hrule
-		\vspace*{0.5cm}
-		Abteilung Elektrotechnik\\
-		\vspace*{1cm}
-	\end{center}
-	\begin{multicols}{2}
-		Ausgeführt im Schuljahr 2019/20 von:\bigskip\par
-		Andreas Grain 5AHET (HV)\par
-		Matthias Mair 5AHET\par	
-		\columnbreak	
-		Betreuer:\bigskip\par
-		DI(FH) Mario Prantl\par
-	\end{multicols}
-	Projektpartner: keine
-	\vskip 1.5cm
-	Innsbruck, am \DTMnow
-	\vskip 1.5cm
-	\hrule
-	\vspace*{1cm}
-	\begin{multicols}{2}
-		Abgabevermerk:\\
-		Datum:
-		
-		\columnbreak
-		
-		Betreuer:
-	\end{multicols}
-	\restoregeometry
-\end{titlepage}
-\blankpage
+\pagestyle{normalpage}
+\frontmatter
+\begin{titlingpage}
+	\input{title.tex}
+\end{titlingpage}
 
-\tableofcontents
+\chapter{Erklärungen}
+\section{Eidesstattliche Erklärung}
+Wir erklären an Eides statt, dass wir die vorliegende Diplomarbeit selbständig und ohne fremde Hilfe verfasst, andere als die angegebenen Quellen und Hilfsmittel nicht benutzt und die den benutzten Quellen wörtlich und inhaltlich entnommenen Stellen als solche erkenntlich gemacht haben.
+\vspace*{1.5cm}
+\begin{center}
+	\hrule
+	\vspace*{0.2cm}
+	Ort, Datum\hspace*{0.4\linewidth}Andreas Grain\\
+	\vspace*{1.5cm}
+	\hrule
+	\vspace*{0.2cm}
+	Ort, Datum\hspace*{0.4\linewidth}Matthias Mair
+\end{center}
+\vspace*{1.5cm}
+
+\section{Gender-Erklärung}
+Aus Gründen der besseren Lesbarkeit wird in dieser Diplomarbeit die Sprachform des generischen Maskulinums angewendet. Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendung der männlichen Form geschlechtsunabhängig verstanden werden soll.
 \newpage
 
-\begin{abstract}
-	
-\end{abstract}
-\begin{otherlanguage}{british}
-\begin{abstract}
-	
-\end{abstract}
-\end{otherlanguage}
+\tableofcontents
 \blankpage
 
-\section{Einleitung}
+\chapter{Kurzfassung/Abstract}
+\thispagestyle{abstractpage}
+Die vorliegende Diplomarbeit beschäftigt sich mit der Erweiterung einer \ac{rpi}-basierten Videosprechanlage um einer Smartphone-Applikation, sowie der grundlegenden Überarbeitung der Stations-Hardware.
+Zusätzlich soll ein Linux-basierter, aus dem Internet erreichbarer Server zum Verteilen der Video-Streams eingerichtet werden.
+%Für die Entwicklung der Smartphone-App wird das Xamarin-Framework herangezogen, sodass die Applikation sowohl auf Android-, als auch iOS-Geräten lauffähig ist.
+\par
+Dieses Projekt basiert auf einer früheren Diplomarbeit von \_ und \_ an der HTL Anichstraße aus dem Jahr \_, welche ein voll funktionsfähiges Videosprechanlagensystem hervorbrachte.
+Jedoch wurde damals die Hardware-Entwicklung sehr vernachlässigt.
+\par
+Die Hardware-Erweiterung besteht grundsätzlich aus zwei Teilen: zum einen werden die vielen Elektronik-Bausteine in einer zentralen Platine vereint, was eine einfachere und kostengünstigere Fertigung erlaubt.
+Zusätzlich wird die aktuelle Hardware der Station um einen Watchdog-Timer erweitert, welcher im Fehlerfall die Anlage zurücksetzt.
+\par
+Softwareseitig wird die Anlage um eine Smartphone-App erweitert, mit welcher der Fernzugriff auf das System ermöglicht werden soll.
+\par
+
+\vspace*{1cm}
+\begin{otherlanguage}{british}
+	This diploma thesis deals with the extension of a \ac{rpi}-based video intercom system by a smartphone application, as well as the fundamental revision of the station hardware.
+	In addition, a Linux-based server, accessible from the Internet, will be set up to distribute the video streams.
+	%The Xamarin framework will be used for the development of the smartphone app, so that the application can be run on both Android and iOS devices.
+	\par
+	This project is based on an earlier diploma thesis by \_ and \_ at the HTL Anichstraße from the year \_, which produced a fully functional video intercom system.
+	However, at that time the hardware development was rather neglected.
+	\par
+	The hardware extension basically consists of two parts: on the one hand, the many electronic components are combined in a central circuit board, which allows easier and more cost-effective production.
+	In addition, the current hardware of the station is extended by a watchdog timer, which resets the system in case of an error.
+	\par
+	On the software side, the system will be extended by a smartphone app, which will enable remote access to the system.
+	\par
+\end{otherlanguage}
+
+\mainmatter
+\chapter{Einleitung}
+\chapter{Vertiefende Aufgabenstellung}
+\section{Andreas Grain}
+\section{Matthias Mair}
+
 \part{Hardware-Erweiterung}
-\section{Probleme des Ist-Standes}
-\section{Platine}
+\chapter{Probleme des Ist-Standes}
+\chapter{Platine}
+\section{Spannungsversorgung}
+\section{Mikrofon-Verstärkerschaltung}
+\section{Lautsprecher-Verstärkerschaltung}
+\section{Mikrocontroller}
+\subsection{Programmierung}
+\subsection{Watchdog}
+
 \part{Smartphone-App}
+\chapter{Grundlagen}
 \section{Xamarin-Rahmenwerk}
-\section{LibVLC Sharp}
+\subsection{Xamarin.Forms}
+\subsection{Platform-Spezifischer Code}
 \section{RTSP}
-\section{Entwicklung und Testen}
+\section{LibVLC Sharp}
+\chapter{Entwicklung}
+\chapter{Testen}
+
 \part{Server}
-\section{GStreamer}
-\section{Live555 Proxy}
+\chapter{GStreamer}
+\chapter{Live555 Proxy}
+
+\appendix
+\part{Appendix}
+\chapter{Verwendete Entwicklungswerkzeuge}
+\chapter{Lastenheft}
+\chapter{Zeitplanung}
+\chapter{Kostenübersicht}
+\chapter{Fertigungsdokumentation}
+
+\printacronyms[heading=chapter]
 \end{document}

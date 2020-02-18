@@ -3,3 +3,6 @@
 *.synctex.gz
 *.out
 *.toc
+*.code-workspace
+*.fls
+*.fdb_latexmk
