@@ -3,14 +3,11 @@
 %, draft, showframe
 ]{memoir}
 \usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
 \usepackage[margin=2cm, bindingoffset=5mm, includeheadfoot]{geometry}
 \usepackage[british, german]{babel}
-
 \usepackage{fancyhdr, graphicx, datetime2, fontspec, microtype}
-
-\usepackage{hyperref}
 \usepackage[hyperref=true]{acro}
+\usepackage{hyperref}
 
 \input{acronyms.tex}
 
@@ -62,7 +59,7 @@
 \pagestyle{normalpage}
 \frontmatter
 \begin{titlingpage}
-	\input{title.tex}
+	\input{sections/title.tex}
 \end{titlingpage}
 
 \chapter{Erklärungen}
@@ -89,34 +86,7 @@ Aus Gründen der besseren Lesbarkeit wird in dieser Diplomarbeit die Sprachform 
 
 \chapter{Kurzfassung/Abstract}
 \thispagestyle{abstractpage}
-Die vorliegende Diplomarbeit beschäftigt sich mit der Erweiterung einer \ac{rpi}-basierten Videosprechanlage um einer Smartphone-Applikation, sowie der grundlegenden Überarbeitung der Stations-Hardware.
-Zusätzlich soll ein Linux-basierter, aus dem Internet erreichbarer Server zum Verteilen der Video-Streams eingerichtet werden.
-%Für die Entwicklung der Smartphone-App wird das Xamarin-Framework herangezogen, sodass die Applikation sowohl auf Android-, als auch iOS-Geräten lauffähig ist.
-\par
-Dieses Projekt basiert auf einer früheren Diplomarbeit von \_ und \_ an der HTL Anichstraße aus dem Jahr \_, welche ein voll funktionsfähiges Videosprechanlagensystem hervorbrachte.
-Jedoch wurde damals die Hardware-Entwicklung sehr vernachlässigt.
-\par
-Die Hardware-Erweiterung besteht grundsätzlich aus zwei Teilen: zum einen werden die vielen Elektronik-Bausteine in einer zentralen Platine vereint, was eine einfachere und kostengünstigere Fertigung erlaubt.
-Zusätzlich wird die aktuelle Hardware der Station um einen Watchdog-Timer erweitert, welcher im Fehlerfall die Anlage zurücksetzt.
-\par
-Softwareseitig wird die Anlage um eine Smartphone-App erweitert, mit welcher der Fernzugriff auf das System ermöglicht werden soll.
-\par
-
-\vspace*{1cm}
-\begin{otherlanguage}{british}
-	This diploma thesis deals with the extension of a \ac{rpi}-based video intercom system by a smartphone application, as well as the fundamental revision of the station hardware.
-	In addition, a Linux-based server, accessible from the Internet, will be set up to distribute the video streams.
-	%The Xamarin framework will be used for the development of the smartphone app, so that the application can be run on both Android and iOS devices.
-	\par
-	This project is based on an earlier diploma thesis by \_ and \_ at the HTL Anichstraße from the year \_, which produced a fully functional video intercom system.
-	However, at that time the hardware development was rather neglected.
-	\par
-	The hardware extension basically consists of two parts: on the one hand, the many electronic components are combined in a central circuit board, which allows easier and more cost-effective production.
-	In addition, the current hardware of the station is extended by a watchdog timer, which resets the system in case of an error.
-	\par
-	On the software side, the system will be extended by a smartphone app, which will enable remote access to the system.
-	\par
-\end{otherlanguage}
+\input{sections/kurzfassung.tex}
 
 \mainmatter
 \chapter{Einleitung}
@@ -137,6 +107,7 @@ Softwareseitig wird die Anlage um eine Smartphone-App erweitert, mit welcher der
 \part{Smartphone-App}
 \chapter{Grundlagen}
 \section{Xamarin-Rahmenwerk}
+\input{sections/xamarin.tex}
 \subsection{Xamarin.Forms}
 \subsection{Platform-Spezifischer Code}
 \section{RTSP}
