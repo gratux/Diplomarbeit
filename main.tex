@@ -29,11 +29,13 @@
 	\fancyhf{} %clear header and footer
 	\rhead[]{\thepage}
 	\lhead[\thepage]{}
+	\cfoot{Andreas Grain / Matthias Mair}
 }
 
 \fancypagestyle{titlepage}{
 	\fancyhf{} %clear header and footer
 	\fancyhead[c]{\includegraphics[width=\linewidth]{images/HTL_Header}}
+	\cfoot{Andreas Grain / Matthias Mair}
 }
 \aliaspagestyle{titlingpage}{titlepage}
 
@@ -51,7 +53,7 @@
 }
 
 % text formatting ----------------------------------------------------------
-\setlength{\parindent}{0pt}
+%\setlength{\parindent}{0pt}
 \setlength{\parskip}{8pt}
 \setmainfont{Arial}
 
@@ -59,7 +61,7 @@
 \pagestyle{normalpage}
 \frontmatter
 \begin{titlingpage}
-	\input{sections/title.tex}
+	\input{chapters/title.tex}
 \end{titlingpage}
 
 \chapter{Erklärungen}
@@ -85,16 +87,20 @@ Aus Gründen der besseren Lesbarkeit wird in dieser Diplomarbeit die Sprachform 
 \blankpage
 
 \chapter{Kurzfassung/Abstract}
-\thispagestyle{abstractpage}
-\input{sections/kurzfassung.tex}
+%\thispagestyle{abstractpage}
+\input{chapters/kurzfassung.tex}
+\chapter{Projektergebnis}
+%\thispagestyle{abstractpage}
+
 
 \mainmatter
 \chapter{Einleitung}
+\input{chapters/einleitung.tex}
 \chapter{Vertiefende Aufgabenstellung}
 \section{Andreas Grain}
 \section{Matthias Mair}
 
-\part{Hardware-Erweiterung}
+\part{Hardware-Erweiterung - Matthias Mair}
 \chapter{Probleme des Ist-Standes}
 \chapter{Platine}
 \section{Spannungsversorgung}
@@ -104,19 +110,22 @@ Aus Gründen der besseren Lesbarkeit wird in dieser Diplomarbeit die Sprachform 
 \subsection{Programmierung}
 \subsection{Watchdog}
 
-\part{Smartphone-App}
-\chapter{Grundlagen}
-\section{Xamarin-Rahmenwerk}
-\input{sections/xamarin.tex}
-\subsection{Xamarin.Forms}
-\subsection{Platform-Spezifischer Code}
-\section{RTSP}
-\section{LibVLC Sharp}
+\part{Smartphone-App - Andreas Grain}
+\chapter{Xamarin-Rahmenwerk}
+\input{chapters/xamarin.tex}
+\section{Xamarin.Forms}
+\section{Platform-Spezifischer Code}
+\chapter{RTSP}
+\chapter{LibVLC Sharp}
+\chapter{Push-Benachrichtigung}
+\section{Push Notification Service}
+\section{Azure Notification Hubs}
 \chapter{Entwicklung}
 \chapter{Testen}
 
 \part{Server}
-\chapter{GStreamer}
+\chapter{Grundlagen}
+\section{GStreamer}
 \chapter{Live555 Proxy}
 
 \appendix
