@@ -1,7 +1,8 @@
 Jedes moderne Wohngebäude ist inzwischen mit einer Gegensprechanlage ausgestattet.
 Eine solche Anlage werlaubt es dem Wohnungsbesitzer mit jemandem vor der Haustür zu reden, bevor dieser hereingelassen wird.
 Manche Wohnungen besitzen bereits eine Videosprechanlage, die nicht nur den Ton, sondern zusätzlich ein Video von außen dem Bewohner bereitstellt.
-Dem Gast wird jedoch immer noch nur der Ton von innen übertragen.\par
+Dem Gast wird jedoch immer noch nur der Ton von innen übertragen.
+Diese Applikation ist ortsgebunden, d.h. es müssen sowohl der Gast, als auch der Bewohner vor der entsprechenden Station stehen.\par
 
 Im Zuge einer früheren Diplomarbeit an der HTL Anichstraße entwickelten \_ und \_ eine Videogegensprechanlage, welche mehrere Innenstationen und die bidirektionale Video- und Tonübertragung unterstützt.
 Die Idee ist, dass in einem Wohnungskomplex pro Partei eine Innestation verbaut wird, sowie eine Außenstation am Hauseingang.
@@ -12,3 +13,28 @@ Am Anfang des 5. Schuljahres bat uns unser FI-Professor DI(FH) Mario Prantl an, 
 Für die Entwicklung der App sollte das Xamarin-Rahmenwerk verwendet werden, damit die Applikation auf sowohl Android-, als auch iOS-Geräten lauffähig ist. Der Benutzer soll über die App das Video der entsprechenden Station abrufen und mit dem Gesprächspartner sprechen können.
 Die Hardware-Überarbeitung hat mehrere Ziele; zum Einen soll dadurch die komplexität des internen Aufbaus einer Station verringert werden.
 Zum Anderen soll mit Hilfe eines Watchdog-Timers das Langzeit-Betriebsverhalten verbessert werden.
+
+\section{Funktionalität}
+\paragraph{Ortsunabhängiger Anlagenzugriff}
+Um dem Anwender mehr Komfort bieten zu können, beschränkt sich die Anlage und dessen Funktion nicht mehr auf die fest installierte Station, sondern ist auch über ein mobiles Gerät bedienbar.
+Dies bietet den Vorteil, dass auch wenn man sich gerade nicht in der Nähe der Innenstation befindet Gäste empfangen werden können.
+
+\paragraph{Paketdienst}
+Die Paketübergabe erfolgt üblicherweise persönlich.
+Wenn der Empfänger nicht zuhause ist, nimmt der Paketdienst die Ware wieder mit, und deponiert sie bei einer Paketabholstelle und hinterlässt dem Empfänger lediglich eine Benachrichtigung.
+Diese Vorgangsweise ist besonders ärgerlich, wenn man den Paketboten um wenige Minuten versäumt hat oder nicht schnell genug zur Innenstelle gelangen konnte.
+Beispielsweise befindet sich der Bewohner gerade auf dem Dachboden oder im Keller.
+Mit einer Smartphone-App ist eine sofortige Kontaktaufnahme mit dem Postboten möglich und verhindert eine unnötige zusätzliche Bearbeitung des Paketversandes.
+
+\paragraph{Sicherheit}
+Die neu gewonnene Ortsunabhängigkeit der Anlage bietet eine höhere Einbruchssicherheit, da man jederzeit Überblick über gewünschte bzw. ungewünschte Besucher hat.
+Über die Smartphone-Applikation ist ein Öffnen des Türschlosses aus mehreren Gründen deaktiviert.
+\begin{itemize}
+    \item Wenn der Benutzer nicht zuhause ist, ist eine Türöffnung sowieso irrelevant.
+    \item Wenn der Benutzer zuhause ist, muss er sowieso zur Eingangstür gehen, um den Besuch in Empfang zu nehmen. Die im Eingangsbereich installierte Station dient hier zur Öffnung der Haustür.
+\end{itemize}
+
+\section{Aufgabenteilung}
+\paragraph{Andreas Grain} ist der Projekt-Hauptverantwortliche und ...
+
+\paragraph{Matthias Mair}
