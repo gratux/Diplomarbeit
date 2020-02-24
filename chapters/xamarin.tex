@@ -5,7 +5,21 @@
 % Das Unternehmen Xamarin wurde mit der Absicht gegründet, Software auf mobile Geräte zu vertreiben. 
 
 \section{Übersicht}
-%Grafik Teile der Solution ...
+Grundsätzlich besteht das Software-Projekt aus drei Teilen:
+\paragraph{PiBell} ist das portable Porjekt, auch .NET-Standard-Projekt genannt.
+Dieses beinhaltet den ganzen platformunabhängigen Code, sowie die Definition der UI-Oberfläche mittels XAML-Dateien.\par
+\paragraph{PiBell.Android} beinhaltet allen Code, der platformspezifisch für Android geschrieben wurde. Unter anderem ist hier enthalten die Android-Implementation des Mikrofon-Auf\-nahme-Services, sowie das Berechtigungs-Management.\par
+\paragraph{PiBell.iOS} beinhaltet wie PiBell.Android den platformspezifischen Code für die iOS-Plat\-form. Aufgrund mangelnder Entwicklungswerkzeuge wurde dieser Teil nicht großartig behandelt.\par
+Der immer wieder auftretende Name PiBell ist dabei eine freigeistliche Erfindung. Der Begriff setzt sich zusammen aus RaspberryPi und dem englischen Wort für Glocke oder Klingel (Bell).\par
+\begin{figure}
+\tikzstyle{mybox} = [draw=black, fill=blue!20, very thick,
+    rectangle, rounded corners, inner sep=10pt, inner ysep=20pt]
+\begin{tikzpicture}
+    %Grafik Teile der Solution ...
+\end{tikzpicture}
+\caption{Aufbau der Solution}
+\end{figure}
+
 %besteht aus drei teilen
 %- portable project/.net standard project
 %   platformunabhängiger teil, oberfläche, ...
@@ -15,3 +29,6 @@
     %iOS-spezifischer Teil, ...
 %project-name PiBell -> erfindung, leitet sich aus raspberry und Türglocke ab
 %
+\section{Portable Project}
+\section{PiBell.Android}
+\section{PiBell.iOS}
