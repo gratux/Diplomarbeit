@@ -1,6 +1,6 @@
 % !TeX spellcheck = de_DE
 \documentclass[a4paper, 12pt, twoside, openright
-, draft, showframe
+%, draft, showframe
 ]{memoir}
 \usepackage[T1]{fontenc}
 \usepackage[margin=2cm, bindingoffset=5mm, includeheadfoot]{geometry}
@@ -24,7 +24,6 @@
 	\cfoot{Andreas Grain / Matthias Mair}
 }
 \aliaspagestyle{chapter}{normalpage}
-\aliaspagestyle{part}{normalpage}
 
 \fancypagestyle{abstractpage}{
 	\fancyhf{} %clear header and footer
@@ -32,6 +31,7 @@
 	\lhead[\thepage]{}
 	\cfoot{Andreas Grain / Matthias Mair}
 }
+\aliaspagestyle{part}{abstractpage}
 
 \fancypagestyle{titlepage}{
 	\fancyhf{} %clear header and footer

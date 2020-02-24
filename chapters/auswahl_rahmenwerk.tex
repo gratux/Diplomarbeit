@@ -9,6 +9,27 @@
 %- Native Programmierung
 %- ...
 %
+Für die App-Programmierung stehen viele verschiedene Rahmenwerke bereits zur Verfügung.
+Dieser Abschnitt beschäftigt sich mit dem Vergleich der einzelnen Möglichkeiten, sowie einer endgültigen Auswahl eines der Rahmenwerke zur Verwendung im Diplomprojekt.
+
+\paragraph{Microsoft Xamarin}
+ist ein Rahmenwerk, mit dem man Multiplatform-Applikationen für unter Anderem Android, iOS, UWP und noch viele weitere Platformen erstellen kann.
+Es basiert auf Microsoft's .NET-Rahmenwerk und dem Mono-Projekt, welches sich als Ziel gesetzt hat, das .NET-Rahmenwerk auf andere Platformen zu portieren.
+Xamarin bietet mehrere Projekttypen an, darunter Xamarin.Android und Xamarin.iOS für native App-Entwicklung und Xamarin.Forms für großteils platformunabhängige Entwicklung.
+Eine Xamarin.Forms-Solution besteht daher aus drei Teilen: einem Portable bzw. .NET-Standard-Projekt und je einem nativen Xamarin-Projekt für jede Zielplatform.
+Der Vorteil Xamarin's ist, dass der Großteil des geschriebenen Codes im platformunabhängigen Projekt bleibt und nur für wenige Funktionen auf native Programmierung zurückgegriffen wird, wie zum Beispiel für hardwarenahe Audio-Aufnahme.
+Außerdem ist das Xamarin-Projekt Open Source, das bedeutet jeder kann den Quellcode betrachten und unter Umständen Verbesserungen vorbringen.
+
+\paragraph{Apache Cordova}
+ist ein Appentwicklungs-Rahmenwerk welches ursprünglich von der Firma Nitobi entwickelt wurde.
+Im Jahr 2011 wurde Nitobi vone Adopbe aufgekauft und das Rahmenwerk wurde zu PhoneGap umgetauft.
+Später wurde eine quelloffene Version unter dem ursprünglichen Namen veröffentlicht.
+Apps werden mittels gängiger Webtechnologie, wie zum Beispiel JavaScript, CSS und Ähnlichen, entwickelt und realisiert, weshalb das Rahmenwerk alle gängigen Platformen unterstützt.
+Der Vorteil von Cordova liegt im enormen Support dieser Webtechnologien, jedoch sind Sprachen wie JavaScript eher weniger für Back-End-Programmierung geeignet.
+Noch dazu kommt, dass an der HTL Anichstraße großteils die Programmierung nur in C und C\# gelehrt wird, welshalb die Entwicklung mit JavaScript nicht realistisch ist.
+\paragraph{Andere}
+Neben Apache Cordova existieren noch viele weitere Rahmenwerke, die wie Cordova auf Webtechnologie aufbauen, um so die platformunabhängigkeit garantiern zu können. Allerdings bringen diese alle die selben Probleme wie Cordova mit sich.
+
 \section{Build-Umgebung}
 Aufgrund obiger Aufstellung wurde Visual Studio 2019 der Firma Microsoft als Entwicklungsumgebung gewählt.
 Diese steht für Schüler und Private gratis auf der Seite {\href{https://visualstudio.microsoft.com/}{https://visualstudio.microsoft.com/}} zum Download zur Verfügung.
@@ -17,7 +38,8 @@ Visual Studio ist das offizielle Werkzeug für die Programmierung mit dem Xamari
 
 %Betriebssystem, Hardwareanforderungen
 %
-Die minimalen Hardware-, bzw. Software-Anforderungen können der \href{https://docs.microsoft.com/en-us/visualstudio/releases/2019/system-requirements}{Microsoft-Doku\-mentation des Visual Studio} entnommen werden:
+\subsection{Installation Visual Studio} %nur wenn noch Text gebraucht wird
+Die minimalen Hardware-, bzw. Software-Anforderungen können der \href{https://docs.microsoft.com/en-us/visualstudio/releases/2019/system-requirements}{Microsoft-Doku"~men"~tation des Visual Studio} entnommen werden:
 
 \begin{figure}[H]
     \centering\begin{tabular}{ | r | p{0.6\linewidth} l | }
@@ -59,33 +81,53 @@ Die minimalen Hardware-, bzw. Software-Anforderungen können der \href{https://d
 % Um mit Android 8.1 (API-Level 27) und höheren Systembildern arbeiten zu können, muss eine angeschlossene Webcam die Fähigkeit haben, 720p-Frames aufzunehmen.
 
 %Vorsicht be\item Unterstützte Betriebssystemei der Installation
+
+Auf der oben genannten Website steht der Visual Studio 2019 Installer zum Download bereit.
+Hier ist bereits die geünschte Version, in diesem Fall die Community-Edition, auszuwählen.
 \begin{figure}[H]
-    \centering\includegraphics[width=0.7\linewidth]{images/auswahl_rahmenwerk/installation.png}    
+    \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/download.png}    
+    \caption{Auswahl der Visual-Studio-Edition}
+\end{figure}
+Nach dem Download und anschließender Installation können die gewünschten Programmteile ausgewählt werden.
+Für die Entwicklung von Xamarin-Applikationen ist das "Mobile development with .NET''-Pakted erforderlich.
+\begin{figure}[H]
+    \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/installation.png}    
     \caption{Auswahl des Xamarin-Rahmenwerks bei der Installation}
 \end{figure}
-Keine weiteren Einstellungen oder Auswahlen sind zwingend erforderlich, allerdings empfielt es sich noch zusätzlich das ".NET desktop development"-Paket installiert. Mit diesem kann man neue Technologien des .NET Frameworks in einer einfacheren Konsolenanwendung ausprobieren und kennenlernen.
+
+Keine weiteren Einstellungen oder Auswahlen sind zwingend erforderlich, allerdings empfielt es sich noch zusätzlich das ,,.NET desktop development''-Paket zu installieren.
+Mit diesem kann man neue Technologien des .NET Frameworks in einer einfacheren Konsolenanwendung ausprobieren und kennenlernen.
 \begin{figure}[H]
-    \centering\includegraphics[width=0.7\linewidth]{images/auswahl_rahmenwerk/installation2.png}    
+    \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/installation2.png}    
     \caption{Zusatzpaket für Desktop-Entwicklung mit .NET}
 \end{figure}
-Nach Fertigstellung der Installation von Visual Studio 2019 erscheint dieses am Desktop und im Startmeü als neues Icon. Zusätzlich zum Xamarin-Rahemnwerk sind die notwendigen Android-SDK-Komponenten auszuwählen und zu installieren. Diese sind notwendig ...
+Nach Fertigstellung der Installation von Visual Studio 2019 erscheint dieses am Desktop und im Startmenü als neues Icon.
 
-Nach dem Start von Visual Studio muss eine neue "Solution" angelegt werden. Diese beinhaltet alle Programmteile, welche für die Xamarin-Entwicklung benötigt werden. 
+\subsection{Installation Android SDK}
+Das Xamarin-Rahmenwerk benötigt zum Entwickeln von Android-Apps noch zusätzlich mehrere Teile des Android SDK der Firma Google. Mit diesem wird während dem Kompilieren das Programm in ein installierbares Android-Packet, kurz APK, umgewandelt.
+Damit dies richtig funktioniert, müssen alle Komponenten, auf die im Programm zugegriffen wird, über den Android-SDK-Manager installiert werden.
+%Android SDK komponente
+\begin{figure}[H]
+    \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/android_sdk_installation.png}    
+    \caption{Android SDK Manager}
+\end{figure}
+\begin{figure}[H]
+    \centering\includegraphics[height=15cm]{images/auswahl_rahmenwerk/android_sdk_auswahl.png}    
+    \caption{Notwendige Teile des Android SDK}
+\end{figure}
+Besonders wichtig sind hier die Pakete der Google Play Services und die Goole Cloud Messaging Library, welche für das Empfangen von Push-Benachrichtung zwingend erforderlich sind. Diese Benachrigtung wird in einem eigenen Kapitel näher erklärt.
+Die Android SDK Tools sind für jede Art von Android-Applikation mit Xamarin erforderlich.
+Bei Bedarf kann über dieses Menü auch der offizielle Android-Emulator installiert werden.
+%System images
+
+Nach dem Start von Visual Studio muss eine neue ,,Solution'' angelegt werden. Diese beinhaltet alle Programmteile, welche für die Xamarin-Entwicklung benötigt werden. 
 
 \begin{figure}[H]
-    \centering\includegraphics[width=0.7\linewidth]{images/auswahl_rahmenwerk/installation2.png}    
+    \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/installation2.png}    
     \caption{Anlegen einer neuen Solution}
 \end{figure}
 
-\begin{figure}[H]
-    \centering\includegraphics[width=0.7\linewidth]{images/auswahl_rahmenwerk/installation2.png}    
-    \caption{Auswahl der beötigten Android Platformen}
-\end{figure}
-\begin{figure}[H]
-    \centering\includegraphics[width=0.7\linewidth]{images/auswahl_rahmenwerk/installation2.png}    
-    \caption{Auswahl der benötigten Android Tools}
-\end{figure}
-%Android SDK komponente
+
 
 
 
