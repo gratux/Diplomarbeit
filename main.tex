@@ -1,11 +1,11 @@
 % !TeX spellcheck = de_DE
-\documentclass[a4paper, 12pt, twoside, openright
+\documentclass[a4paper, 12pt, twoside, openleft
 %, draft, showframe
 ]{memoir}
 \usepackage[T1]{fontenc}
 \usepackage[margin=2cm, bindingoffset=5mm, includeheadfoot]{geometry}
 \usepackage[british, german]{babel}
-\usepackage{fancyhdr, graphicx, datetime2, fontspec, tikz, float}
+\usepackage{fancyhdr, graphicx, datetime2, fontspec, tikz, float, hologo}
 \usepackage[protrusion=true,final]{microtype}
 \usepackage[hyperref=true]{acro}
 \usepackage{hyperref}
@@ -13,7 +13,9 @@
 \input{acronyms.tex}
 
 \hypersetup{
-	linktoc=all
+	linktoc=all,
+	colorlinks=true,
+	linkcolor=blue
 }
 
 % pagestyles ------------------------------------------------------------------
@@ -56,7 +58,8 @@
 % text formatting ----------------------------------------------------------
 %\setlength{\parindent}{0pt}
 \setlength{\parskip}{8pt}
-\setmainfont{Arial}
+\setsansfont{Arial}
+\setmainfont{Times New Roman}
 
 \begin{document}
 \pagestyle{normalpage}
@@ -64,7 +67,7 @@
 \begin{titlingpage}
 	\input{chapters/title.tex}
 \end{titlingpage}
-
+\linespread{1.5}
 \chapter{Erklärungen}
 \section{Eidesstattliche Erklärung}
 Wir erklären an Eides statt, dass wir die vorliegende Diplomarbeit selbständig und ohne fremde Hilfe verfasst, andere als die angegebenen Quellen und Hilfsmittel nicht benutzt und die den benutzten Quellen wörtlich und inhaltlich entnommenen Stellen als solche erkenntlich gemacht haben.
@@ -81,8 +84,9 @@ Wir erklären an Eides statt, dass wir die vorliegende Diplomarbeit selbständig
 \vspace*{1.5cm}
 
 \section{Gender-Erklärung}
-Aus Gründen der besseren Lesbarkeit wird in dieser Diplomarbeit die Sprachform des generischen Maskulinums angewendet. Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendung der männlichen Form geschlechtsunabhängig verstanden werden soll.
-\newpage
+Aus Gründen der besseren Lesbarkeit wird in dieser Diplomarbeit die Sprachform des generischen Maskulinums angewendet.
+Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendung der männlichen Form geschlechtsunabhängig verstanden werden soll.
+\cleartoverso
 
 \tableofcontents
 \blankpage
