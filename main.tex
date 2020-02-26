@@ -6,7 +6,7 @@
 \usepackage[margin=2cm, bindingoffset=5mm, includeheadfoot]{geometry}
 \usepackage[british, german]{babel}
 \usepackage{fancyhdr, graphicx, datetime2, fontspec, tikz, float, hologo}
-\usepackage[protrusion=true,final]{microtype}
+%\usepackage[protrusion=true,final]{microtype}
 \usepackage[hyperref=true]{acro}
 \usepackage{hyperref}
 
@@ -14,7 +14,7 @@
 
 \hypersetup{
 	linktoc=all,
-	colorlinks=true,
+	colorlinks=false,
 	linkcolor=blue
 }
 
@@ -58,16 +58,19 @@
 % text formatting ----------------------------------------------------------
 %\setlength{\parindent}{0pt}
 \setlength{\parskip}{8pt}
-\setsansfont{Arial}
-\setmainfont{Times New Roman}
+\setmainfont{Arial}
 
+
+% Document start -----------------------------------------------------------
 \begin{document}
 \pagestyle{normalpage}
+
 \frontmatter
 \begin{titlingpage}
 	\input{chapters/title.tex}
 \end{titlingpage}
-\linespread{1.5}
+
+\linespread{2}
 \chapter{Erklärungen}
 \section{Eidesstattliche Erklärung}
 Wir erklären an Eides statt, dass wir die vorliegende Diplomarbeit selbständig und ohne fremde Hilfe verfasst, andere als die angegebenen Quellen und Hilfsmittel nicht benutzt und die den benutzten Quellen wörtlich und inhaltlich entnommenen Stellen als solche erkenntlich gemacht haben.
@@ -89,23 +92,23 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \cleartoverso
 
 \tableofcontents
-\cleartoverso
-\part{}
+\printacronyms[heading=chapter,name=Abkürzungen]
+\listoffigures
+\listoftables
 
 \chapter{Kurzfassung/Abstract}
-%\thispagestyle{abstractpage}
 \input{chapters/kurzfassung.tex}
 \chapter{Projektergebnis} 
 %\thispagestyle{abstractpage}
 %iOS-Entwicklung nicht durchgeführt, kein Mac vorhanden.
 %Mehrfachzugriff über App wurde nicht eingeschränkt, ist weiter zu bearbeiten.
 
-
 \mainmatter
 \chapter{Einleitung}
 \input{chapters/einleitung.tex}
 
 \part{Hardware-Erweiterung - Matthias Mair}
+\cleartoverso
 \chapter{Probleme des Ist-Standes}
 \chapter{Platine}
 \section{Spannungsversorgung}
@@ -141,6 +144,4 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \chapter{Zeitplanung}
 \chapter{Kostenübersicht}
 \chapter{Fertigungsdokumentation}
-
-\printacronyms
 \end{document}

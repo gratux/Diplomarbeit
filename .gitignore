@@ -8,3 +8,12 @@
 *.fdb_latexmk
 *.xdv
 *.ist
+*.lof
+*.maf
+*.mtc
+*.mtc0
+*.ptc1
+*.ptc2
+*.ptc3
+*.ptc4
+*.lot
