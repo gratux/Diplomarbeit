@@ -5,10 +5,13 @@
 \usepackage[T1]{fontenc}
 \usepackage[margin=2cm, bindingoffset=5mm, includeheadfoot]{geometry}
 \usepackage[british, german]{babel}
-\usepackage{fancyhdr, graphicx, datetime2, fontspec, tikz, float, hologo}
-%\usepackage[protrusion=true,final]{microtype}
 \usepackage[hyperref=true]{acro}
+\usepackage[backend=biber, style=alphabetic]{biblatex}
+\usepackage{fancyhdr, graphicx, datetime2, fontspec, tikz, float, hologo, csquotes, tabulary}
+%\usepackage[protrusion=true,final]{microtype}
 \usepackage{hyperref}
+
+\addbibresource{sources.bib}
 
 \input{acronyms.tex}
 
@@ -92,9 +95,6 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \cleartoverso
 
 \tableofcontents
-\printacronyms[heading=chapter,name=Abkürzungen]
-\listoffigures
-\listoftables
 
 \chapter{Kurzfassung/Abstract}
 \input{chapters/kurzfassung.tex}
@@ -121,15 +121,14 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \part{Smartphone-App - Andreas Grain}
 \chapter{Auswahl Rahmenwerk}
 \input{chapters/auswahl_rahmenwerk.tex}
-\chapter{Programm-Dokumentation}
-\input{chapters/xamarin.tex}
 \chapter{RTSP}
 \chapter{LibVLC Sharp}
 \chapter{Push-Benachrichtigung}
 \section{Push Notification Service}
 \section{Azure Notification Hubs}
+\chapter{Programm-Dokumentation}
+\input{chapters/xamarin.tex}
 \chapter{Entwicklung}
-
 \chapter{Testen}
 
 \part{Server}
@@ -138,6 +137,11 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \chapter{Live555 Proxy}
 
 \appendix
+\printacronyms[heading=chapter,name=Abkürzungen]
+\listof{figure}{Abbildungsverzeichnis}
+\listof{table}{Tabellenverzeichnis}
+\printbibliography
+
 \part{Appendix}
 \chapter{Verwendete Entwicklungswerkzeuge}
 \chapter{Lastenheft}

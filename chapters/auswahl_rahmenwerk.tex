@@ -23,17 +23,33 @@ Neben Apache Cordova existieren noch viele weitere Rahmenwerke, die wie Cordova 
 
 \section{Build-Umgebung}
 Aufgrund obiger Aufstellung wurde Visual Studio 2019 der Firma Microsoft als Entwicklungsumgebung gewählt.
-Diese steht für Schüler und Private gratis auf der Seite \href{https://visualstudio.microsoft.com/}{https://visualstudio.microsoft.com/} zum Download zur Verfügung.
+Visual Studio ist das offizielle Werkzeug für die Programmierung mit dem Xamarin-Rahmenwerk und die wahrscheinlich bestbekannte Entwicklungsumgebung überhaupt.
+Die Community-Edition für Schüler und Private steht gratis zum Download zur Verfügung.
+Diese beinhält alle wichtigen Entwicklungswerkzeuge wie zum Beispiel die automatische Code-Vervollständigung.
+Für die Nutzung wird nach den ersten 30 Tagen ein Microsoft-Konto benötigt.\par
 %versionsvergleich hier https://visualstudio.microsoft.com/vs/compare/
-Visual Studio ist das offizielle Werkzeug für die Programmierung mit dem Xamarin-Rahmenwerk.
 
+Visual Studio 2019 organisiert den Programmcode in sogenannten Solutions.
+Am Beispiel einer Xamarin.Forms-Applikation lässt sich das sehr gut erläutern;
+die Solution enthält auf oberster Ebene drei Projekte: das portable Projekt, das Android- und das iOS-Projekt.
+Ein Projekt kann bereits für sich lauffähig oder nur Teil eines größeren Programms sein.\par
+
+Visual Studio 2019 unterschtützt viele verschiedene Einsatzbereiche, die bei der Installation ausgewählt werden müssen.
+Eine volle Installation mit allen Funktionen und Projektarten ist zwar möglich, benötigt allerdings bis zu 210GB Speicherplatz des Systems.
+Eine typische Xamarin-Installation benötigt zwischen 7GB und 10GB.
+Für eine solche Installation muss im Visual Studio Installer das "Mobile development with .NET''-Paktet ausgewählt und installiert werden.
+\begin{figure}[H]
+    \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/installation.png}    
+    \caption{Auswahl des Xamarin-Rahmenwerks bei der Installation}
+\end{figure}
+Auf nähere Details der Installation von Visual Studio wird hier nicht eingegangen, diese können aber auf der Microsoft-Dokumentationsseite \cite{msdoc-vs-install} nachgeschalgen werden.
 %Betriebssystem, Hardwareanforderungen
 %
 \subsection{Installation Visual Studio} %nur wenn noch Text gebraucht wird
 Die minimalen Hardware-, bzw. Software-Anforderungen können der \href{https://docs.microsoft.com/en-us/visualstudio/releases/2019/system-requirements}{Microsoft-Doku\-men\-tation des Visual Studio} entnommen werden:
 
-\begin{figure}[H]
-    \centering\begin{tabular}{ | r | p{0.6\linewidth} l | }
+\begin{table}[H]
+    \centering\begin{tabulary}{0.9\linewidth}{|R|L|}
         \hline
         Unterstützte Betriebssysteme
         & - Windows 10, Version 1703 oder höher (LTSC und S werden nicht unterstützt)\\
@@ -42,7 +58,7 @@ Die minimalen Hardware-, bzw. Software-Anforderungen können der \href{https://d
         & - Windows 8.1 (mit Update 2919355)\\
         & - Windows Server 2012 R2 (mit Update 2919355)\\
         & - Windows 7 SP1 (mit neuesten Windows-Updates)\\
-        & \\
+        \hline
         Hardware
         & - 1,8-GHz-Prozessor oder schneller; Quad-Core oder besser empfohlen\\
         & - 2 GB RAM; 8 GB RAM empfohlen\\
@@ -50,9 +66,9 @@ Die minimalen Hardware-, bzw. Software-Anforderungen können der \href{https://d
         & - Festplattengeschwindigkeit: Zur Verbesserung der Leistung installieren Sie Windows und Visual Studio auf einem Festkörperlaufwerk (SSD).\\
         & - Grafikkarte, die eine Auflösung von mindestens 720p (1280 x 720) unterstützt. Visual Studio funktioniert am besten mit einer Auflösung von WXGA (1366 x 768) oder höher.\\
         \hline
-    \end{tabular}
+    \end{tabulary}
     \caption{Soft- und Hardware-Anforderungen Visual Studio}    
-\end{figure}
+\end{table}
 
 %Quellenangabe!!
 %Anforderungen für Android Emulator
@@ -81,10 +97,7 @@ Hier ist bereits die geünschte Version, in diesem Fall die Community-Edition, a
 \end{figure}
 Nach dem Download und anschließender Installation können die gewünschten Programmteile ausgewählt werden.
 Für die Entwicklung von Xamarin-Applikationen ist das "Mobile development with .NET''-Pakted erforderlich.
-\begin{figure}[H]
-    \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/installation.png}    
-    \caption{Auswahl des Xamarin-Rahmenwerks bei der Installation}
-\end{figure}
+
 
 Keine weiteren Einstellungen oder Auswahlen sind zwingend erforderlich, allerdings empfielt es sich noch zusätzlich das ,,.NET desktop development''-Paket zu installieren.
 Mit diesem kann man neue Technologien des .NET Frameworks in einer einfacheren Konsolenanwendung ausprobieren und kennenlernen.

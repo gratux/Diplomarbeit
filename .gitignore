@@ -17,3 +17,7 @@
 *.ptc3
 *.ptc4
 *.lot
+*.bbl
+*.bcf
+*.blg
+*.run.xml
