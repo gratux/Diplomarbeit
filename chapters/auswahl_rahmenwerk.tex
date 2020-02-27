@@ -3,23 +3,23 @@ Für die App-Programmierung stehen viele verschiedene Rahmenwerke bereits zur Ve
 Dieser Abschnitt beschäftigt sich mit dem Vergleich der einzelnen Möglichkeiten, sowie einer endgültigen Auswahl eines der Rahmenwerke zur Verwendung im Diplomprojekt.
 
 \paragraph{Microsoft Xamarin}
-ist ein Rahmenwerk, mit dem man Multiplatform-Applikationen für unter Anderem Android, iOS, UWP und noch viele weitere Platformen erstellen kann.
-Es basiert auf Microsoft's .NET-Rahmenwerk und dem Mono-Projekt, welches sich als Ziel gesetzt hat, das .NET-Rahmenwerk auf andere Platformen zu portieren.
-Xamarin bietet mehrere Projekttypen an, darunter Xamarin.Android und Xamarin.iOS für native App-Entwicklung und Xamarin.Forms für großteils platformunabhängige Entwicklung.
-Eine Xamarin.Forms-Solution besteht daher aus drei Teilen: einem Portable/.NET-Standard-Projekt und je ein natives Xamarin-Projekt für jede Zielplatform.
-Der Vorteil Xamarin's ist, dass der Großteil des geschriebenen Codes im platformunabhängigen Projekt bleibt und nur für wenige Funktionen auf native Programmierung zurückgegriffen wird, wie zum Beispiel für hardwarenahe Audio-Aufnahme.
+ist ein Rahmenwerk, mit dem man Multiplattform-Applikationen für unter Anderem Android, iOS, UWP und noch viele weitere Plattformen erstellen kann.
+Es basiert auf Microsofts \ac{dotnet} und dem Mono-Projekt, welches sich als Ziel gesetzt hat, das \ac{dotnet} auf andere Plattformen zu portieren.
+Xamarin bietet mehrere Projekttypen an, darunter Xamarin.Android und Xamarin.iOS für native App-Entwicklung und Xamarin.Forms für großteils plattformunabhängige Entwicklung.
+Eine Xamarin.Forms-Solution besteht daher aus drei Teilen: einem Portable/.NET-Standard-Projekt und je ein natives Xamarin-Projekt für jede Zielplattform.
+Der Vorteil Xamarins ist, dass der Großteil des geschriebenen Codes im plattformunabhängigen Projekt bleibt und nur für wenige Funktionen auf native Programmierung zurückgegriffen wird, wie zum Beispiel für hardwarenahe Audio-Aufnahme.
 Außerdem ist das Xamarin-Projekt Open Source, das bedeutet jeder kann den Quellcode betrachten und unter Umständen Verbesserungen vorbringen.
 
 \paragraph{Apache Cordova}
 ist ein Appentwicklungs-Rahmenwerk welches ursprünglich von der Firma Nitobi entwickelt wurde.
-Im Jahr 2011 wurde Nitobi vone Adopbe aufgekauft und das Rahmenwerk wurde zu PhoneGap umgetauft.
+Im Jahr 2011 wurde Nitobi von Adobe aufgekauft und das Rahmenwerk wurde zu PhoneGap umgetauft.
 Später wurde eine quelloffene Version unter dem ursprünglichen Namen veröffentlicht.
-Apps werden mittels gängiger Webtechnologie, wie zum Beispiel JavaScript, CSS und Ähnlichen, entwickelt und realisiert, weshalb das Rahmenwerk alle gängigen Platformen unterstützt.
-Der Vorteil von Cordova liegt im enormen Support dieser Webtechnologien, jedoch sind Sprachen wie JavaScript eher weniger für Back-End-Programmierung geeignet.
+Apps werden mittels gängiger Webtechnologie, wie zum Beispiel JavaScript, CSS und Ähnlichen, entwickelt und realisiert, weshalb das Rahmenwerk alle gängigen Plattformen unterstützt.
+Der Vorteil von Cordova liegt im enormen Support dieser Webtechnologien, jedoch sind Sprachen wie JavaScript nicht für Back-End-Programmierung geeignet.
 Noch dazu kommt, dass an der HTL Anichstraße großteils die Programmierung nur in C und C\# gelehrt wird, welshalb die Entwicklung mit JavaScript nicht realistisch ist.
 
 \paragraph{Andere}
-Neben Apache Cordova existieren noch viele weitere Rahmenwerke, die wie Cordova auf Webtechnologie aufbauen, um so die platformunabhängigkeit garantiern zu können. Allerdings bringen diese alle dieselben Probleme wie Cordova mit sich.
+Neben Apache Cordova existieren noch viele weitere Rahmenwerke, die wie Cordova auf Webtechnologie aufbauen, um so die Platformunabhängigkeit garantieren zu können. Allerdings bringen diese alle dieselben Probleme wie Cordova mit sich.
 
 \section{Build-Umgebung}
 Aufgrund obiger Aufstellung wurde Visual Studio 2019 der Firma Microsoft als Entwicklungsumgebung gewählt.
@@ -34,15 +34,15 @@ Am Beispiel einer Xamarin.Forms-Applikation lässt sich das sehr gut erläutern;
 die Solution enthält auf oberster Ebene drei Projekte: das portable Projekt, das Android- und das iOS-Projekt.
 Ein Projekt kann bereits für sich lauffähig oder nur Teil eines größeren Programms sein.\par
 
-Visual Studio 2019 unterschtützt viele verschiedene Einsatzbereiche, die bei der Installation ausgewählt werden müssen.
+Visual Studio 2019 unterstützt viele verschiedene Einsatzbereiche, die bei der Installation ausgewählt werden müssen.
 Eine volle Installation mit allen Funktionen und Projektarten ist zwar möglich, benötigt allerdings bis zu 210GB Speicherplatz des Systems.
 Eine typische Xamarin-Installation benötigt zwischen 7GB und 10GB.
-Für eine solche Installation muss im Visual Studio Installer das "Mobile development with .NET''-Paktet ausgewählt und installiert werden.
+Für eine solche Installation muss im Visual Studio Installer das \enquote{Mobile development with .NET}-Paket ausgewählt und installiert werden.
 \begin{figure}[H]
     \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/installation.png}    
     \caption{Auswahl des Xamarin-Rahmenwerks bei der Installation}
 \end{figure}
-Auf nähere Details der Installation von Visual Studio wird hier nicht eingegangen, diese können aber auf der Microsoft-Dokumentationsseite \cite{msdoc-vs-install} nachgeschalgen werden.
+Auf nähere Details der Installation von Visual Studio wird hier nicht eingegangen, diese können aber auf der Microsoft-Dokumentationsseite \cite[vgl.][]{msdoc-vs-install} nachgeschlagen werden.
 %Betriebssystem, Hardwareanforderungen
 %
 \subsection{Installation Visual Studio} %nur wenn noch Text gebraucht wird
@@ -87,19 +87,19 @@ Die minimalen Hardware-, bzw. Software-Anforderungen können der \href{https://d
 
 % Um mit Android 8.1 (API-Level 27) und höheren Systembildern arbeiten zu können, muss eine angeschlossene Webcam die Fähigkeit haben, 720p-Frames aufzunehmen.
 
-%Vorsicht be\item Unterstützte Betriebssystemei der Installation
+%Vorsicht bei der Installation
 
 Auf der oben genannten Website steht der Visual Studio 2019 Installer zum Download bereit.
-Hier ist bereits die geünschte Version, in diesem Fall die Community-Edition, auszuwählen.
+Hier ist bereits die gewünschte Version, in diesem Fall die Community-Edition, auszuwählen.
 \begin{figure}[H]
     \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/download.png}    
     \caption{Auswahl der Visual-Studio-Edition}
 \end{figure}
 Nach dem Download und anschließender Installation können die gewünschten Programmteile ausgewählt werden.
-Für die Entwicklung von Xamarin-Applikationen ist das "Mobile development with .NET''-Pakted erforderlich.
+Für die Entwicklung von Xamarin-Applikationen ist das "Mobile development with .NET''-Paket erforderlich.
 
 
-Keine weiteren Einstellungen oder Auswahlen sind zwingend erforderlich, allerdings empfielt es sich noch zusätzlich das ,,.NET desktop development''-Paket zu installieren.
+Keine weiteren Einstellungen oder Auswahlen sind zwingend erforderlich, allerdings empfiehlt es sich noch zusätzlich das ,,.NET desktop development''-Paket zu installieren.
 Mit diesem kann man neue Technologien des .NET Frameworks in einer einfacheren Konsolenanwendung ausprobieren und kennenlernen.
 \begin{figure}[H]
     \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/installation2.png}    
@@ -108,7 +108,7 @@ Mit diesem kann man neue Technologien des .NET Frameworks in einer einfacheren K
 Nach Fertigstellung der Installation von Visual Studio 2019 erscheint dieses am Desktop und im Startmenü als neues Icon.
 
 \subsection{Installation Android SDK}
-Das Xamarin-Rahmenwerk benötigt zum Entwickeln von Android-Apps noch zusätzlich mehrere Teile des Android SDK der Firma Google. Mit diesem wird während dem Kompilieren das Programm in ein installierbares Android-Packet, kurz APK, umgewandelt.
+Das Xamarin-Rahmenwerk benötigt zum Entwickeln von Android-Apps noch zusätzlich mehrere Teile des Android SDK der Firma Google. Mit diesem wird während dem Kompilieren das Programm in ein installierbares Android-Paket, kurz APK, umgewandelt.
 Damit dies richtig funktioniert, müssen alle Komponenten, auf die im Programm zugegriffen wird, über den Android-SDK-Manager installiert werden.
 %Android SDK komponente
 \begin{figure}[H]
@@ -119,7 +119,7 @@ Damit dies richtig funktioniert, müssen alle Komponenten, auf die im Programm z
     \centering\includegraphics[height=15cm]{images/auswahl_rahmenwerk/android_sdk_auswahl.png}    
     \caption{Notwendige Teile des Android SDK}
 \end{figure}
-Besonders wichtig sind hier die Pakete der Google Play Services und die Goole Cloud Messaging Library, welche für das Empfangen von Push-Benachrichtung zwingend erforderlich sind. Diese Benachrigtung wird in einem eigenen Kapitel näher erklärt.
+Besonders wichtig sind hier die Pakete der Google Play Services und die Google Cloud Messaging Library, welche für das Empfangen von Push-Benachrichtung zwingend erforderlich sind. Diese Benachrichtigung wird in einem eigenen Kapitel näher erklärt.
 Die Android SDK Tools sind für jede Art von Android-Applikation mit Xamarin erforderlich.
 Bei Bedarf kann über dieses Menü auch der offizielle Android-Emulator installiert werden.
 %System images
@@ -131,70 +131,7 @@ Nach dem Start von Visual Studio muss eine neue ,,Solution'' angelegt werden. Di
     \caption{Anlegen einer neuen Solution}
 \end{figure}
 
-
-
-
-
 %Weg vom Programm zur binary
-
-
-\section{Gedanken}
-% Als Programmiersprache wird in diesem Projekt die Sprache C verwendet. Die
-% Programmentwicklung in C ist im Vergleich zur Entwicklung in der Assemblersprache schneller und einfacher möglich. Trotzdem bietet die Sprache C die
-% Möglichkeit eines sehr hardwarenahen Zugriffs auf die verfügbare Peripherie des
-% Controllers durch Zugriffsmöglichkeit auf die einzelnen Register.
-% 
-% Ziel der Build-Werkzeuge ist es somit, den C-Programmcode in Maschinencode
-% zu übersetzen und diesen in das Intel-Hex-Format überzuführen.
-% Zur Bewältigung dieser Aufgabe kann unter Windows entweder auf die offizielle Entwicklungsumgebung Atmel-Studio zurückgegriffen werden (vgl. Atmel Studio 7 2016) oder es wird das WinAVR-Softwarepaket verwendet, das eine wesentlich schlankere Installation bietet und einen Editor, den GCC-Compiler und
-% alle weiteren benötigten Programme zur Erstellung des Hex-Files aus dem CProgrammcode mitliefert (vgl. Homepage WinAVR 2016). Das Programm kann
-% von der Website direkt als Installer-Datei heruntergeladen werden.
-% WinAVR liefert das Programm Programmer’s Notepad mit, das bereits alle benö-
-% tigten Makros zur Übersetzung des Programms besitzt. Es reicht, eine beliebige
-% Datei aus dem Ordner der Mikrocontrollersoftware mit Programmer’s Notepad zu
-% öffnen und in der Menüleiste unter Tools die Auswahl Make all anzuklicken. Im
-% Ordner wird eine Datei namens main.hex erzeugt, die nun beispielsweise mithilfe
-% der Software des Programmieradapters zum Mikrocontroller übertragen werden
-% kann.
-% Unter Linux existieren bei den meisten Distributionen vorgefertigte Pakete unter
-% dem Namen avr-gcc bzw. gcc-avr, welche die benötigte Software beinhalten. Sollte das Paket avr-libc nicht automatisch mitinstalliert werden, muss es manuell
-% installiert werden. Zur Übersetzung des Projekts kann in der Kommandozeile in
-% den Ordner mit den Quelldateien gewechselt und dort der Befehl make all ausgeführt werden. Der Befehl make clean löscht alle erzeugten Dateien, sodass nur
-% mehr die Quelldateien übrigbleiben und make program überträgt das Programm
-% zum Mikrocontroller. Zur Übertragung ruft make die Software avrdude auf, die
-% eine Vielzahl verschiedener Programmiergeräte unterstützt. Um das verwendete
-% Programmiergerät einzustellen, müssen in der Datei Makefile im Ordner mit den
-% Quelldateien die Optionen AVRDUDE_PROGRAMMER und AVRDUDE_PORT abgeändert
-% werden. Die Dokumentation des Programms avrdude liefert weitere Informationen
-% über die unterstützten Programmer (vgl. AVRDUDE Documentation 2016).
-% Achtung Der Mikrocontroller im Projekt wird mit einer Betriebsspannung von
-% 3 V anstatt mit 5 V versorgt. Viele Programmer gehen jedoch davon aus, dass
-% der Mikrocontroller mit 5 V betrieben wird. Vor dem Programmiervorgang sollte
-% der Programmer auf 3 V-Betrieb umgestellt werden. Die genaue Vorgehensweise dazu muss der jeweiligen Dokumentation des Programmiergeräts entnommen
-% werden.
-% Fusebits Einige Grundfunktionen des Mikrocontrollers können über die sogenannten Fusebits eingestellt werden. Diese Bits werden, anders als die Konfigu-
-% 1057. Auswahl Mikrocontroller
-% rationsbits in gewöhnlichen Registern, nicht durch die Software am Controller,
-% sondern direkt mithilfe des Programmieradapters eingestellt (vgl. ATmega 644
-% Microcontroller Datasheet 2012, Seite 285 ff.). Für dieses Projekt müssen die Fusebits zur Einstellung der Taktquelle (CKSEL3..0) auf den Wert 0b1101 gestellt
-% werden. Diese Einstellung steht für einen Low power crystal oscillator mit einer
-% Frequenz zwischen 3 und 8 MHz. Außerdem ist es wichtig, das JTAG-Interface
-% mithilfe des Bits JTAGEN (→ auf 0 setzen) zu deaktivieren, da die entsprechenden Pins des JTAG-Interfaces, das zum Debuggen verwendet werden kann, für
-% andere Aufgaben benötigt werden. Möchte man die Mikrocontrollersoftware testen, bietet es sich an, das Bit EESAVE auf 0 zu setzen. Dadurch wird der Inhalt
-% des EEPROMs nicht bei jedem Programmiervorgang gelöscht. So gehen die Einstellungen der Software nicht jedes Mal verloren, wenn ein Fehler in der Software
-% ausgebessert wird.
-% Zur Programmierung der Fusebits kann meist die entsprechende Software des
-% Programmieradapters verwendet werden. Das Atmel-Studio und avrdude bieten
-% die Funktionalität ebenfalls. Für avrdude bietet sich als komfortableres Frontend
-% beispielsweise das Programm avr8-burn-o-mat an, das für alle gängigen Betriebssysteme auf der Projektwebsite heruntergeladen werden kann (vgl. AVR8 BurnO-Mat - a GUI for avrdude 2016).
-% Wichtig Atmel bezeichnet Fusebits als programmed, wenn sie auf 0 gesetzt und
-% als unprogrammed, wenn sie auf 1 gesetzt sind. Viele Programme zum Einstellen
-% der Fusebits bieten eine Checkbox für die Einstellung an, die angehakt werden
-% muss, um das Bit auf 0 zu setzen. Das kann verwirrend sein. In diesem Fall ist
-% Vorsicht geboten. Die Dokumentation der entsprechenden Software sollte konsultiert werden, da eine falsche Einstellung der Taktquelle dazu führen kann, dass der
-% Controller nicht mehr reagiert und zur „Wiederbelebung“ ein Taktsignal mittels
-% Funktionsgenerator eingespeist werden muss.
-
 %microsoft VS2019
 %frei zugänglich
 %nur auf windows, kein linux-support

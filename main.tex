@@ -13,6 +13,10 @@
 
 \addbibresource{sources.bib}
 
+%variables
+
+\newcommand{\authorName}{Andreas Grain / Matthias Mair}
+
 \input{acronyms.tex}
 
 \hypersetup{
@@ -26,7 +30,9 @@
 	\fancyhf{} %clear header and footer
 	\rhead[\leftmark]{\thepage}
 	\lhead[\thepage]{\rightmark}
-	\cfoot{Andreas Grain / Matthias Mair}
+	\cfoot{\authorName}
+	\renewcommand{\headrulewidth}{0.4pt}
+	\renewcommand{\footrulewidth}{0.4pt}
 }
 \aliaspagestyle{chapter}{normalpage}
 
@@ -34,14 +40,18 @@
 	\fancyhf{} %clear header and footer
 	\rhead[]{\thepage}
 	\lhead[\thepage]{}
-	\cfoot{Andreas Grain / Matthias Mair}
+	\cfoot{\authorName}
+	\renewcommand{\headrulewidth}{0.4pt}
+	\renewcommand{\footrulewidth}{0.4pt}
 }
 \aliaspagestyle{part}{abstractpage}
 
 \fancypagestyle{titlepage}{
 	\fancyhf{} %clear header and footer
 	\fancyhead[c]{\includegraphics[width=\linewidth]{images/HTL_Header}}
-	\cfoot{Andreas Grain / Matthias Mair}
+	\cfoot{\authorName}
+	\renewcommand{\headrulewidth}{0.4pt}
+	\renewcommand{\footrulewidth}{0.4pt}
 }
 \aliaspagestyle{titlingpage}{titlepage}
 
@@ -59,8 +69,8 @@
 }
 
 % text formatting ----------------------------------------------------------
-%\setlength{\parindent}{0pt}
-\setlength{\parskip}{8pt}
+%\setlength{\parindent}{0pt}% Remove paragraph indentation
+\setlength{\parskip}{8pt}% Add space after paragraph
 \setmainfont{Arial}
 
 
@@ -106,9 +116,10 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \mainmatter
 \chapter{Einleitung}
 \input{chapters/einleitung.tex}
-
-\part{Hardware-Erweiterung - Matthias Mair}
 \cleartoverso
+
+\renewcommand{\authorName}{Matthias Mair}
+\part{Hardware - Matthias Mair}
 \chapter{Probleme des Ist-Standes}
 \chapter{Platine}
 \section{Spannungsversorgung}
@@ -117,30 +128,37 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \section{Mikrocontroller}
 \subsection{Programmierung}
 \subsection{Watchdog}
+\cleartoverso
 
-\part{Smartphone-App - Andreas Grain}
+\renewcommand{\authorName}{Andreas Grain}
+\part{Software - Andreas Grain}
 \chapter{Auswahl Rahmenwerk}
 \input{chapters/auswahl_rahmenwerk.tex}
-\chapter{RTSP}
-\chapter{LibVLC Sharp}
+\chapter{Verwendete Software-Module}
+\section{RTSP}
+\input{chapters/rtsp.tex}
+\section{LibVLC Sharp}
+\section{GStreamer}
+\section{Live555 Proxy}
 \chapter{Push-Benachrichtigung}
 \section{Push Notification Service}
 \section{Azure Notification Hubs}
 \chapter{Programm-Dokumentation}
 \input{chapters/xamarin.tex}
-\chapter{Entwicklung}
 \chapter{Testen}
+\chapter{Ausblick}
+\section{Gesicherte Verbindung}% VPN-Zugriff
+\cleartoverso
 
-\part{Server}
-\chapter{Grundlagen}
-\section{GStreamer}
-\chapter{Live555 Proxy}
-
+\renewcommand{\authorName}{Andreas Grain / Matthias Mair}
 \appendix
-\printacronyms[heading=chapter,name=Abkürzungen]
-\listof{figure}{Abbildungsverzeichnis}
-\listof{table}{Tabellenverzeichnis}
+%\printbibheading
+%\printbibliography[heading=subbibliography,type=online,title={Online-Quellen}]
+%\printbibliography[heading=subbibliography,nottype=online,title={Andere Quellen}]
 \printbibliography
+\printacronyms[heading=chapter*,name=Abkürzungen]
+\listoffigures
+\listoftables
 
 \part{Appendix}
 \chapter{Verwendete Entwicklungswerkzeuge}
