@@ -9,40 +9,43 @@ Die Idee ist, dass in einem Wohnungskomplex pro Partei eine Innenstation verbaut
 Die einzelnen Innenstationen, also Wohnungsparteien, können dann nicht nur mit der Außenstation, sondern auch mit anderen Innenstationen per Video und Ton kommunizieren.
 Die Stationen wurden mit Hilfe eines \ac{rpi} realisiert, um die Kosten gering zu halten.\par
 
-Am Anfang des 5. Schuljahres bat uns unser \acs{fi}-Professor DI(FH) Mario Prantl an, dieses Projekt durch eine Smartphone-App und eine Hardware-Überarbeitung zu verbessern.
+Am Anfang des 5. Schuljahres im Herbst 2019 bat uns unser \ac{fi}-Professor DI(FH) Mario Prantl an, dieses Projekt durch eine Smartphone-App und eine Hardware-Überarbeitung zu verbessern.
 Für die Entwicklung der App sollte das Xamarin-Rahmenwerk verwendet werden, damit die Applikation auf sowohl Android-, als auch iOS-Geräten lauffähig ist. 
 Der Benutzer soll über die App das Video der entsprechenden Station abrufen und mit dem Gesprächspartner sprechen können.
+Hierfür wird ein aus dem Internet erreichbarer Medien-Verwaltungsserver benötigt, der die Medien-Streams der Einzelstationen empfängt und an die Station des Gesprächspartners überträgt.
 Die Hardware-Überarbeitung hat mehrere Ziele; zum Einen soll dadurch die Komplexität des internen Aufbaus einer Station verringert werden.
 Zum Anderen soll mit Hilfe eines Watchdog-Timers das Langzeit-Betriebsverhalten verbessert werden.
 
 \section{Funktionalität}
-\paragraph{Ortsunabhängiger Anlagenzugriff}
+\paragraph{Ortsunabhängiger Anlagenzugriff:}
 Um dem Anwender mehr Komfort bieten zu können, beschränkt sich die Anlage und dessen Funktion nicht mehr auf die fest installierte Station, sondern ist auch über ein mobiles Gerät bedienbar.
-Dies bietet den Vorteil, dass auch wenn man sich gerade nicht in der Nähe der Innenstation befindet Gäste empfangen werden können.
+Dies bietet den Vorteil, dass auch wenn man sich gerade nicht in der Nähe der Innenstation befindet, Gäste empfangen werden können.
 
-\paragraph{Paketdienst}
+\paragraph{Paketdienst:}
 Die Paketübergabe erfolgt üblicherweise persönlich.
-Wenn der Empfänger nicht zuhause ist, nimmt der Paketdienst die Ware wieder mit, und deponiert sie bei einer Paketabholstelle und hinterlässt dem Empfänger lediglich eine Benachrichtigung.
-Diese Vorgangsweise ist besonders ärgerlich, wenn man den Paketboten um wenige Minuten versäumt hat oder nicht schnell genug zur Innenstelle gelangen konnte.
+Wenn der Empfänger nicht zuhause ist, nimmt der Paketzusteller die Ware wieder mit, deponiert sie bei einer Paketabholstelle und hinterlässt dem Empfänger lediglich eine Benachrichtigung.
+Diese Vorgangsweise ist besonders ärgerlich, wenn man den Paketzusteller um wenige Minuten versäumt hat oder nicht schnell genug zur Innenstelle gelangen konnte.
 Beispielsweise befindet sich der Bewohner gerade auf dem Dachboden oder im Keller.
-Mit einer Smartphone-App ist eine sofortige Kontaktaufnahme mit dem Postboten möglich und verhindert eine unnötige zusätzliche Bearbeitung des Paketversandes.
+Mit einer Smartphone-App ist eine sofortige Kontaktaufnahme mit dem Paketzusteller möglich und verhindert eine unnötige zusätzliche Bearbeitung des Paketversandes.
 
-\paragraph{Sicherheit}
+\paragraph{Sicherheit:}
 Die neu gewonnene Ortsunabhängigkeit der Anlage bietet eine höhere Einbruchssicherheit, da man jederzeit Überblick über gewünschte bzw. ungewünschte Besucher hat.
-Über die Smartphone-Applikation ist ein Öffnen des Türschlosses aus mehreren Gründen deaktiviert.
+Über die Smartphone-Applikation ist ein Öffnen des Türschlosses aus mehreren Gründen deaktiviert:
 \begin{itemize}
-    \item Wenn der Benutzer nicht zuhause ist, ist eine Türöffnung sowieso irrelevant.
+    \item Wenn der Benutzer nicht zuhause ist, ist eine Türöffnung in den allermeisten Fällen nicht erwünscht.
     \item Wenn der Benutzer zuhause ist, muss er sowieso zur Eingangstür gehen, um den Besuch in Empfang zu nehmen. Die im Eingangsbereich installierte Station dient hier zur Öffnung der Haustür.
-    \item Falls unbefugter Zugriff auf die Applikation erfolgen sollte, besteht kein besonderes Sicherheitsrisiko.
+    \item Falls unbefugter Zugriff auf die Applikation erfolgen sollte, besteht kein besonderes Sicherheitsrisiko hinsichtlich Einbruch in die Wohnung.
 \end{itemize}
 
 \section{Aufgabenteilung}
 \paragraph{Andreas Grain} ist der Projekt-Hauptverantwortliche und zuständig für die App-Program\-mierung.
-Dies beinhaltet die Einarbeitung in und Verwendung des Xamarin-Rahmenwerks zur erstellung einer Multiplattform-Smartphone-Applikation.
+Dies beinhaltet die Einarbeitung in und Verwendung des Xamarin-Rahmenwerks zur Erstellung einer Multiplattform-Smartphone-Applikation.
 Diese soll den Video-Stream der gewählten Station abrufen und anzeigen, sowie den Mikrofon-Ton des Mobilgerätes zur Anlage zurückschicken.
 Weiters ist er für die Einarbeitung in das GStreamer-Rahmenwerk zur zentralen Verarbeitung der Video- und Audio-Daten der Stationen und Mobilgeräte über einen linuxbasierten Server zuständig.
 Darüber hinaus organisiert Andreas Grain alle Treffen mit dem Betreuer, achtet auf die Einhaltung des Zeitplans und ist zuständig für das Erstellen des \hologo{XeLaTeX} -Dokuments
 
-\paragraph{Matthias Mair} is verantwortlich für die Hardware-Überarbeitung der Station.
-Im Zuge dieser sollen die vielen Einzelmodule in einer übersichtlichen Platine vereint werden.
-Für die Leiterplatte soll die weit verbreitete SMD-Technologie verwendet werden, da diese heutzutage Marktstandard für integrierte Geräte ist.
+\paragraph{Matthias Mair} ist verantwortlich für die Hardware-Überarbeitung der Station.
+Diese beinhaltet die Einarbeitung in das \ac{pcb}-Entwicklungsprogramm \ac{eagle}, sowie das Recherchieren und Auswählen möglicher Verstärker-Schaltungen und -\ac{ic}s für die Mikrofon- und Lautsprecher-Verstärkung.
+Im Zuge der Hardware-Überarbeitung sollen die vielen Einzelmodule in einer übersichtlichen Platine vereint werden.
+Für die Leiterplatte soll die weit verbreitete \ac{smd}-Technologie verwendet werden, da diese heutzutage Marktstandard für integrierte Geräte ist und im Vergleich zu traditionellen \ac{tht}-Platinen viel platzsparender ist.
+Zusätzlich wird die Station um einen Watchdog-Timer erweitert, den Matthias Mair entwerfen und die dazugehörige Software schreiben soll.

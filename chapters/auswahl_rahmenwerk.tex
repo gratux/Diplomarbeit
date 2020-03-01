@@ -1,27 +1,44 @@
 \section{Vergleich}
-Für die App-Programmierung stehen viele verschiedene Rahmenwerke bereits zur Verfügung.
+Das Rahmenwerk dient der Vereinfachung des Entwicklungsprozesses.
+Je nach Anwendung sind von diesem verschiedene Anforderungen zu erfüllen, daher ist die Wahl des richtigen Rahmenwerks besonders wichtig.
 Dieser Abschnitt beschäftigt sich mit dem Vergleich der einzelnen Möglichkeiten, sowie einer endgültigen Auswahl eines der Rahmenwerke zur Verwendung im Diplomprojekt.
+Die geforderten Funktionen für dieses Projekt beinhalten:
+\begin{itemize}
+    \item eine einfache Möglichkeit der Multiplattform-Entwicklung der App. Wenn möglich soll nur eine App geschrieben werden, die dann auf allen Zielplattformen (Android, iOS) lauffähig ist.
+    \item Die Programmierung sollte in einer bereits bekannten Programmiersprache möglich sein.
+    Für die Fachrichtung Elektrotechnik der HTL Anichstraße werden momentan die Sprachen C, C++ und C\#, in untergeordnetem Ausmaß auch JavaScript für Webseiten-Entwicklung unterrichtet.
+    \item Das Rahmenwerk und die dazugehörige Entwicklungsumgebung sollten für nichtkommerzielle Anwendungen wie diese Diplomarbeit frei zur Verfügung stehen.
+    \item Die Entwicklungswerkzeuge sollten das Windows-, optional das Linux-Betriebs\-sys\-tem unterstützen.
+\end{itemize}
 
+Für die App-Programmierung stehen viele verschiedene Rahmenwerke bereits zur Verfügung.
 \paragraph{Microsoft Xamarin}
-ist ein Rahmenwerk, mit dem man Multiplattform-Applikationen für unter Anderem Android, iOS, UWP und noch viele weitere Plattformen erstellen kann.
+ist ein Rahmenwerk, mit dem man Multiplattform-Applikationen für unter Anderem Android, iOS, \ac{uwp} und noch viele weitere Plattformen erstellen kann.
 Es basiert auf Microsofts \ac{dotnet} und dem Mono-Projekt, welches sich als Ziel gesetzt hat, das \ac{dotnet} auf andere Plattformen zu portieren.
 Xamarin bietet mehrere Projekttypen an, darunter Xamarin.Android und Xamarin.iOS für native App-Entwicklung und Xamarin.Forms für großteils plattformunabhängige Entwicklung.
-Eine Xamarin.Forms-Solution besteht daher aus drei Teilen: einem Portable/.NET-Standard-Projekt und je ein natives Xamarin-Projekt für jede Zielplattform.
+Eine Xamarin.Forms-Solution besteht daher aus mehreren Teilen:
+\begin{itemize}
+    \item Portable/.NET-Standard Projekt, das den plattformunabhängigen Code beinhält
+    \item natives Xamarin-Projekt für jede Zielplattform
+\end{itemize}
 Der Vorteil Xamarins ist, dass der Großteil des geschriebenen Codes im plattformunabhängigen Projekt bleibt und nur für wenige Funktionen auf native Programmierung zurückgegriffen wird, wie zum Beispiel für hardwarenahe Audio-Aufnahme.
 Außerdem ist das Xamarin-Projekt Open Source, das bedeutet jeder kann den Quellcode betrachten und unter Umständen Verbesserungen vorbringen.
 
-\paragraph{Apache Cordova}
-ist ein Appentwicklungs-Rahmenwerk welches ursprünglich von der Firma Nitobi entwickelt wurde.
-Im Jahr 2011 wurde Nitobi von Adobe aufgekauft und das Rahmenwerk wurde zu PhoneGap umgetauft.
-Später wurde eine quelloffene Version unter dem ursprünglichen Namen veröffentlicht.
-Apps werden mittels gängiger Webtechnologie, wie zum Beispiel JavaScript, CSS und Ähnlichen, entwickelt und realisiert, weshalb das Rahmenwerk alle gängigen Plattformen unterstützt.
-Der Vorteil von Cordova liegt im enormen Support dieser Webtechnologien, jedoch sind Sprachen wie JavaScript nicht für Back-End-Programmierung geeignet.
-Noch dazu kommt, dass an der HTL Anichstraße großteils die Programmierung nur in C und C\# gelehrt wird, welshalb die Entwicklung mit JavaScript nicht realistisch ist.
+\paragraph{Webtechnologiebasierte Rahmenwerke: }
+In dieser Kategorie existieren sehr viele verschiedene Rahmenwerke, darunter Apache Cordova, Adobe PhoneGap, sowie Facebook React Native.
+Am Beispiel von Apache Cordova werden hier die Vor- und Nachteile dieses Ansatzes erläutert.
 
-\paragraph{Andere}
-Neben Apache Cordova existieren noch viele weitere Rahmenwerke, die wie Cordova auf Webtechnologie aufbauen, um so die Platformunabhängigkeit garantieren zu können. Allerdings bringen diese alle dieselben Probleme wie Cordova mit sich.
+Cordova ist ein Appentwicklungs-Rahmenwerk welches ursprünglich von der Firma Nitobi entwickelt wurde.
+Im Jahr 2011 wurde Nitobi von Adobe aufgekauft und das Rahmenwerk wurde zu PhoneGap umgetauft.
+Später wurde eine quelloffene Version unter dem ursprünglichen Namen Cordova veröffentlicht.
+Apps werden mittels gängiger Webtechnologie, wie zum Beispiel JavaScript, CSS und Ähnlichen, entwickelt und realisiert, weshalb das Rahmenwerk alle gängigen Plattformen unterstützt.
+Der Vorteil von Cordova und ähnlichen Rahmenwerken liegt im enormen Support dieser Webtechnologien, jedoch sind Sprachen wie JavaScript für Back-End-Programmierung weniger geeignet.
+Noch dazu kommt, dass an der HTL Anichstraße großteils die Programmierung nur in C und C\# gelehrt wird, welshalb die Entwicklung mit JavaScript im vereinbarten Zeitrahmen der Diplomarbeit nicht realistisch umsetzbar ist.
+
+Aufgrund der oben erläuterten Vor- und Nachteile der möglichen Ansätze wurde sich für Xamarin zur Verwendung in diesem Diplomprojekt entschieden.
 
 \section{Build-Umgebung}
+\subsection{Grund-Setup}
 Aufgrund obiger Aufstellung wurde Visual Studio 2019 der Firma Microsoft als Entwicklungsumgebung gewählt.
 Visual Studio ist das offizielle Werkzeug für die Programmierung mit dem Xamarin-Rahmenwerk und die wahrscheinlich bestbekannte Entwicklungsumgebung überhaupt.
 Die Community-Edition für Schüler und Private steht gratis zum Download zur Verfügung.
@@ -29,106 +46,67 @@ Diese beinhält alle wichtigen Entwicklungswerkzeuge wie zum Beispiel die automa
 Für die Nutzung wird nach den ersten 30 Tagen ein Microsoft-Konto benötigt.\par
 %versionsvergleich hier https://visualstudio.microsoft.com/vs/compare/
 
-Visual Studio 2019 organisiert den Programmcode in sogenannten Solutions.
+Der Programmcode wird von Visual Studio 2019 in sogenannten Solutions organisiert.
 Am Beispiel einer Xamarin.Forms-Applikation lässt sich das sehr gut erläutern;
 die Solution enthält auf oberster Ebene drei Projekte: das portable Projekt, das Android- und das iOS-Projekt.
 Ein Projekt kann bereits für sich lauffähig oder nur Teil eines größeren Programms sein.\par
 
 Visual Studio 2019 unterstützt viele verschiedene Einsatzbereiche, die bei der Installation ausgewählt werden müssen.
 Eine volle Installation mit allen Funktionen und Projektarten ist zwar möglich, benötigt allerdings bis zu 210GB Speicherplatz des Systems.
-Eine typische Xamarin-Installation benötigt zwischen 7GB und 10GB.
+Eine typische Xamarin-Installation benötigt etwa 6.25GB Festplattenspeicher.
 Für eine solche Installation muss im Visual Studio Installer das \enquote{Mobile development with .NET}-Paket ausgewählt und installiert werden.
 \begin{figure}[H]
     \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/installation.png}    
     \caption{Auswahl des Xamarin-Rahmenwerks bei der Installation}
 \end{figure}
+Es empfiehlt sich, das Paket für \enquote{.NET desktop development} dazu zu installieren, damit neue, noch nicht bekannte \ac{dotnet}-Technologien in einer einfacheren Konsolen-Anwen\-dung ausprobiert werden können.
+Das Paket benötigt ungefähr weitere 0.8GB.\par
 Auf nähere Details der Installation von Visual Studio wird hier nicht eingegangen, diese können aber auf der Microsoft-Dokumentationsseite \cite[vgl.][]{msdoc-vs-install} nachgeschlagen werden.
 %Betriebssystem, Hardwareanforderungen
 %
-\subsection{Installation Visual Studio} %nur wenn noch Text gebraucht wird
-Die minimalen Hardware-, bzw. Software-Anforderungen können der \href{https://docs.microsoft.com/en-us/visualstudio/releases/2019/system-requirements}{Microsoft-Doku\-men\-tation des Visual Studio} entnommen werden:
-
-\begin{table}[H]
-    \centering\begin{tabulary}{0.9\linewidth}{|R|L|}
-        \hline
-        Unterstützte Betriebssysteme
-        & - Windows 10, Version 1703 oder höher (LTSC und S werden nicht unterstützt)\\
-        & - Windows Server 2019\\
-        & - Windows Server 2016\\
-        & - Windows 8.1 (mit Update 2919355)\\
-        & - Windows Server 2012 R2 (mit Update 2919355)\\
-        & - Windows 7 SP1 (mit neuesten Windows-Updates)\\
-        \hline
-        Hardware
-        & - 1,8-GHz-Prozessor oder schneller; Quad-Core oder besser empfohlen\\
-        & - 2 GB RAM; 8 GB RAM empfohlen\\
-        & - Speicherplatz auf der Festplatte: Mindestens 800 MB, je nach installierten Features bis zu 210 GB des verfügbaren Speicherplatzes. Eine typische Installation erfordert 20–50 GB freien Speicherplatz.\\
-        & - Festplattengeschwindigkeit: Zur Verbesserung der Leistung installieren Sie Windows und Visual Studio auf einem Festkörperlaufwerk (SSD).\\
-        & - Grafikkarte, die eine Auflösung von mindestens 720p (1280 x 720) unterstützt. Visual Studio funktioniert am besten mit einer Auflösung von WXGA (1366 x 768) oder höher.\\
-        \hline
-    \end{tabulary}
-    \caption{Soft- und Hardware-Anforderungen Visual Studio}    
-\end{table}
-
-%Quellenangabe!!
-%Anforderungen für Android Emulator
-% Der Android-Emulator hat zusätzliche Anforderungen, die über die grundlegenden Systemanforderungen für Android Studio hinausgehen, die im Folgenden beschrieben werden:
-
-%     SDK-Tools 26.1.1 oder höher
-%     64-Bit-Prozessor
-%     Fenster: CPU mit UG-Unterstützung (uneingeschränkter Gast)
-%     HAXM 6.2.1 oder höher (HAXM 7.2.0 oder höher empfohlen)
-
-% Der Einsatz von Hardwarebeschleunigung stellt unter Windows und Linux zusätzliche Anforderungen:
-
-%     Intel-Prozessor unter Windows oder Linux: Intel-Prozessor mit Unterstützung für Intel VT-x, Intel EM64T (Intel 64) und Execute Disable (XD)-Bit-Funktionalität
-%     AMD-Prozessor unter Linux: AMD-Prozessor mit Unterstützung für AMD-V-Virtualisierung (AMD-V) und Supplemental Streaming SIMD Extensions 3 (SSSE3)
-%     AMD-Prozessor unter Windows: Android Studio 3.2 oder höher und Windows 10. April 2018 oder höher für die Windows Hypervisor-Plattform (WHPX)
-
-% Um mit Android 8.1 (API-Level 27) und höheren Systembildern arbeiten zu können, muss eine angeschlossene Webcam die Fähigkeit haben, 720p-Frames aufzunehmen.
-
-%Vorsicht bei der Installation
-
-Auf der oben genannten Website steht der Visual Studio 2019 Installer zum Download bereit.
-Hier ist bereits die gewünschte Version, in diesem Fall die Community-Edition, auszuwählen.
-\begin{figure}[H]
-    \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/download.png}    
-    \caption{Auswahl der Visual-Studio-Edition}
-\end{figure}
-Nach dem Download und anschließender Installation können die gewünschten Programmteile ausgewählt werden.
-Für die Entwicklung von Xamarin-Applikationen ist das "Mobile development with .NET''-Paket erforderlich.
-
-
-Keine weiteren Einstellungen oder Auswahlen sind zwingend erforderlich, allerdings empfiehlt es sich noch zusätzlich das ,,.NET desktop development''-Paket zu installieren.
-Mit diesem kann man neue Technologien des .NET Frameworks in einer einfacheren Konsolenanwendung ausprobieren und kennenlernen.
-\begin{figure}[H]
-    \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/installation2.png}    
-    \caption{Zusatzpaket für Desktop-Entwicklung mit .NET}
-\end{figure}
-Nach Fertigstellung der Installation von Visual Studio 2019 erscheint dieses am Desktop und im Startmenü als neues Icon.
-
-\subsection{Installation Android SDK}
-Das Xamarin-Rahmenwerk benötigt zum Entwickeln von Android-Apps noch zusätzlich mehrere Teile des Android SDK der Firma Google. Mit diesem wird während dem Kompilieren das Programm in ein installierbares Android-Paket, kurz APK, umgewandelt.
-Damit dies richtig funktioniert, müssen alle Komponenten, auf die im Programm zugegriffen wird, über den Android-SDK-Manager installiert werden.
-%Android SDK komponente
+\subsection{Android SDK}
+Um Xamarin-Applikationen für Android-Geräte entwickeln zu können wird das von Google bereitgestellte Android \ac{sdk} benötigt, um das Programm in ein \ac{apk} umzuwandeln. Die einzelnen Komponenten können im Android-\ac{sdk}-Manager des Visual Studio installiert werden.
+Dieser ist im Menüband unter \enquote{Tools\textbackslash Android\textbackslash Android \ac{sdk} Manager} zu finden.
 \begin{figure}[H]
     \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/android_sdk_installation.png}    
     \caption{Android SDK Manager}
 \end{figure}
+Der \ac{sdk}-Manager ist in zwei Seiten unterteilt - \enquote{Platforms} und \enquote{Tools}.
+Auf der \enquote{Plat\-forms}-Seite können die benötigten \ac{sdk}-Teile für jede Android-Version installiert werden.
+Benötigt wird nur die Version, mit der das Projekt später kompiliert werden soll.
+Außerdem kann man auf dieser Seite des \ac{sdk}-Managers System-Abbilder für den Android Emulator installieren.\par
+
+Über die \enquote{Tools}-Seite können verschiedenste Entwicklungswerkzeuge installiert werden.
+Grundsätzlich erforderlich sind \enquote{Android SDK Tools}, \enquote{Android SDK Platform Tools} und \enquote{Android SDK Build Tools} um Android-Apps mit Xamarin entwickeln zu können.
+Für dieses Projekt werden Push-Benachrichtigungen via Google Cloud Messaging verwendet, daher werden noch zusätzlich die Pakete für die \enquote{Google Play Services} sowie die \enquote{Google Cloud Messaging for Android Library} installiert.
+Wie Push-Benachrichtigungen genauer funktionieren wird später im Kapitel \crossref{ch:push} auf Seite \pageref{ch:push} behandelt.
 \begin{figure}[H]
-    \centering\includegraphics[height=15cm]{images/auswahl_rahmenwerk/android_sdk_auswahl.png}    
+    \centering\includegraphics[width=0.8\linewidth]{images/auswahl_rahmenwerk/android_sdk_auswahl.png}    
     \caption{Notwendige Teile des Android SDK}
 \end{figure}
-Besonders wichtig sind hier die Pakete der Google Play Services und die Google Cloud Messaging Library, welche für das Empfangen von Push-Benachrichtung zwingend erforderlich sind. Diese Benachrichtigung wird in einem eigenen Kapitel näher erklärt.
-Die Android SDK Tools sind für jede Art von Android-Applikation mit Xamarin erforderlich.
-Bei Bedarf kann über dieses Menü auch der offizielle Android-Emulator installiert werden.
-%System images
 
-Nach dem Start von Visual Studio muss eine neue ,,Solution'' angelegt werden. Diese beinhaltet alle Programmteile, welche für die Xamarin-Entwicklung benötigt werden. 
-
+\subsection{Build-Vorgang}
+Um den geschriebenen Code in eine lauffähige Applikation umzuwandeln wird ein sogenannter Compiler benötigt.
+Die Aufgabe des Compilers ist es, die geschriebene Hochsprache entweder direkt in CPU-Maschinensprache bzw. eine Art Zwischencode zu kompilieren, d.h. umzuwandeln. Im Fall einer einfachen C\#-Konsolenanwendung ist der Build-Vorgang noch relativ simpel:
+\begin{enumerate}
+    \item Alle einzelnen Code-Dateien werden nacheinander vom Compiler in \ac{cil}, eine Zwischensprache des \ac{dotnet}, umgewandelt.
+    \item Der Linker fügt die einzelnen Teile zu einem Gesamten zusammen.
+    Das Resultat ist eine Datei, die wie eine ausführbare .EXE-Datei erscheint.
+    \item Wenn das zusammengefügte Programm gestartet wird, kompiliert die \ac{clr} den Zwischencode in ausführbaren Maschinen-Code.
+    Die CPU des Systems kann diesen dann ausführen.
+\end{enumerate}
 \begin{figure}[H]
-    \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/installation2.png}    
-    \caption{Anlegen einer neuen Solution}
+    \centering\includegraphics[height=12cm]{images/auswahl_rahmenwerk/dotnet-compilation.png}
+    \caption{Build-Vorgang einer \ac{dotnet}-Applikation}
+    %\footfullcite[]{wiki-cli}
+\end{figure}
+
+Ähnlich funktioniert dieser Vorgang auch bei einer Xamarin.Forms-App, allerdings wesentlich komplexer.
+Eine Xamarin.Forms-Solution besteht aus drei Einzel-Projekten, wobei das .NET-Standard-Projekt als Teil der anderen zwei verbaut werden muss.
+Dadurch ergibt sich folgender Build-Ablauf:
+\begin{figure}
+    \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/build-vorgang.pdf}
+    \caption{Build-Vorgang einer Xamarin.Forms-Solution}
 \end{figure}
 
 %Weg vom Programm zur binary

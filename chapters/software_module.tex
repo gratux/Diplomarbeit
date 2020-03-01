@@ -1,0 +1,54 @@
+\section{\acl{rtsp}}
+Um einen Video-Stream über das Netzwerk übertragen zu können braucht es ein geeignetes Protokoll.
+Das \ac{rtsp} ist seit Langem ein sehr beliebtes und oft verwendetes Protokoll, um die Übertragung von kontinuierlichen Medien-Daten .
+Das Protokoll ist eigentlich selbst nicht direkt für die Übertragung von Medien-Streams, sondern nur für den Aufbau und die Steuerung von Verbindungen.
+Meist das \ac{rtp}-Protokoll zur Übertragung der einzelnen Elementar-Streams in Verbindung mit dem \ac{rtcp}-Protokoll zur Steuerung, d.h. Starten und Stoppen des Medienflusses verwendet.
+Die typischen Anwendungsfälle für \ac{rtsp} beinhalten:
+\begin{itemize}
+    \item Live-Streaming
+    \item Übertragung von Überwachungs-Kamera-Videos
+\end{itemize}
+\ac{rtsp} ist aber grundsätzlich protokoll-unabhängig, d.h. es kann jedes beliebige Protokoll zur übertragung der Daten verwendet werden. \ac{rtsp} dient nur zum Aufbau und Verwalten der Übertragungs-Session.
+% Auf unterster Ebene wird der Medien-Stream über \ac{rtp} übertragen und die Steuerbefehle für Starten und Stoppen des Streams, sowie \ac{vod}-Funktionalität werden mit \ac{rtcp} verschickt.
+% \ac{rtsp} hat sich aufgrund der guten Echtzeitfähigkeit, d.h. niedrigen Übertragungsverzögerung, und dem einfachen Anfragenaufbaus als nahezu Industriestandard durchgesetzt.
+
+\subsection{RTSP-Anfragen}
+Das \ac{rtsp} definiert zur Steuerung des Medienflusses mehrere Kommandos bzw. Anfragen, welche im dazugehörigen Standard \citename{ieft-rtsp} festgelegt sind.
+\ac{rtsp} ist ein textbasiertes Protokoll, d.h. die Anfragen werden als unverschlüsselter Text verschickt, ähnlich wie \ac{http}.
+\paragraph{OPTIONS:}
+Mit einer Options-Anfrage überprüft der Client, welche Formate und Optionen der Server unterstützt.
+
+\paragraph{describe}
+% setup
+% play
+% pause
+% record
+% announce
+% teardown
+% get_parameter
+% set_parameter
+% redirect
+
+
+In dieser Diplomarbeit wird das \ac{rtsp}-Protokoll für die Übertragung der Video- und Audio-Streams der einzelnen Stationen von und zum zentralen Server.
+Der Server ist für die Verteilung der Daten zuständig, d.h. er übertragt die Streams dem jeweiligen Gesprächspartner.
+
+
+
+\section{LibVLC Sharp}
+LibVLC ist eine C-Bibliothek für die Medienverarbeitung und -Wiedergabe.
+Mit Hilfe von Bindings kann diese Bibliothek auch in anderen Programmiersprachen verwendet werden.
+Eines dieser Binding ist LibVLC Sharp, welches die Funktionen der LibVLC in C\# zur Verfügung stellt.
+Es handelt sich bei der LibVLC um ein OpenSource-Projekt der Organisation VideoLAN, das fortlaufend weiterentwickelt und unterstützt wird. Der sehr bekannte VLC Media Player nutzt für alle Funktionen die LibVLC und dient daher sozusagen als Grafische Oberfläche zur LibVLC. \cite[vgl.][]{libvlc}\par
+
+Im Zuge dieser Diplomarbeit wird das C\#-Binding der LibVLC verwendet, um am Smartphone den Video-Stream der fest installierten Station abrufen und darstellen zu können.
+Dies wird näher im Kapitel \crossref{ch:prog-doc} beschrieben.
+
+\section{GStreamer}
+GStreamer ist ein extrem leistungsfähiges und vielseitiges Framework zur Erstellung von Medien-Streaming-Anwendungen.
+Viele der Vorzüge des GStreamer-Frameworks liegen in seiner Modularität:
+GStreamer kann neue Plugin-Module nahtlos integrieren.
+Aber da Modularität und Leistungsfähigkeit oft mit einem Preis für eine größere Komplexität einhergehen, ist das Schreiben neuer Anwendungen nicht immer einfach.
+\cite[aus dem Englischen übersetzt]{gstreamer}
+
+\section{Live555 Proxy}
