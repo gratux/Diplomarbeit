@@ -76,7 +76,7 @@
 \setlength{\parskip}{8pt}% Add space after paragraph
 \setmainfont{Arial}
 \renewcommand{\footnotesize}{\scriptsize}
-
+\lstset{basicstyle=\ttfamily\small,breaklines=true}
 
 % Document start -----------------------------------------------------------
 \begin{document}
@@ -87,7 +87,8 @@
 	\input{chapters/title.tex}
 \end{titlingpage}
 
-\linespread{2}
+\OnehalfSpacing
+
 \chapter{Erklärungen}
 \section{Eidesstattliche Erklärung}
 Wir erklären an Eides statt, dass wir die vorliegende Diplomarbeit selbständig und ohne fremde Hilfe verfasst, andere als die angegebenen Quellen und Hilfsmittel nicht benutzt und die den benutzten Quellen wörtlich und inhaltlich entnommenen Stellen als solche erkenntlich gemacht haben.
@@ -109,6 +110,7 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \cleartoverso
 
 \tableofcontents
+%\cleartoverso
 
 \chapter{Kurzfassung/Abstract}
 \input{chapters/kurzfassung.tex}
@@ -142,8 +144,7 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \input{chapters/software_module.tex}
 \chapter{Push-Benachrichtigung}
 \label{ch:push}
-\section{Push Notification Service}
-\section{AppCenter Push}
+\input{chapters/push_notification.tex}
 \chapter{Programm-Dokumentation}
 \input{chapters/xamarin.tex}
 \chapter{Testen}

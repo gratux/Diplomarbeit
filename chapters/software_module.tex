@@ -4,7 +4,9 @@ Dieses Netzwerkprotokoll ist im IETF-Dokument \citetitle{ietf-rtsp} festgelegt.
 Es wurde gemeinsam von \citeauthor{ietf-rtsp} entwickelt. \cite[vgl.][]{ietf-rtsp}\par
 Im Zuge dieser Diplomarbeit wird die erste Version des RTSP-Protokolls verwendet.
 Neben der verwendeten Version 1 existiert auch eine neue Version 2, welche im IETF-Dokument \citetitle{ietf-rtsp-2} definiert ist. Die neue Version wurde von \citeauthor{ietf-rtsp-2} erarbeitet. \cite[vgl.][]{ietf-rtsp-2}
-Es wurde dennoch die erste Version verwendet, da die Stationen dieses bereits verwenden und die neue Version nicht rückwärtskompatibel ist.
+Es wurde dennoch die erste Version verwendet, da die Stationen dieses bereits verwenden und die neue Version nicht rückwärtskompatibel ist.\par
+
+RTSP wird in der Industrie vielseitig verwendet, um Live-Übertragungen von Überwachungskameras zu verwalten. Eine weitere Anwendung des RTSP Protokolls ist das Streamen von Medien-Daten zu einem Server, der diese dann beispielsweise transcodiert oder aufnimmt.
 
 \subsection{Anfragen-Aufbau}
 Das RTSP-Protokoll definiert mehrere Anfragen zur Verwaltung der Netzwerkverbindung.
@@ -13,7 +15,7 @@ In Tabelle \ref{tab:rtsp-req} sind sämtliche Anfragen des RTSP-Protokolls und d
 Die in Tabelle \ref{tab:rtsp-req} verwendeten Kurzbezeichnungen haben folgende Bedeutung:
 \paragraph{Richtung:} C\dots Client, S\dots Server
 \paragraph{Objekt:}P\dots Präsentation, S\dots Stream
-\begin{table}
+\begin{table}[H]
     \centering\begin{tabular}{|r|c|c|l|}
         \hline%-----------------------------------------------------------
         Methode         &Richtung                           &Objekt &Verbindlichkeit\\
@@ -34,12 +36,15 @@ Die in Tabelle \ref{tab:rtsp-req} verwendeten Kurzbezeichnungen haben folgende B
     \caption{Anfrage-Arten des RTSP-Protokolls}
     \label{tab:rtsp-req}
 \end{table}
-Das Aussehen einer solchen Anfrage wird anhand des Beispiels der DESCRIBE-Methode veranschaulicht:
+Das Aussehen einer solchen Anfrage wird anhand des Beispiels der DESCRIBE-Methode veranschaulicht.
+Der Client beginnt die Anfrage mit dem Url des Medien-Streams, den er abrufen möchte und teilt dem Server mit, welche Formate er versteht.
 \begin{lstlisting}
 C->S: DESCRIBE rtsp://server.example.com/fizzle/foo RTSP/1.0
     CSeq: 312
     Accept: application/sdp, application/rtsl, application/mheg
-
+\end{lstlisting}
+Der server antwortet auf diese Anfrage mit dem Session Descriptor, der alle wichtigen Informationen des Medien-Streams beinhaltet, wie zum Beispiel Video- und Audio-Format, Übertragungsmethode, sowie allgemeine Informationen wie Titel und Beschreibung.
+\begin{lstlisting}
 S->C: RTSP/1.0 200 OK
     CSeq: 312
     Date: 23 Jan 1997 15:35:06 GMT
@@ -60,44 +65,6 @@ S->C: RTSP/1.0 200 OK
     m=whiteboard 32416 UDP WB
     a=orient:portrait
 \end{lstlisting}
-% Um einen Video-Stream über das Netzwerk übertragen zu können braucht es ein geeignetes Protokoll.
-% Das \ac{rtsp} ist seit Langem ein sehr beliebtes und oft verwendetes Protokoll, um die Übertragung von kontinuierlichen Medien-Daten .
-% Das Protokoll ist eigentlich selbst nicht direkt für die Übertragung von Medien-Streams, sondern nur für den Aufbau und die Steuerung von Verbindungen.
-% Meist das \ac{rtp}-Protokoll zur Übertragung der einzelnen Elementar-Streams in Verbindung mit dem \ac{rtcp}-Protokoll zur Steuerung, d.h. Starten und Stoppen des Medienflusses verwendet.
-% Die typischen Anwendungsfälle für \ac{rtsp} beinhalten:
-% \begin{itemize}
-%     \item Live-Streaming
-%     \item Übertragung von Überwachungs-Kamera-Videos
-% \end{itemize}
-% \ac{rtsp} ist aber grundsätzlich protokoll-unabhängig, d.h. es kann jedes beliebige Protokoll zur übertragung der Daten verwendet werden. \ac{rtsp} dient nur zum Aufbau und Verwalten der Übertragungs-Session.
-% % Auf unterster Ebene wird der Medien-Stream über \ac{rtp} übertragen und die Steuerbefehle für Starten und Stoppen des Streams, sowie \ac{vod}-Funktionalität werden mit \ac{rtcp} verschickt.
-% % \ac{rtsp} hat sich aufgrund der guten Echtzeitfähigkeit, d.h. niedrigen Übertragungsverzögerung, und dem einfachen Anfragenaufbaus als nahezu Industriestandard durchgesetzt.
-
-% \subsection{RTSP-Anfragen}
-
-
-
-% Das \ac{rtsp} definiert zur Steuerung des Medienflusses mehrere Kommandos bzw. Anfragen, welche im dazugehörigen Standard \cite[vgl.][]{ietf-rtsp} festgelegt sind.
-% \ac{rtsp} ist ein textbasiertes Protokoll, d.h. die Anfragen werden als unverschlüsselter Text verschickt, ähnlich wie \ac{http}.
-% \paragraph{OPTIONS:}
-% Mit einer Options-Anfrage überprüft der Client, welche Formate und Optionen der Server unterstützt.
-
-% \paragraph{describe}
-% % setup
-% % play
-% % pause
-% % record
-% % announce
-% % teardown
-% % get_parameter
-% % set_parameter
-% % redirect
-
-
-% In dieser Diplomarbeit wird das \ac{rtsp}-Protokoll für die Übertragung der Video- und Audio-Streams der einzelnen Stationen von und zum zentralen Server.
-% Der Server ist für die Verteilung der Daten zuständig, d.h. er übertragt die Streams dem jeweiligen Gesprächspartner.
-
-
 
 \section{LibVLC Sharp}
 LibVLC ist eine C-Bibliothek für die Medienverarbeitung und -Wiedergabe.
@@ -113,6 +80,47 @@ GStreamer ist ein extrem leistungsfähiges und vielseitiges Framework zur Erstel
 Viele der Vorzüge des GStreamer-Frameworks liegen in seiner Modularität:
 GStreamer kann neue Plugin-Module nahtlos integrieren.
 Aber da Modularität und Leistungsfähigkeit oft mit einem Preis für eine größere Komplexität einhergehen, ist das Schreiben neuer Anwendungen nicht immer einfach.
-\cite[aus dem Englischen übersetzt]{gstreamer}
+\cite[aus dem Englischen übersetzt]{gstreamer}\par
 
+Gstreamer ist Pipeline-basiert, d.h. die Funktion wird mit einer Vielzahl von hintereinander geschalteten Filtern bestimmt.
+Eine Pipeline hat immer einen Eingang (Source) und einen oder mehrere Ausgänge.
+Zwischen diesen können sich beliebig viele Filter befinden, die unterschiedlichste Funktionen haben können:
+\begin{itemize}
+    \item Signale de- und encodieren (Codec, z.B. x264enc)
+    \item Größe und Position von Videos verändern (Caps, z.B. video/x-raw)
+    \item die Pipeline in zwei Teile auftrennen, z.B. in Video und Audio (Demux)
+    \item Daten zu einem Netzwerk-Paket zusammenbündeln (z.B. rtph264pay)
+    \item etc.
+\end{itemize}
+Ein Filter hat bestimmte Ein- und Ausgangsformate die er unterstützt.
+Als Beispiel nehmen wir den H264-Encoder:
+dieser unterstützt für das Eingangssignal RAW-Video, also decodierte Binärdaten. Am Ausgang kommt logischerweise ein H264-codierter Video-Stream heraus.\par
+
+Das Gstreamer-Rahmenwerk wird aktuell vom Gstreamer-Team fortlaufend upgedatet und verbessert.
+Die erste Version des Gstreamer-Rahmenwerks wurde im Jahr 2001 mit der Versionsnummer 0.1.0 veröffentlicht.
+Im Jahr 2012 kam eine große Umstellung, bei der grundlegende Teile des Rahmenwerks ausgetauscht wurden, wodurch einige Teile nicht mehr kompatibel waren.
+Ab diesem Zeitpunkt begann die Versionsnummer mit 1.x.x, um die neuen Versionen deutlich von den Vorgängern abzutrennen.
+Die aktuelle Version des Gstreamer-Rahmenwerks zum Verfassungszeitpunkt dieser Arbeit ist die Version 1.16.2.\par
+
+Aktuell wird die Version 1.16.2 verwendet. Da aber alle 1.x.x-Versionen mehr oder weniger miteinander kompatibel sind, kann sich das ändern, sobald ein neues Update veröffentlicht wird. Es gibt keinen besonderen Grund auf genau dieser Version zu bleiben.\par
+
+Es wurden während der Recherche einige mögliche Alternativen für das GStreamer-Rahenwerk gefunden:
+\begin{itemize}
+    \item FFmpeg, ein Multimedia-Rahmenwerk, das vor allem im Bereich Transcodierung verwendung findet. Es bietet alle Funktionen des GStreamer-Rahmenwerks an.
+    \item LibVLC, die Grundlage des VLC Media Players, welche vor allem zur Wiedergabe verwendet wird. Diese Bibliothek kann zur Transcodierung und Live-Übertragung genutzt werden, ist allerdings nicht dafür optimiert.
+\end{itemize}
+
+GStreamer wird in diesem Projekt verwendet, da bei Live-Video-Übertragung möglichst wenig Latenz vorkommen soll.
+Das Gstreamer-Rahmenwerk ist in dieser Hinsicht den anderen Multimedia-Rahmenwerken weit voraus.
+Zusätzlich gibt es von GStreamer keine einschränkenden Vorgaben was Ein- und Ausgangsformat betrifft.
+Es kann jede beliebige Quelle mit jedem beliebigen Output verknüpft werden, solange die richtige Pipeline verwendet wird.
+Weiters ist das Projekt quelloffen, d.h. man ist in Bezug auf die Installationsdateien nicht auf den Hersteller angewiesen, sondern kann das Programm selbst für die jeweilige Plattform kompilieren, wenn der Hersteller das noch nicht getan hat.
+Außerdem kann jeder Entwickler Vorschläge für Änderungen am Code, sowie Bugfixes vorbringen.
+\subsection{Pipeline-Beispiel}
+Die detaillierte Funktionsweise des GStreamer-Rahmenwerks lässt sich am besten anhand eines realistischen Beispiels erklären.
+In diesem Beispiel wird ein in Echtzeit generiertes Testvideosignal zuerst auf 1280x720 Pixel vergrößert und danach als H264-encodierter Stream via RTP verschickt.
+\begin{lstlisting}
+    gst-launch-1.0 videotestsrc ! video/x-raw,width=1260,height=720,framerate=20/1 ! autovideoconvert ! queue ! x264enc tune=zerolatency bitrate=4096 speed-preset=superfast ! queue ! rtph264pay config-interval=1 mtu=1300 ! udpsink host=127.0.0.1 port=5000
+\end{lstlisting}
+Der Filter \enquote{queue} wird hier verwendet, um vor und nach dem Encoding-Vorgang ein kurzes Video-Segment in einem Zwischenspeicher zu behalten. Dies ist notwendig, da der H264-Codec mehrere Video-Frames auf einmal komprimiert.
 \section{Live555 Proxy}

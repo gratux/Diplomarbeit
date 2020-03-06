@@ -71,7 +71,8 @@ Dieser ist im Menüband unter \enquote{Tools\textbackslash Android\textbackslash
     \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/android_sdk_installation.png}    
     \caption{Android SDK Manager}
 \end{figure}
-Der \ac{sdk}-Manager ist in zwei Seiten unterteilt - \enquote{Platforms} und \enquote{Tools}.
+Der \ac{sdk}-Manager ist in zwei Seiten unterteilt - \enquote{Platforms} und \enquote{Tools}.\par
+
 Auf der \enquote{Plat\-forms}-Seite können die benötigten \ac{sdk}-Teile für jede Android-Version installiert werden.
 Benötigt wird nur die Version, mit der das Projekt später kompiliert werden soll.
 Außerdem kann man auf dieser Seite des \ac{sdk}-Managers System-Abbilder für den Android Emulator installieren.\par
@@ -103,10 +104,11 @@ Die Aufgabe des Compilers ist es, die geschriebene Hochsprache entweder direkt i
 
 Ähnlich funktioniert dieser Vorgang auch bei einer Xamarin.Forms-App, allerdings wesentlich komplexer.
 Eine Xamarin.Forms-Solution besteht aus drei Einzel-Projekten, wobei das .NET-Standard-Projekt als Teil der anderen zwei verbaut werden muss.
-Dadurch ergibt sich folgender Build-Ablauf:
+Dadurch ergibt sich ein in Abbildung \crossref{fig:build-forms} dargestellter Build-Vorgang.
 \begin{figure}
     \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/build-vorgang.pdf}
     \caption{Build-Vorgang einer Xamarin.Forms-Solution}
+    \label{fig:build-forms}
 \end{figure}
 
 %Weg vom Programm zur binary

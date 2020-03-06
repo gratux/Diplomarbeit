@@ -5,7 +5,14 @@
 % Das Unternehmen Xamarin wurde mit der Absicht gegründet, Software auf mobile Geräte zu vertreiben. 
 \label{ch:prog-doc}
 \section{Übersicht}
-Grundsätzlich besteht das Software-Projekt aus drei Teilen:
+Das im Zuge dieser Diplomarbeit entwickelte Software-Projekt basiert auf einer der von Microsoft bereitgestellten Xamarin.Forms-Vorlagen, welche als Teil von Visual Studio bereitgestellt werden.
+Es gibt mehrere Auswahlmöglichkeiten, wobei alle Vorlagen bis auf \enquote{Blank} Beispielcode beinhalten.
+Da der Beispielcode der anderen Vorlagen für dieses Projekt nicht relevant ist und ohnehin gelöscht werden müsste, wird die \enquote{Blank}-Vorlage verwendet.
+Diese Vorlage beinhält nur eine Haupt-Oberflächenseite ohne jeglichen Beispielcode.
+
+Der immer wieder vorkommende Name PiBell ist eine freigeistliche Erfindung. PiBell ist der Projektname, der sich aus \acl{rpi} und \enquote{Bell}, dem englischen Wort für Klingel oder Glocke, zusammensetzt.
+
+Visual Studio organisiert alle Programmteile in einer sogenannten Solution, welche den Projektnamen trägt. In diesem Fall beinhält die Solution \enquote{PiBell} drei Programmteile oder \enquote{Projects}:
 \paragraph{PiBell} ist das portable Projekt, auch .NET-Standard-Projekt genannt.
 Dieses beinhaltet den ganzen plattformunabhängigen Code, sowie die Definition der UI-Oberfläche mittels XAML-Dateien.
 In diesem Projekt befindet sich der größte entwickelte Code-Anteil, da die meisten Funktionen, wie das Abspielen von Videos mit Hilfe der LibVLC-Bindings, plattformunabhängig funktionieren und deswegen geteilt werden können.
@@ -15,7 +22,7 @@ Unter anderem ist hier enthalten die Android-Implementation des Mikrofon-Auf\-na
 Die Mikrofon-Aufnahme erfolgt auf einer sehr hardwarenahen Ebene, was die plattformabhängigkeit erklärt.
 
 \paragraph{PiBell.iOS} beinhaltet wie PiBell.Android den plattformspezifischen Code für die iOS-Platt\-form. Aufgrund mangelnder Entwicklungswerkzeuge wurde dieser Teil nicht großartig behandelt.\par
-Der immer wieder auftretende Name PiBell ist dabei eine freigeistliche Erfindung. Der Begriff setzt sich zusammen aus RaspberryPi und dem englischen Wort für Glocke oder Klingel (Bell).\par
+
 \begin{figure}[H]
 \centering\includegraphics[width=0.9\linewidth]{images/xamarin/struktur.pdf}
 \caption{Aufbau der Solution}
