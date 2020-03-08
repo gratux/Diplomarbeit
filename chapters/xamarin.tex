@@ -13,13 +13,13 @@ Diese Vorlage beinhält nur eine Haupt-Oberflächenseite ohne jeglichen Beispiel
 Der immer wieder vorkommende Name PiBell ist eine freigeistliche Erfindung. PiBell ist der Projektname, der sich aus \acl{rpi} und \enquote{Bell}, dem englischen Wort für Klingel oder Glocke, zusammensetzt.
 
 Visual Studio organisiert alle Programmteile in einer sogenannten Solution, welche den Projektnamen trägt. In diesem Fall beinhält die Solution \enquote{PiBell} drei Programmteile oder \enquote{Projects}:
-\paragraph{PiBell} ist das portable Projekt, auch .NET-Standard-Projekt genannt.
-Dieses beinhaltet den ganzen plattformunabhängigen Code, sowie die Definition der UI-Oberfläche mittels XAML-Dateien.
+\paragraph{PiBell} ist das portable Projekt, auch \acs{dotnet}-Standard-Projekt genannt.
+Dieses beinhaltet den ganzen plattformunabhängigen Code, sowie die Definition der \acs{ui}-Oberfläche mittels \acs{xaml}-Dateien.
 In diesem Projekt befindet sich der größte entwickelte Code-Anteil, da die meisten Funktionen, wie das Abspielen von Videos mit Hilfe der LibVLC-Bindings, plattformunabhängig funktionieren und deswegen geteilt werden können.
 
 \paragraph{PiBell.Android} beinhaltet allen Code, der plattformspezifisch für Android geschrieben wurde.
 Unter anderem ist hier enthalten die Android-Implementation des Mikrofon-Auf\-nahme-Services, sowie das Berechtigungs-Management.
-Die Mikrofon-Aufnahme erfolgt auf einer sehr hardwarenahen Ebene, was die plattformabhängigkeit erklärt.
+Die Mikrofon-Aufnahme erfolgt auf einer sehr hardwarenahen Ebene, was die Plattform-Abhängigkeit erklärt.
 
 \paragraph{PiBell.iOS} beinhaltet wie PiBell.Android den plattformspezifischen Code für die iOS-Platt\-form. Aufgrund mangelnder Entwicklungswerkzeuge wurde dieser Teil nicht großartig behandelt.\par
 
@@ -42,7 +42,7 @@ Im folgenden Teil werden die wesentlichen Teile des portablen Projektes PiBell b
 In den einzelnen Programmteilen gibt es immer wiederkehrende Abläufe, wie Initialisierung, die nur einmal beschrieben werden.
 Die von Microsoft vorgefertigten Teile werden nicht behandelt.
 Der Fokus liegt damit auf den selbst erstellten Programmteilen.
-Die Programmteile werden generell in der selben Reihenfolge behandelt, wie sie vom Programm aufgerufen werden.\par
+Die Programmteile werden generell in derselben Reihenfolge behandelt, wie sie vom Programm aufgerufen werden.\par
 
 Textsegmente mit vorgestellter Zeilennummer sind direkt vom Programm eingefügt.
 Der beschreibende Text bezieht sich auf den Programmteil mit Hilfe der Zeilennummern.
@@ -72,7 +72,7 @@ Anschließend wird das AppCenter \acs{sdk} mit AppCenter.Start(..) gestartet. Am
 
 \subsection{MainPage.xaml}
 %vlcht. Zu Xamarin im Allgemeinen
-In einer XAML-Datei wird das Aussehen der Oberfläche nach dem WYSIWYM-Prinzip beschrieben. Das Format ähnelt sehr einer XML-Datei, in der Hinsicht, dass ein Element mit einer spitzen Klammer (<) beginnt und mit einem Schrägstrich und einer spitzen Klammer (/>) endet. Einige Elemente, wie zum Beispiel Listen oder ein Grid, können sogenannte Kind-Elemente beinhalten.
+In einer \acs{xaml}-Datei wird das Aussehen der Oberfläche nach dem \acs{wysiwym}-Prinzip beschrieben. Das Format ähnelt sehr einer \acs{xml}-Datei, in der Hinsicht, dass ein Element mit einer spitzen Klammer (<) beginnt und mit einem Schrägstrich und einer spitzen Klammer (/>) endet. Einige Elemente, wie zum Beispiel Listen oder ein Grid, können sogenannte Kind-Elemente beinhalten.
 \begin{lstlisting}[firstnumber=3,language=xml]
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
@@ -83,9 +83,9 @@ In einer XAML-Datei wird das Aussehen der Oberfläche nach dem WYSIWYM-Prinzip b
              Title="Main Page"
              BackgroundColor="#ff1b1b1b">
 \end{lstlisting}
-\paragraph{3-8:} Am Anfang der XAML-Datei wird der allgemeine Seiten-Typ, gemeinsam mit einigen Quell-Abkürzungen (Namenspräfix für Xamarin-fremde Elemente) definiert. In diesem Fall handelt es sich um eine simple ContentPage mit den Standard-Abkürzungen. Zur Verwendung der LibVLC wurde in Zeile 7 eine zusätzliche Quelle definiert. Die neu hinzugefügte Quelle erlaubt den Zugriff auf Elemente wie die VideoView, welche ein Video als Teil der Oberfläche darstellt.
+\paragraph{3-8:} Am Anfang der \acs{xaml}-Datei wird der allgemeine Seiten-Typ, gemeinsam mit einigen Quell-Abkürzungen (Namenspräfix für Xamarin-fremde Elemente) definiert. In diesem Fall handelt es sich um eine simple ContentPage mit den Standard-Abkürzungen. Zur Verwendung der LibVLC wurde in Zeile 7 eine zusätzliche Quelle definiert. Die neu hinzugefügte Quelle erlaubt den Zugriff auf Elemente wie die VideoView, welche ein Video als Teil der Oberfläche darstellt.
 \paragraph{9:} Mit x:Class wird die Programmklasse angegeben, die den Code der Oberfläche beinhält. In dieser Klasse finden sich alle Event-Handler für jegliche Oberflächenereignisse, wie das drücken eines Buttons.
-\paragraph{10:} Das festlegen der Title-Variable ist in diesem Fall optional. Falls eine Master-Detail-Page-Struktur verwendet werden würde, wäre der Titel oben in der Kopfzeile der App zu sehen. Da es sich hier aber um ein Sigle-Page-Layout handelt, ist der Titel nicht zwingend notwendig.
+\paragraph{10:} Das Festlegen der Title-Variable ist in diesem Fall optional. Falls eine Master-Detail-Page-Struktur verwendet werden würde, wäre der Titel oben in der Kopfzeile der App zu sehen. Da es sich hier aber um ein Sigle-Page-Layout handelt, ist der Titel nicht zwingend notwendig.
 \paragraph{11:} Mit der Variable BackgroundColor wird die Hintergrundfarbe der Oberfläche definiert. Die gewünschte Farbe wird als HEX-Zahl mit dem Format Alpha-Rot-Grün-Blau angegeben. Der Alpha-Wert legt die Durchsichtigkeit der Farbe fest. Es wurde sich für ein dunkles Design entschieden, da dieses in einer wenig beleuchteten Umgebung die Augen besser schont.
 
 \begin{lstlisting}[firstnumber=12,language=xml]
@@ -116,7 +116,7 @@ In einer XAML-Datei wird das Aussehen der Oberfläche nach dem WYSIWYM-Prinzip b
              Clicked="BtConnect_Clicked"/>
 \end{lstlisting}
 \paragraph{36:} Ein ImageButton kann im Vergleich zu einem normalen Button als Inhalt ein Bild anzeigen. Die Bildquelle wird mit der „Source“-Property gesetzt. Es gibt mehrere mögliche Bildformate, wobei hier PNG aufgrund von Transparenz-Unterstützung gewählt wurde. Ohne Definition der „BackgroundColor“ würde der ImageButton mit der Default-Farbe grau gefüllt werden.
-\paragraph{38:} Mit dem EventHandler „Clicked“ kann die Funktion, die aufgerufen wird wenn der ImageButton gedrückt wird, spezifiziert werden.
+\paragraph{38:} Mit dem EventHandler „Clicked“ kann die Funktion, die aufgerufen wird, wenn der ImageButton gedrückt wird, spezifiziert werden.
 \begin{lstlisting}[firstnumber=43,language=xml]
 <ImageButton x:Name="BtToggleSpeaker" Source="SpeakerMute.png" BackgroundColor="Transparent"
              Grid.Row="1" Grid.Column="0" Margin="10"
@@ -186,7 +186,7 @@ Wenn ein anderer Compiler-Modus ausgewählt ist, werden diese Teile ignoriert.
 \paragraph{42-49:} Mit einer Schleife werden alle Zusatzdaten der Benachrichtigung überprüft.
 Wenn der Datensatz \texttt{mrl} enthalten ist, wird dessen Wert in \texttt{\_player.Mrl} gespeichert.
 Der Wert stellt die Server-Adresse dar, von der der Video-Stream abgerufen werden soll.
-\paragraph{51-55:} Der Benutzer wird per Popup gefragt, ob der Anruf entgegen genommen werden soll (Abb. \crossref{fig:inc-call}).
+\paragraph{51-55:} Der Benutzer wird per Popup gefragt, ob der Anruf entgegengenommen werden soll (Abb. \crossref{fig:inc-call}).
 \begin{figure}[H]
     \centering
     \includegraphics[width=.5\linewidth]{images/xamarin/IncomingCall.png}
@@ -225,7 +225,7 @@ MessagingCenter.Subscribe<string>(this, "OnRestart", app =>
 Bevor dies geschieht, wird die aktuelle Wiedergabe-Position in einer Variablen gespeichert und die Wiedergabe gestoppt.
 Anschließend wird die VideoView von der Oberfläche entfernt, damit sie später neu hinzugefügt werden kann.
 \paragraph{67-78:} Das \texttt{OnRestart}-Event wird aufgerufen, wenn die App vom Hintergrund wieder in den Vordergrund geht.
-Hier geschieht der selbe Vorgang wie davor, jedoch in sinngemäß umgekehrter Reihenfolge.
+Hier geschieht derselbe Vorgang wie davor, jedoch in sinngemäß umgekehrter Reihenfolge.
 Als erstes wird die VideoView der Oberfläche wieder hinzugefügt, damit die LibVLC eine Referenz dazu bilden kann.
 Falls davor ein Video gespielt wurde, wird dieses fortgesetzt und die Variable für die vorherige Wiedergabeposition wird gelöscht.
 
@@ -246,9 +246,62 @@ private void BtConnect_Clicked(object sender, EventArgs e)
 \paragraph{109:} Eine Funktion für ein Button-Event hat grundsätzlich als Rückgabe-Typ \texttt{void}, also nichts.
 Auf die Funktion kann nur aus der selben Klasse zugegriffen werden, was mit dem \texttt{private}-Schlüsselwort bekanntgegeben wird.
 Als Parameter werden Informationen zum Event-Auslöser und zum Event selbst mitgegeben.
-\paragraph{111-112:} Wenn der grüne \enquote{Anrufen}-Button gedrückt wird, beginnen \texttt{\_player} und \texttt{\_streamer} damit, die Daten abzurufen bzw. bereitzustellen.
+\paragraph{111-112:} Wenn der grüne \enquote{Anrufen}-Button gedrückt wird, beginnen \texttt{\_player} und \texttt{\_streamer} damit, die Daten abzurufen bzw. bereitzustellen. Diese Funktionen werden im Abschnitt \crossref{ssec:classes} genauer beschrieben.
 
+Im letzten Abschnitt dieser Datei wird das Verhalten beim Wechseln zwischen Hoch- und Querformat festgelegt.
+\begin{lstlisting}[firstnumber=121]
+protected override void OnSizeAllocated(double width, double height)
+{
+    base.OnSizeAllocated(width, height);
+    if (_width != width || _height != height)
+    {
+        _width = width;
+        _height = height;
+        if (width < height) //Portrait
+        {
+            MainGrid.ColumnDefinitions.Clear();
+            MainGrid.ColumnDefinitions.Add(new ColumnDefinition
+                {Width = new GridLength(1, GridUnitType.Star)});
+
+            MainGrid.RowDefinitions.Clear();
+            MainGrid.RowDefinitions.Add(new RowDefinition
+                {Height = new GridLength(0.7, GridUnitType.Star)});
+            MainGrid.RowDefinitions.Add(new RowDefinition
+                {Height = new GridLength(3, GridUnitType.Star)});
+            MainGrid.RowDefinitions.Add(new RowDefinition
+                {Height = new GridLength(2, GridUnitType.Star)});
+
+            Grid.SetColumnSpan(EditMrl, 1);
+            Grid.SetColumn(ButtonGrid, 0);
+            Grid.SetRow(ButtonGrid, 2);
+        }
+\end{lstlisting}
+[\dots]
+\begin{lstlisting}[firstnumber=164]
+    }
+}
+\end{lstlisting}
+\paragraph{121:} Die \texttt{OnSizeAllocated()}-Funktion ist eine vorgefertigte Funktion, die aufgerufen wird, wenn sich die Abmasse der Oberfläche geändert haben.
+Die neunen Abmasse sind über die Parameter \texttt{width} und \texttt{height} verfügbar.
+\paragraph{124-164:} Wenn die Abmasse anders sind, als die Abmasse beim letzten Aufruf wird das Oberflächen-Layout entsprechend angepasst.
+Falls die Höhe größer als die Breite ist, greift der erste Teil der If-Else-Struktur, ansonsten der zweite.
+\paragraph{130-144:} Zuerst werden die Reihen- und Spalten-Definitionen gelöscht, um sie neu zuweisen zu können.
+Für das Hochformat werden eine Spalte und drei Reihen benötigt.
+Diese werden mit den richtigen relativen Massen hinzugefügt.
+Wenn dies geschehen ist, werden die Oberflächenelemente den richtigen Plätzen im Grid zugewiesen.
+\paragraph{146-163:} Das Verändern der Oberfläche für Querformat wird hier ausgelassen, da es sinngemäß äquivalent zum Hochformat ist.
 \subsection{MediaClasses.cs}
+\label{ssec:classes}
+In dieser Source-Datei sind sämtliche Hilfsklassen zum Abrufen und Bereitstellen von Medieninformationen definiert.
+Grundsätzlich finden sich hier zwei Klassen:
+\begin{itemize}
+    \item Player, die für das Abrufen des Medien-Streams vom Server und Darstellen von diesem zuständig ist
+    \item Streamer, mit der das Zurückschicken der Mikrofon-Rohdaten erfolgen soll
+\end{itemize}
+\subsubsection{Player}
+
+
+\subsubsection{Streamer}
 
 \section{PiBell.Android}
 \blindtext

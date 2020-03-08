@@ -21,3 +21,4 @@
 *.bcf
 *.blg
 *.run.xml
+sync.ffs_lock

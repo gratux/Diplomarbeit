@@ -117,6 +117,7 @@ Weiters sind die einzelnen Funktionen zwar auf der Dokumentationsseite aufgelist
 Während der Recherche wurden wenige Alternativen gefunden. Diese Alternativen sind jedoch seit langem nicht mehr in Entwicklung und sind daher nicht für die Verwendung empfohlen. Die LibVLC-Bibliothek ist momentan die einzige kostenfreie Variante \acs{rtsp}-Streams mit Xamarin auf dem Mobilgerät abspielen zu können. Es gibt Bibliotheken von VASTreaming, jedoch sind diese kostenpflichtig zu erwerben, was für diese Diplomarbeit keine Option ist. \cite[vgl.][Pricing]{vastreaming}
 
 \section{GStreamer}
+\subsection{Modularität}
 GStreamer ist ein extrem leistungsfähiges und vielseitiges Framework zur Erstellung von Medien-Streaming-Anwendungen.
 Viele der Vorzüge des GStreamer-Frameworks liegen in seiner Modularität:
 GStreamer kann neue Plugin-Module nahtlos integrieren.
@@ -137,6 +138,7 @@ Ein Filter hat bestimmte Ein- und Ausgangsformate die er unterstützt.
 Als Beispiel nehmen wir den H264-Encoder:
 dieser unterstützt für das Eingangssignal RAW-Video, also decodierte Binärdaten. Am Ausgang kommt logischerweise ein H264-codierter Video-Stream heraus.\par
 
+\subsection{Version}
 Das GStreamer-Rahmenwerk wird aktuell vom GStreamer-Team fortlaufend upgedatet und verbessert.
 Die erste Version des GStreamer-Rahmenwerks wurde im Jahr 2001 mit der Versionsnummer 0.1.0 veröffentlicht.
 Im Jahr 2012 kam eine große Umstellung, bei der grundlegende Teile des Rahmenwerks ausgetauscht wurden, wodurch einige Teile nicht mehr kompatibel waren.
@@ -145,43 +147,51 @@ Die aktuelle Version des GStreamer-Rahmenwerks zum Verfassungszeitpunkt dieser A
 
 Aktuell wird die Version 1.16.2 verwendet. Da aber alle 1.x.x-Versionen mehr oder weniger miteinander kompatibel sind, kann sich das ändern, sobald ein neues Update veröffentlicht wird. Es gibt keinen besonderen Grund auf genau dieser Version zu bleiben.\par
 
+\subsection{Alternativen}
 Es wurden während der Recherche einige mögliche Alternativen für das GStreamer-Rahenwerk gefunden:
 \begin{itemize}
-    \item FFmpeg, ein Multimedia-Rahmenwerk, das vor allem im Bereich Transcodierung verwendung findet. Es bietet alle Funktionen des GStreamer-Rahmenwerks an.
+    \item FFmpeg, ein Multimedia-Rahmenwerk, das vor allem im Bereich Transcodierung Verwendung findet. Es bietet alle Funktionen des GStreamer-Rahmenwerks an.
     \item LibVLC, die Grundlage des VLC Media Players, welche vor allem zur Wiedergabe verwendet wird. Diese Bibliothek kann zur Transcodierung und Live-Übertragung genutzt werden, ist allerdings nicht dafür optimiert.
 \end{itemize}
 
+\subsection{Vorteile}
 GStreamer wird in diesem Projekt verwendet, da bei Live-Video-Übertragung möglichst wenig Latenz vorkommen soll.
 Das GStreamer-Rahmenwerk ist in dieser Hinsicht den anderen Multimedia-Rahmenwerken weit voraus.
 Zusätzlich gibt es von GStreamer keine einschränkenden Vorgaben was Ein- und Ausgangsformat betrifft.
 Es kann jede beliebige Quelle mit jedem beliebigen Output verknüpft werden, solange die richtige Pipeline verwendet wird.
 Weiters ist das Projekt quelloffen, d.h. man ist in Bezug auf die Installationsdateien nicht auf den Hersteller angewiesen, sondern kann das Programm selbst für die jeweilige Plattform kompilieren, wenn der Hersteller das noch nicht getan hat.
 Außerdem kann jeder Entwickler Vorschläge für Änderungen am Code, sowie Bugfixes vorbringen.
-\subsection{Pipeline-Beispiel}
+\subsection{Funktionsweise}
 Die detaillierte Funktionsweise des GStreamer-Rahmenwerks lässt sich am besten anhand eines realistischen Beispiels erklären.
 In diesem Beispiel wird ein in Echtzeit generiertes Testvideosignal zuerst auf 1280x720 Pixel vergrößert und danach als H264-encodierter Stream via RTP verschickt.
+Mit dem Kommandozeilen-Programm \texttt{gst-launch-1.0.exe} kann ohne großen Aufwand eine Pipeline aufgebaut werden:
 \begin{lstlisting}
     gst-launch-1.0 videotestsrc ! video/x-raw,width=1260,height=720,framerate=20/1 ! autovideoconvert ! queue ! x264enc tune=zerolatency bitrate=4096 speed-preset=superfast ! queue ! rtph264pay config-interval=1 mtu=1300 ! udpsink host=127.0.0.1 port=5000
 \end{lstlisting}
 Der Filter \enquote{queue} wird hier verwendet, um vor und nach dem Encoding-Vorgang ein kurzes Video-Segment in einem Zwischenspeicher zu behalten. Dies ist notwendig, da der H264-Codec mehrere Video-Frames auf einmal komprimiert.
 
-\subsection{gst-rtsp-server}
+\subsection{Zusatzmodul}
 gst-rtsp-server ist ein Zusatzmodul für das GStreamer- Rahmenwerk, welches die Verwendung des \acs{rtsp}-Protokolls 
+%TODO
 
 \section{Live555 Proxy}
-Ein \acs{rtsp}-Stream ist grundsätzlicherweise eine Unicast-Verbindung zwischen Server und Client.
+Ein \acs{rtsp}-Stream ist grundsätzlich eine Unicast-Verbindung zwischen Server und Client.
 Falls mehrere Clients den gleichen Medien-Stream abrufen möchten, muss der Server diesen für jeden Client einzeln transcodieren und verschicken.
-Dies stellt eine große Belastung für den Server un dessen Internetanbindung dar.
+Dies stellt eine große Belastung für den Server und dessen Internetanbindung dar.
 Mit Hilfe eines Proxy-Servers muss der Medien-Stream nur einmal verarbeitet werden, bevor er dann an die einzelnen Clients verteilt wird.\par
 
-Der Live555 Proxy Server ist eine quelloffene Applikation, welche für genau diese Aufgabe von LiveMedia Inc. entwickelt wurde.
+Der Live555 Proxy Server ist eine quelloffene Applikation, welche für genau diese Aufgabe von Live Networks Inc. entwickelt wurde.
 Mit Hilfe des Live555 Proxy Servers wird ein \acs{rtsp}-Stream einmalig eingelesen und an alle verbundenen Clients verteilt.
 Dadurch bleibt die \acs{cpu}-Belastung des Servers unabhängig von der Anzahl der verbundenen Clients, wodurch er unter Umständen mehrere verschiedene Streams bereitstellen könnte. Für jeden Medien-Stream, den der Server anbietet, wird eine weitere Live555-Proxy-Server-Instanz benötigt.\par
 
-Der Live555 Proxy Server wurde im Jahr xxxx erstmals von LiveMedia Inc. veröffentlicht. Neben dem Live555 Proxy Server entwickelt das Unternehmen mehrere Projekte:
+Das ursprüngliche Veröffentlichungsdatum des Live555 Proxy Servers konnte nicht gefunden werden.
+Bei Analyse der Google-Such-Trends zum Begriff Live555 wurde festgestellt, dass Suchanfragen mit Oktober 2005 gestartet haben.
+Daher lässt sich vermuten, dass das Programm kurz vor diesem Zeitpunkt veröffentlicht wurde. \cite[vgl.][Interest over time]{live555-trends}
+
+Neben dem Live555 Proxy Server entwickelt das Unternehmen mehrere Projekte:
 \begin{itemize}
     \item Live555 Media Server, mit dem lokale Medien-Dateien per \acs{rtsp} dem Netzwerk bereitgestellt werden können.
     \item liveCaster, zur Multicast-Übertragung von MP3-Dateien
-    \item diverse Kommandozeilenprogramme zum Senden und empfangen von Echtzeit-Streams
+    \item diverse Kommandozeilenprogramme zum Senden und Empfangen von Echtzeit-Streams
 \end{itemize}
-Die von LiveMedia Inc. entwickelten Programme und Bibliotheken finden in vielen bekannten Applikationen Anwendung, darunter auch der VLC Media Player mit der dazugehörigen LibVLC. In diesem Programm werden die Live555-Bibliotheken zum Empfangen und Entschlüsseln von \acs{rtsp}-Streams genutzt.
+Die von Live Networks Inc. entwickelten Programme und Bibliotheken finden in vielen bekannten Applikationen Anwendung, darunter auch der VLC Media Player mit der dazugehörigen LibVLC. In diesem Programm werden die Live555-Bibliotheken zum Empfangen und Entschlüsseln von \acs{rtsp}-Streams genutzt.

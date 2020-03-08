@@ -1,13 +1,13 @@
 % !TeX spellcheck = de_DE
 \documentclass[a4paper, 12pt, twoside, openright
-%, draft, showframe
+%, showframe
 ]{memoir}
 \usepackage[T1]{fontenc}
 \usepackage[margin=2cm, bindingoffset=10mm, includeheadfoot]{geometry}
 \usepackage[british, german]{babel}
 \usepackage[hyperref=true]{acro}
 \usepackage[backend=biber, style=ieee]{biblatex}
-\usepackage{fancyhdr, graphicx, datetime2, fontspec, tikz, float, hologo, csquotes, tabulary, listings}
+\usepackage{fancyhdr, graphicx, datetime2, fontspec, tikz, float, hologo, csquotes, tabulary, listings, longtable}
 \usepackage{blindtext}
 %\usepackage[protrusion=true,final]{microtype}
 \usepackage{hyperref}
@@ -56,7 +56,7 @@
 
 % memoir configuration ------------------------------------------------------
 \chapterstyle{section}
-\setsecnumdepth{subsection}
+\setsecnumdepth{subsubsection}
 \settocdepth{subsection}
 
 % custom commands -----------------------------------------------------------
@@ -69,7 +69,7 @@
 \newcommand{\MarioPrantl}{DI(FH) Mario Prantl}
 \newcommand{\AndreasGrain}{Andreas Grain}
 \newcommand{\MatthiasMair}{Matthias Mair}
-\newcommand{\authorName}{\AndreasGrain / \MatthiasMair}
+\newcommand{\authorName}{\AndreasGrain\ / \MatthiasMair}
 \newcommand{\crossref}[1]{\emph{\ref{#1} \nameref{#1}}}
 
 % text formatting ----------------------------------------------------------
@@ -135,18 +135,6 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \input{chapters/einleitung.tex}
 \cleartoverso
 
-\renewcommand{\authorName}{\MatthiasMair}
-\part{Hardware - \MatthiasMair}
-\chapter{Probleme des Ist-Standes}
-\chapter{Platine}
-\section{Spannungsversorgung}
-\section{Mikrofon-Verstärkerschaltung}
-\section{Lautsprecher-Verstärkerschaltung}
-\section{Mikrocontroller}
-\subsection{Programmierung}
-\subsection{Watchdog}
-\cleartoverso
-
 \renewcommand{\authorName}{\AndreasGrain}
 \part{Software - \AndreasGrain}
 \chapter{Rahmenwerk}
@@ -158,9 +146,20 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \input{chapters/push_notification.tex}
 \chapter{Programm-Dokumentation}
 \input{chapters/xamarin.tex}
-\chapter{Testen}
-\chapter{Ausblick}
+\chapter{Software-Ausblick}
 \section{Gesicherte Verbindung}% VPN-Zugriff
+\cleartoverso
+
+\renewcommand{\authorName}{\MatthiasMair}
+\part{Hardware - \MatthiasMair}
+\chapter{Probleme des Ist-Standes}
+\chapter{Platine}
+\section{Spannungsversorgung}
+\section{Mikrofon-Verstärkerschaltung}
+\section{Lautsprecher-Verstärkerschaltung}
+\section{Mikrocontroller}
+\subsection{Programmierung}
+\subsection{Watchdog}
 \cleartoverso
 
 \renewcommand{\authorName}{\AndreasGrain / \MatthiasMair}
@@ -174,7 +173,6 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \listoftables\clearpage
 
 \part{Appendix}
-\chapter{Verwendete Entwicklungswerkzeuge}
 \chapter{Datenblätter}
 \chapter{Kostenübersicht}
 \chapter{Fertigungsdokumentation}

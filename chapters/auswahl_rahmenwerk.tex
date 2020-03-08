@@ -19,7 +19,7 @@ Es basiert auf Microsofts \ac{dotnet} und dem Mono-Projekt, welches sich als Zie
 Xamarin bietet mehrere Projekttypen an, darunter Xamarin.Android und Xamarin.iOS für native App-Entwicklung und Xamarin.Forms für großteils plattformunabhängige Entwicklung.
 Eine Xamarin.Forms-Solution besteht daher aus mehreren Teilen:
 \begin{itemize}
-    \item Portable/.NET-Standard Projekt, das den plattformunabhängigen Code beinhält
+    \item Portable/\acs{dotnet}-Standard Projekt, das den plattformunabhängigen Code beinhält
     \item natives Xamarin-Projekt für jede Zielplattform
 \end{itemize}
 Der Vorteil Xamarins ist, dass der Großteil des geschriebenen Codes im plattformunabhängigen Projekt bleibt und nur für wenige Funktionen auf native Programmierung zurückgegriffen wird, wie zum Beispiel für hardwarenahe Audio-Aufnahme.
@@ -58,12 +58,12 @@ Ein Projekt kann bereits für sich lauffähig oder nur Teil eines größeren Pro
 Visual Studio 2019 unterstützt viele verschiedene Einsatzbereiche, die bei der Installation ausgewählt werden müssen.
 Eine volle Installation mit allen Funktionen und Projektarten ist zwar möglich, benötigt allerdings bis zu 210GB Speicherplatz des Systems.
 Eine typische Xamarin-Installation benötigt etwa 6.25GB Festplattenspeicher.
-Für eine solche Installation muss im Visual Studio Installer das \enquote{Mobile development with .NET}-Paket ausgewählt und installiert werden.
+Für eine solche Installation muss im Visual Studio Installer das \enquote{Mobile development with \acs{dotnet}}-Paket ausgewählt und installiert werden.
 \begin{figure}[H]
     \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/installation.png}    
     \caption{Auswahl des Xamarin-Rahmenwerks bei der Installation}
 \end{figure}
-Es empfiehlt sich, das Paket für \enquote{.NET desktop development} dazu zu installieren, damit neue, noch nicht bekannte \ac{dotnet}-Technologien in einer einfacheren Konsolen-Anwen\-dung ausprobiert werden können.
+Es empfiehlt sich, das Paket für \enquote{\acs{dotnet} desktop development} dazu zu installieren, damit neue, noch nicht bekannte \ac{dotnet}-Technologien in einer einfacheren Konsolen-Anwen\-dung ausprobiert werden können.
 Das Paket benötigt ungefähr weitere 0.8GB.\par
 Auf nähere Details der Installation von Visual Studio wird hier nicht eingegangen, diese können aber auf der Microsoft-Dokumentationsseite \cite[vgl.][]{msdoc-vs-install} nachgeschlagen werden.
 %Betriebssystem, Hardwareanforderungen
@@ -107,7 +107,7 @@ Die Aufgabe des Compilers ist es, die geschriebene Hochsprache entweder direkt i
 \end{figure}
 
 Ähnlich funktioniert dieser Vorgang auch bei einer Xamarin.Forms-App, allerdings wesentlich komplexer.
-Eine Xamarin.Forms-Solution besteht aus drei Einzel-Projekten (PiBell, PiBell.Android, PiBell.iOS), wobei das .NET-Standard-Projekt als Teil der anderen zwei verbaut werden muss.
+Eine Xamarin.Forms-Solution besteht aus drei Einzel-Projekten (PiBell, PiBell.Android, PiBell.iOS), wobei das \acs{dotnet}-Standard-Projekt als Teil der anderen zwei verbaut werden muss.
 Dadurch ergibt sich ein in Abbildung \crossref{fig:build-forms} dargestellter Build-Vorgang.
 \begin{figure}
     \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/build-vorgang.pdf}
