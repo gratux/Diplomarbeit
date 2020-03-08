@@ -38,7 +38,18 @@ Die Mikrofon-Aufnahme erfolgt auf einer sehr hardwarenahen Ebene, was die plattf
 %project-name PiBell -> erfindung, leitet sich aus raspberry und Türglocke ab
 %
 \section{Portable Project}
+Im folgenden Teil werden die wesentlichen Teile des portablen Projektes PiBell beschrieben.
+In den einzelnen Programmteilen gibt es immer wiederkehrende Abläufe, wie Initialisierung, die nur einmal beschrieben werden.
+Die von Microsoft vorgefertigten Teile werden nicht behandelt.
+Der Fokus liegt damit auf den selbst erstellten Programmteilen.
+Die Programmteile werden generell in der selben Reihenfolge behandelt, wie sie vom Programm aufgerufen werden.\par
+
+Textsegmente mit vorgestellter Zeilennummer sind direkt vom Programm eingefügt.
+Der beschreibende Text bezieht sich auf den Programmteil mit Hilfe der Zeilennummern.
+
 \subsection{App.xaml.cs}
+Im diesem Programmteil wird die Applikation grundlegend initialisiert.
+Die Initialisierung beinhaltet unter anderem das Laden aller benötigten Programm-Bibliotheken und NuGet-Pakete.
 \begin{lstlisting}[firstnumber=17]
 public App()
 {
@@ -54,10 +65,10 @@ public App()
         typeof(Analytics), typeof(Crashes), typeof(Push));
 }
 \end{lstlisting}
-\paragraph{19/20:} Die Funktionen InitializeComponent() und Core.Initialize sind vorgefertigte Funktionen; diese sind zu verwenden um die Applikation und alle benötigten Bibliotheken zu initialisieren.
+\paragraph{19-20:} Die Funktionen InitializeComponent() und Core.Initialize sind vorgefertigte Funktionen; diese sind zu verwenden um die Applikation und alle benötigten Bibliotheken zu initialisieren.
 \paragraph{21:} Die Anweisung MainPage = new MainPage() erzeugt eine neue Oberfläche, mit der der Benutzer mit der App interagiert. Diese Oberfläche erscheint nach dem App-Start am Bildschirm und passt sich automatisch der physikalischen Bildschirmgröße an.
 \paragraph{24-28:} Mit AppCenter.LogLevel kann festgelegt werden, welche Log-Nachrichten angezeigt werden. In diesem Fall werden Alle Nachrichten aktiviert.
-Anschließend wird das AppCenter SDK mit AppCenter.Start(..) gestartet. Am Ende dieser Anweisung werden alle Module (Analytics, Crashes und Push), die dazu gestartet werden sollen angegeben.
+Anschließend wird das AppCenter \acs{sdk} mit AppCenter.Start(..) gestartet. Am Ende dieser Anweisung werden alle Module (Analytics, Crashes und Push), die dazu gestartet werden sollen angegeben.
 
 \subsection{MainPage.xaml}
 %vlcht. Zu Xamarin im Allgemeinen
@@ -134,16 +145,116 @@ In einer XAML-Datei wird das Aussehen der Oberfläche nach dem WYSIWYM-Prinzip b
     \centering\includegraphics[width=.9\linewidth]{images/xamarin/VisualStateManager.png}
     \caption{VisualStateManager}
 \end{figure}
-Die hier beschriebenen Konzepte werden mehrmals verwendet, um die Oberfläche aufzubauen. Die Datei als Gesamtheit ergibt die in Bild xx gezeigte Oberfläche:
+Die hier beschriebenen Konzepte werden mehrmals verwendet, um die Oberfläche aufzubauen. Die Datei als Gesamtheit ergibt die in Bild \crossref{fig:mainpage} gezeigte Oberfläche.
 \begin{figure}[H]
     %grafik eventuell oben abschneiden
     \centering\includegraphics[width=.9\linewidth]{images/xamarin/MainPage.png}
     \caption{App-Oberfläche}
+    \label{fig:mainpage}
 \end{figure}
 
-%main.xaml.cs
+\subsection{MainPage.xaml.cs}
+Dieser Teil beinhaltet den C\#-Code, der für die Steuerung und Verwaltung der Oberfläche notwendig ist.
+Unter anderem wird hier das Verhalten beim Wechseln zwischen Hoch- und Querformat festgelegt.
+\begin{lstlisting}[firstnumber=36]
+    if (!AppCenter.Configured)
+        Push.PushNotificationReceived += async (sender, e) =>
+        {
+#if DEBUG
+            Console.WriteLine("DEBUG - Push-Notification recieved");
+#endif
+            foreach (string key in e.CustomData.Keys)
+            {
+#if DEBUG
+                Console.WriteLine($"DEBUG - Custom Data: {key}:{e.CustomData[key]}");
+#endif
+                if (key == "mrl")
+                    _player.Mrl = e.CustomData[key].ToString();
+            }
+
+            if (await DisplayAlert("Incoming Call", "Connect now?", "Yes", "No"))
+            {
+                _player.StartCall();
+                _streamer.StartCall();
+            }
+        };
+\end{lstlisting}
+Hier wird das Verhalten bei eingehender Push Benachrichtigung festgelegt.
+\paragraph{39,41,44,46:} Die mit \enquote{\#} beginnenden Anweisungen sind sogenannte Preprocessor-Statements, mit denen dem Compiler spezielle Anweisungen gegeben werden können.
+Hier soll der Programmteil, der sich zwischen \texttt{\#if DEBUG} und \texttt{\#endif} befindet, nur im DEBUG-Modus verarbeitet werden.
+Wenn ein anderer Compiler-Modus ausgewählt ist, werden diese Teile ignoriert.
+\paragraph{42-49:} Mit einer Schleife werden alle Zusatzdaten der Benachrichtigung überprüft.
+Wenn der Datensatz \texttt{mrl} enthalten ist, wird dessen Wert in \texttt{\_player.Mrl} gespeichert.
+Der Wert stellt die Server-Adresse dar, von der der Video-Stream abgerufen werden soll.
+\paragraph{51-55:} Der Benutzer wird per Popup gefragt, ob der Anruf entgegen genommen werden soll (Abb. \crossref{fig:inc-call}).
+\begin{figure}[H]
+    \centering
+    \includegraphics[width=.5\linewidth]{images/xamarin/IncomingCall.png}
+    \caption{Abfrage Anrufannahme}
+    \label{fig:inc-call}
+\end{figure}
+Wenn die Applikation in den Hintergrund geht, verliert die LibVLC die Referenz auf die VideoView und kann den Video-Stream nicht mehr darstellen.
+Daher muss die Wiedergabe gestoppt werden, sobald die App in den Hintergrund geht und neu gestartet werden, wenn die App wieder im Vordergrund ist.
+Da die Benachrichtigung über den Vorder- bzw. Hintergrundstatus der Applikation nur über das native Projekt funktioniert, muss diese Information vom nativen Projekt zum portablen Projekt übertragen werden.
+Dies geschieht mit der MessagingCenter-Komponente.
+\begin{lstlisting}[firstnumber=57]
+MessagingCenter.Subscribe<string>(this, "OnPause", app =>
+{
+    _wasConnected = _player.MediaPlayer.IsPlaying;
+    _player.MediaPlayer.Pause();
+    _prevPosition = _player.MediaPlayer.Position;
+    _player.MediaPlayer.Stop();
+
+    MainGrid.Children.Remove(VideoView);
+});
+
+MessagingCenter.Subscribe<string>(this, "OnRestart", app =>
+{
+    RegenerateVideoView();
+    VideoView.MediaPlayer = _player.MediaPlayer;
+    if (_wasConnected)
+    {
+        _player.MediaPlayer.Play();
+        _player.MediaPlayer.Position = _prevPosition;
+    }
+
+    _prevPosition = 0;
+});
+\end{lstlisting}
+\paragraph{57-65:} Dieses Ereignis wird aufgerufen, wenn die Applikation in den Hintergrund wechselt.
+Bevor dies geschieht, wird die aktuelle Wiedergabe-Position in einer Variablen gespeichert und die Wiedergabe gestoppt.
+Anschließend wird die VideoView von der Oberfläche entfernt, damit sie später neu hinzugefügt werden kann.
+\paragraph{67-78:} Das \texttt{OnRestart}-Event wird aufgerufen, wenn die App vom Hintergrund wieder in den Vordergrund geht.
+Hier geschieht der selbe Vorgang wie davor, jedoch in sinngemäß umgekehrter Reihenfolge.
+Als erstes wird die VideoView der Oberfläche wieder hinzugefügt, damit die LibVLC eine Referenz dazu bilden kann.
+Falls davor ein Video gespielt wurde, wird dieses fortgesetzt und die Variable für die vorherige Wiedergabeposition wird gelöscht.
+
+\begin{lstlisting}[firstnumber=84]
+BindingContext = _player;
+\end{lstlisting}
+\paragraph{84:} Der BindingContext gibt für das MVVM-Modell an, wo die Variablen, die mit der Oberfläche verknüpft sind, sich befinden.
+In diesem Fall sind alle Variablen in der Player-Instanz \texttt{\_player} zu finden.
+
+An folgender Funktion wird das Verhältnis von Oberflächenereignissen mit dem entsprechenden Code-Behind erklärt.
+\begin{lstlisting}[firstnumber=109]
+private void BtConnect_Clicked(object sender, EventArgs e)
+{
+    _player.StartCall();
+    _streamer.StartCall("192.168.43.78");
+}
+\end{lstlisting}
+\paragraph{109:} Eine Funktion für ein Button-Event hat grundsätzlich als Rückgabe-Typ \texttt{void}, also nichts.
+Auf die Funktion kann nur aus der selben Klasse zugegriffen werden, was mit dem \texttt{private}-Schlüsselwort bekanntgegeben wird.
+Als Parameter werden Informationen zum Event-Auslöser und zum Event selbst mitgegeben.
+\paragraph{111-112:} Wenn der grüne \enquote{Anrufen}-Button gedrückt wird, beginnen \texttt{\_player} und \texttt{\_streamer} damit, die Daten abzurufen bzw. bereitzustellen.
+
+\subsection{MediaClasses.cs}
+
 \section{PiBell.Android}
+\blindtext
 %audio recording service
 %permissions
 %OnPause(), OnRestart()
+
 \section{PiBell.iOS}
+\blindtext

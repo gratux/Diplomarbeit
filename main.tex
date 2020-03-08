@@ -3,11 +3,12 @@
 %, draft, showframe
 ]{memoir}
 \usepackage[T1]{fontenc}
-\usepackage[margin=2cm, bindingoffset=5mm, includeheadfoot]{geometry}
+\usepackage[margin=2cm, bindingoffset=10mm, includeheadfoot]{geometry}
 \usepackage[british, german]{babel}
 \usepackage[hyperref=true]{acro}
 \usepackage[backend=biber, style=ieee]{biblatex}
 \usepackage{fancyhdr, graphicx, datetime2, fontspec, tikz, float, hologo, csquotes, tabulary, listings}
+\usepackage{blindtext}
 %\usepackage[protrusion=true,final]{microtype}
 \usepackage{hyperref}
 \usepackage[all]{hypcap}
@@ -76,7 +77,15 @@
 \setlength{\parskip}{8pt}% Add space after paragraph
 \setmainfont{Arial}
 \renewcommand{\footnotesize}{\scriptsize}
-\lstset{basicstyle=\ttfamily\small,breaklines=true,numbers=left}
+\lstset{
+	basicstyle=\ttfamily\small,
+	keywordstyle=\color{blue!80!black},
+	%identifierstyle=\color{green!45!black},
+	stringstyle=\color{orange},
+	breaklines=true,
+	numbers=left,
+	language=[Sharp]c
+}
 
 % Document start -----------------------------------------------------------
 \begin{document}
@@ -106,7 +115,7 @@ Wir erklären an Eides statt, dass wir die vorliegende Diplomarbeit selbständig
 
 \section{Gender-Erklärung}
 Aus Gründen der besseren Lesbarkeit wird in dieser Diplomarbeit die Sprachform des generischen Maskulinums angewendet.
-Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendung der männlichen Form geschlechtsunabhängig verstanden werden soll.
+Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendung der männlichen Form geschlechtsunabhängig zu verstehen ist.
 \cleartoverso
 
 \SingleSpacing
@@ -140,7 +149,7 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 
 \renewcommand{\authorName}{\AndreasGrain}
 \part{Software - \AndreasGrain}
-\chapter{Auswahl Rahmenwerk}
+\chapter{Rahmenwerk}
 \input{chapters/auswahl_rahmenwerk.tex}
 \chapter{Verwendete Software-Module}
 \input{chapters/software_module.tex}
