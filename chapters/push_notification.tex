@@ -6,7 +6,7 @@ Eine Notification dient dazu den Benutzer über etwas zu informieren. Dies kann 
 \end{figure}
 
 Im Gegensatz dazu dient eine Push Notification dazu, den Benutzer über ein externes Ereignis auf einem anderen Gerät aufmerksam zu machen. Diese Art der Benachrichtigung findet meist Anwendung in der Katastrophenwarnung, um den Benutzer vor einer herannahenden Gefahr zu warnen.
-Um den Benutzer also darüber zu informieren, dass jemand an der Haustür klingelt, wird eine Push Benachrichtigung verwendet, da das Anläuten-Ereignis bei der Außenstation erfolgt.
+Um den Benutzer also darüber zu informieren, dass jemand an der Haustür klingelt, wird eine Push Benachrichtigung verwendet, da das Anläut-Ereignis bei der Außenstation erfolgt.
 \begin{figure}[H]
     \centering\includegraphics[width=.5\linewidth]{images/xamarin/PushNotification.png}
     \caption{Push-Benachrichtigung}
@@ -17,10 +17,10 @@ Eine Push Notification wird immer von einem sogenannten Push Notification Servic
 Dieser Service wird vom jeweiligen Betriebssystem-Hersteller bereitgestellt.
 Im Fall der hier entwickelten App sind das Google und Apple, mit ihren Push Notification Services GCM und APNs.\par
 
-Der Service ist dafür verantwortlich die Benachrichtigung an alle registrierten Zielgeräte zu schicken.
+Der Service ist dafür verantwortlich, die Benachrichtigung an alle registrierten Zielgeräte zu schicken.
 Wenn das Zustellen nicht möglich ist, bricht der Service die Zustellung nach mehreren Versuchen für dieses Gerät ab.
 Alle anderen Geräte erhalten die Benachrichtigung.
-Daher ist es nicht es nicht sichergestellt, dass eine Push-Benachrichtigung bei jedem Gerät ankommt.\par
+Daher ist es nicht sichergestellt, dass eine Push-Benachrichtigung bei jedem Gerät ankommt.\par
 
 Zusätzlich zum Nachrichtentext können bei einer Push Notification zusätzliche Daten mitgeschickt werden. Diese können zum Beispiel die App über die genaue Benachrichtigungsursache informieren.
 
@@ -32,10 +32,10 @@ AppCenter Push ist entweder über das Web-Interface unter \url{https://appcenter
 Die AppCenter Push \acs{sdk} abstrahiert den ganzen Prozess der Geräte-Registration, des Registrieren des Eingangs-Events und versteckt alles hinter einer einzelnen simplen Funktion \texttt{AppCenter.Start(„{App Secret}“, typeof(Push));}. Das App Secret ist der von AppCenter zugewiesene Schlüssel mit dem sichergestellt wird, dass das Gerät für das richtige AppCenter Projekt registriert wird.
 Ohne diese \acs{sdk} müsste in der App viel mehr konfiguriert werden, was einen höheren Programmieraufwand und größere Fehlerrate darstellt. Außerdem würde das Rad neu erfunden werden.\par
 
-In der entwickelten App wird die AppCenter-\acs{sdk}-Version 2.6.4 verwendet. Zu beachten ist, dass AppCenter Push nicht mehr weiterentwickelt wird und irgendwann dieses Jahr der Service abgeschaltet wird, wie es John Wargo in seinem Blog-Post am 3. Februar 2020 schrieb. Als Alternative wird von Microsoft der Azure Notification Hubs dienst angeboten. Bevor AppCenter Push endgültig terminiert wird, will Microsoft detaillierte Anleitungen zum Umstieg auf Azure bereitstellen.\par
+In der entwickelten App wird die AppCenter-\acs{sdk}-Version 2.6.4 verwendet. Zu beachten ist, dass AppCenter Push nicht mehr weiterentwickelt und irgendwann dieses Jahr der Service abgeschaltet wird, wie es John Wargo in seinem Blog-Post am 3. Februar 2020 schrieb. Als Alternative wird von Microsoft der Azure-Notification-Hubs-Dienst angeboten. Bevor AppCenter Push endgültig terminiert wird, will Microsoft detaillierte Anleitungen zum Umstieg auf Azure bereitstellen.\par
 
 \subsection{Konfiguration des \acs{sdk}}
-Um AppCenter Push in der Applikation verwenden zu können müssen mehrere NuGet-Pakete installiert werden.
+Um AppCenter Push in der Applikation verwenden zu können, müssen mehrere NuGet-Pakete installiert werden.
 Das AppCenter Paket beinhaltet alle Kernfunktionen wie AppCenter.Start(), das AppCenter-Push-Paket erweitert das Grundpaket um Push-bezogene Funktionen und Datentypen.
 \begin{table}[H]
     \centering\begin{tabular}{|c|c|c|c|}

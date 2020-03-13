@@ -1,27 +1,53 @@
 % !TeX spellcheck = de_DE
-\documentclass[a4paper, 12pt, twoside, openright
+\documentclass[a4paper, twoside, 12pt, openright
 %, showframe
+%, draft
 ]{memoir}
 \usepackage[T1]{fontenc}
-\usepackage[margin=2cm, bindingoffset=10mm, includeheadfoot]{geometry}
-\usepackage[british, german]{babel}
+\usepackage[margin=2cm, bindingoffset=10mm, includeheadfoot, headheight=14.7pt]{geometry}
+\usepackage[british, ngerman]{babel}
 \usepackage[hyperref=true]{acro}
 \usepackage[backend=biber, style=ieee]{biblatex}
-\usepackage{fancyhdr, graphicx, datetime2, fontspec, tikz, float, hologo, csquotes, tabulary, listings, longtable}
-\usepackage{blindtext}
-%\usepackage[protrusion=true,final]{microtype}
-\usepackage{hyperref}
+\usepackage[final]{minted}
+\usepackage{fancyhdr, graphicx, datetime2, fontspec, float, hologo, csquotes, longtable, pdfpages, multirow, tabulary}
+\usepackage[protrusion=true,final]{microtype}
+\usepackage[final]{hyperref}
 \usepackage[all]{hypcap}
 
 \addbibresource{sources.bib}
 \input{acronyms.tex}
 
-\emergencystretch=1em
+%TeX distance tweaking
+\emergencystretch=1em%
+\makeatletter
+  \renewcommand{\@pnumwidth}{3em}
+  \renewcommand{\@tocrmarg}{4em}
+\makeatother
 
+%global package setups
 \hypersetup{
 	linktoc=all,
 	colorlinks=false,
 	linkcolor=blue
+}
+
+\setminted[csharp]{
+	numbers=both, 
+	breaklines=true,
+	% breakbefore=;:\=\,.,
+	breakafter=;:\=\,.
+}
+\setminted[xml]{
+	numbers=both,
+	breaklines=true,
+	%breakbefore=;:\=\,.,
+	breakafter=;:\=\,.
+}
+\setminted[text]{
+	numbers=both,
+	breaklines=true,
+	%breakbefore=;:\=\,.,
+	breakafter=;:\=\,.
 }
 
 % pagestyles ------------------------------------------------------------------
@@ -71,22 +97,26 @@
 \newcommand{\MatthiasMair}{Matthias Mair}
 \newcommand{\authorName}{\AndreasGrain\ / \MatthiasMair}
 \newcommand{\crossref}[1]{\emph{\ref{#1} \nameref{#1}}}
+\newcommand{\wip}{{\color{red}Nachfolgender Teil ist noch in Bearbeitung durch \authorName}}
 
 % text formatting ----------------------------------------------------------
 %\setlength{\parindent}{0pt}% Remove paragraph indentation
 \setlength{\parskip}{8pt}% Add space after paragraph
 \setmainfont{Arial}
 \renewcommand{\footnotesize}{\scriptsize}
-\lstset{
-	basicstyle=\ttfamily\small,
-	keywordstyle=\color{blue!80!black},
-	%identifierstyle=\color{green!45!black},
-	stringstyle=\color{orange},
-	breaklines=true,
-	numbers=left,
-	language=[Sharp]c
-}
-
+% \lstset{
+% 	basicstyle=\ttfamily\small,
+% 	keywordstyle=\color{blue!80!black},
+% 	%identifierstyle=\color{green!45!black},
+% 	stringstyle=\color{orange},
+% 	breaklines=true,
+% 	numbers=left,
+% 	language=[Sharp]c,
+% 	frame=single,
+% 	framerule=0.4pt
+% }
+\setlength{\beforechapskip}{0pt}
+\setlength{\afterchapskip}{20pt}
 % Document start -----------------------------------------------------------
 \begin{document}
 \pagestyle{normalpage}
@@ -125,7 +155,8 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 
 \chapter{Kurzfassung/Abstract}
 \input{chapters/kurzfassung.tex}
-\chapter{Projektergebnis} 
+\chapter{Projektergebnis}
+\input{chapters/projektergebnis.tex}
 %\thispagestyle{abstractpage}
 %iOS-Entwicklung nicht durchgeführt, kein Mac vorhanden.
 %Mehrfachzugriff über App wurde nicht eingeschränkt, ist weiter zu bearbeiten.
@@ -147,33 +178,127 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \chapter{Programm-Dokumentation}
 \input{chapters/xamarin.tex}
 \chapter{Software-Ausblick}
-\section{Gesicherte Verbindung}% VPN-Zugriff
+\input{chapters/software-ausblick.tex}
 \cleartoverso
 
 \renewcommand{\authorName}{\MatthiasMair}
 \part{Hardware - \MatthiasMair}
-\chapter{Probleme des Ist-Standes}
-\chapter{Platine}
+\chapter{Technische Grundlagen}
+\input{chapters/technische_grundlagen.tex}
+\chapter{Ausgangssituation}
+\input{chapters/ist-situation.tex}
+
+\chapter{Verbesserte Hardwarelösung}
+\wip
+\section{Konzept}
+%Lösungen für probleme, zusätzliche vorteile
 \section{Spannungsversorgung}
-\section{Mikrofon-Verstärkerschaltung}
-\section{Lautsprecher-Verstärkerschaltung}
+\section{Mikrofon-Vorverstärker}
+\section{Lautsprecher-Verstärker}
 \section{Mikrocontroller}
-\subsection{Programmierung}
-\subsection{Watchdog}
+
+\chapter{Verwendete Software}
+\wip
+\section{\acs{eagle}}
+\section{Library Loader}
+
+\chapter{Hardware-Dokumentation}
+\wip
+\section{Schaltung}
+\section{Platinen-Design}
+
+% \chapter{Testen}
+% Im Zuge der Test sind einige Dinge aufgefallen:
+% \begin{itemize}
+% 	\item Bei Station, welche am weitesten von der Spannungsversorgung entfernt ist, hängt sich das System immer wieder auf und reagiert nicht mehr auf äußere Befehle. Alle anderen Stationen waren von diesem Problem nicht betroffen. Auch nach einer Überprüfung der Hardware konnte kein Fehler 
+% \end{itemize}
+
+% \section{Erster Prototyp} %oder Fertigung
 \cleartoverso
 
-\renewcommand{\authorName}{\AndreasGrain / \MatthiasMair}
+\renewcommand{\authorName}{\AndreasGrain\ / \MatthiasMair}
 \appendix
 %\printbibheading
 %\printbibliography[heading=subbibliography,type=online,title={Online-Quellen}]
 %\printbibliography[heading=subbibliography,nottype=online,title={Andere Quellen}]
-\printbibliography\clearpage
+\printbibliography[title={Literatur und Quellen}]\clearpage
 \printacronyms[heading=chapter*,name=Abkürzungen]\clearpage
-\listoffigures\clearpage
-\listoftables\clearpage
+\listoffigures
+Alle Abbildungen ohne Referenzmarke \enquote{[\#]} sind Eigenfotos\clearpage
+\listoftables
+\clearpage
 
 \part{Appendix}
 \chapter{Datenblätter}
-\chapter{Kostenübersicht}
+\section{Mikrocontroller Atmel ATmega328P}
+Nachfolgend ein Auszug aus dem Datenblatt mit den wichtigsten technischen Daten, der Pinbelegung und einem Blockdiagramm. Die vollständige Dokumentation umfasst über 294 Seiten und kann unter nachfolgender Adresse abgerufen werden.\par
+\fullcite{at328p-datasheet}
+\includepdf[pages={-}, templatesize={140mm}{260mm}]{images/appendix/Atmega328.pdf} %http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf
+\section{Audio-Verstärker PAM8403}
+Nachfolgend ein Auszug aus dem Datenblatt mit den wichtigsten technischen Daten, der Pinbelegung und einem Blockdiagramm. Die vollständige Dokumentation umfasst über 11 Seiten und kann unter nachfolgender Adresse abgerufen werden.\par
+\fullcite{pam8403-datasheet}
+\includepdf[pages={1-4}, templatesize={140mm}{260mm}]{images/appendix/PAM8403.pdf}
+%https://www.diodes.com/assets/Datasheets/PAM8403.pdf
+\section{Spannungsregler LMR33630CDDAR}
+Nachfolgend ein Auszug aus dem Datenblatt mit den wichtigsten technischen Daten, der Pinbelegung und einem Blockdiagramm. Die vollständige Dokumentation umfasst über 11 Seiten und kann unter nachfolgender Adresse abgerufen werden.\par
+\fullcite{lmr33630-datasheet}
+\includepdf[pages={1,4,6,11,12}, templatesize={140mm}{260mm}]{images/appendix/lmr33630.pdf}
 \chapter{Fertigungsdokumentation}
+\section{Code-Listing}
+\includepdf[pages={-}]{images/appendix/Listing.pdf}
+\section{Schaltpläne}
+\includegraphics[width=15.5cm]{images/appendix/schematics.pdf}
+\section{Platinen-Design}
+\begin{center}
+	\begin{minipage}[t]{0.425\linewidth}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=\textwidth]{images/appendix/topLayer.pdf}
+			\caption{Platine TOP-Layer}
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}[t]{0.425\linewidth}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=\textwidth]{images/appendix/botLayer.pdf}
+			\caption{Platine BOT-Layer}
+		\end{figure}
+	\end{minipage}
+\end{center}
+
+\section{Stückliste}
+\footnotesize\begin{longtable}{lllll}
+		Qty.	& Part 					& Value 			& Package 			& Description \\ 
+		\toprule\endhead
+		2 		& C1, C7 				& 10pF 				& C0603 			& Capacitor 0603 \\
+		1		& C2 					& 820µF, 35V 		& CPOL-EUE5-10.5 	& Capacitor, electrolytic \\ 
+		2 		& C3, C14 				& 1mF, 6.3V 		& CPOL-EUE3.5-8 	& Capacitor, electrolytic \\ 
+		3 		& C4, C5, C6 			& 2.2µF 			& C0805 			& Capacitor 0603 \\ 
+		4 		& C8, C10, C12, C18 	& 1µF 				& C0603 			& Capacitor 0603 \\ 
+		4 		& C9, C15, C16, C17 	& 100nF 			& C0603 			& Capacitor 0603 \\ 
+		1 		& C11 					& 470µF 			& C0603 			& Capacitor 0603 \\ 
+		1 		& C13 					& 470nF 			& C0603 			& Capacitor 0603 \\ 
+		1 		& IC1 					& LMR33630 CDDAR 	& DDA0008J 			& Buck Converter, 3.8-36V, 3A \\ 
+		1 		& IC2 					& PAM8403 			& SOP-16 			& Dual Channel Audio Amplifier \\ 
+		1 		& J1 					& SJ-43515RS-SMT 	& 					& 4 conductor 3.5mm Audio Jack \\ 
+		1 		& L1 					& 10µH, 2.9A 		& MSS7348-103MEB 	& Inductor \\ 
+		1 		& Q1 					& 6MHz 				& CSTCR6M 			& Quartz Oscillator \\ %was Q2
+		5 		& R1, R5, R9, R10, R12 	& 10kΩ 				& R0603 			& Resistor \\ 
+		1 		& R2 					& 47kΩ 				& R0603 			& Resistor \\ 
+		1 		& R3 					& 5.6kΩ 			& R0603 			& Resistor \\ 
+		1 		& R4 					& 3.9kΩ 			& R0603 			& Resistor \\ 
+		1 		& R6 					& 2.2kΩ 			& R0603 			& Resistor \\ 
+		1 		& R7 					& 5kΩ 				& R0603 			& Resistor \\ 
+		1 		& R8 					& 10Ω 				& R0603 			& Resistor \\ %was 4ohm
+		1 		& R11 					& 1MΩ 				& R0603 			& Resistor \\ 
+		1 		& R13 					& 100kΩ 			& R0603 			& Resistor \\ 
+		1 		& R14 					& 24.9kΩ 			& R0603 			& Resistor \\ 
+		1 		& S1 					&					& SMS-001 			& Switch On-Off  \\ 
+		1 		& SV1 					&					& MA03-2 			& Pin header, 6pin  \\ 
+		3 		& T1, T2, T3 			& BC847 			& SOT23 			& Transistor \\ 
+		1 		& U1 					& ATmega328P 		& TQFP32-08 		& Microcontroller \\ 
+		1 		& X1 					&					& RS-CONN-2.54-3P 	& Terminal, 3pin  \\ 
+		1 		& X2 					&					& RS-CONN-2.54-2P 	& Terminal, 2pin  \\ 
+		1 		& X3 					&					& RS-CONN-2.54-10P 	& Terminal, 10pin  \\
+	\end{longtable}	
 \end{document}

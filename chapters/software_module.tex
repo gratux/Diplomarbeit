@@ -1,11 +1,11 @@
 \section{\acl{rtsp}}
-\acs{rtsp} ist ein Netzwerkprotokoll zum Aufbauen und Verwalten von Netzwerk-Verbindungen zur Übertragung kontinuierlicher Medien-Daten (Streams).
+\acs{rtsp} ist ein Netzwerkprotokoll zum Aufbauen und Verwalten von Netzwerkverbindungen zur Übertragung kontinuierlicher Medien-Daten (Streams).
 Dieses Netzwerkprotokoll ist im \acs{ietf}-Dokument \citetitle{ietf-rtsp} festgelegt. 
 Es wurde gemeinsam von \citeauthor{ietf-rtsp} entwickelt. \cite[vgl.][]{ietf-rtsp}\par
 
 \subsection{\acs{rtsp} Version 2}
 Im Zuge dieser Diplomarbeit wird die erste Version des \acs{rtsp}-Protokolls verwendet.
-Neben der verwendeten Version 1 existiert auch eine neue Version 2, welche im \acs{ietf}-Dokument \citetitle{ietf-rtsp-2} definiert ist. Die neue Version wurde von \citeauthor{ietf-rtsp-2} erarbeitet. \cite[vgl.][]{ietf-rtsp-2}
+Neben der verwendeten Version 1 existiert auch eine neue Version 2, welche im \acs{ietf}-Dokument \citetitle{ietf-rtsp-2} definiert ist. Die neue Version wurde von \citeauthor{ietf-rtsp-2} erarbeitet. \cite[vgl.][]{ietf-rtsp-2}\par
 Es wurde dennoch die erste Version verwendet, da die Stationen dieses bereits verwenden und die neue Version nicht rückwärtskompatibel ist.\par
 
 \acs{rtsp} wird in der Industrie vielseitig verwendet, um Live-Übertragungen von Überwachungskameras zu verwalten. Eine weitere Anwendung des \acs{rtsp} Protokolls ist das Streamen von Medien-Daten zu einem Server, der diese dann beispielsweise transcodiert oder aufnimmt.
@@ -40,13 +40,13 @@ Die in Tabelle \ref{tab:rtsp-req} verwendeten Kurzbezeichnungen haben folgende B
 \end{table}
 Das Aussehen einer solchen Anfrage wird anhand des Beispiels der DESCRIBE-Methode veranschaulicht.
 Der Client beginnt die Anfrage mit dem \acs{url} des Medien-Streams, den er abrufen möchte und teilt dem Server mit, welche Formate er versteht.
-\begin{lstlisting}
+\begin{minted}{text}
 C->S: DESCRIBE rtsp://server.example.com/fizzle/foo RTSP/1.0
     CSeq: 312
     Accept: application/sdp, application/rtsl, application/mheg
-\end{lstlisting}
+\end{minted}
 Der Server antwortet auf diese Anfrage mit dem Session Descriptor, der alle wichtigen Informationen des Medien-Streams beinhaltet, wie zum Beispiel Video- und Audio-Format, Übertragungsmethode, sowie allgemeine Informationen wie Titel und Beschreibung.
-\begin{lstlisting}
+\begin{minted}{text}
 S->C: RTSP/1.0 200 OK
     CSeq: 312
     Date: 23 Jan 1997 15:35:06 GMT
@@ -66,35 +66,28 @@ S->C: RTSP/1.0 200 OK
     m=video 2232 RTP/AVP 31
     m=whiteboard 32416 UDP WB
     a=orient:portrait
-\end{lstlisting}
+\end{minted}
 
 \section{LibVLC Sharp}
-% LibVLC ist eine C-Bibliothek für die Medienverarbeitung und -Wiedergabe.
-% Mit Hilfe von Bindings kann diese Bibliothek auch in anderen Programmiersprachen verwendet werden.
-% Eines dieser Binding ist LibVLC Sharp, welches die Funktionen der LibVLC in C\# zur Verfügung stellt.
-% Es handelt sich bei der LibVLC um ein OpenSource-Projekt der Organisation VideoLAN, das fortlaufend weiterentwickelt und unterstützt wird. Der sehr bekannte VLC Media Player nutzt für alle Funktionen die LibVLC und dient daher sozusagen als Grafische Oberfläche zur LibVLC. \cite[vgl.][]{libvlc}\par
-
-% Im Zuge dieser Diplomarbeit wird das C\#-Binding der LibVLC verwendet, um am Smartphone den Video-Stream der fest installierten Station abrufen und darstellen zu können.
-% Dies wird näher im Kapitel \crossref{ch:prog-doc} beschrieben.
 LibVLC ist ein Multimedia-Rahmenwerk der Non-Profit-Organisation VideoLAN, welche durch den VLC Media Player und dessen Funktionsumfang bekannt wurde. Der VLC Media Player funktioniert sozusagen als grafische Oberfläche zur LibVLC-Programmbibliothek.
 Die Bibliothek beinhält viele nützliche Funktionen, darunter die folgenden:
 \begin{itemize}
     \item Videos nahezu beliebigen Formates decodieren und darstellen
-    \item Video und Audio aufnehmen und Transcodieren für die weitere Verwendung
+    \item Video und Audio aufnehmen und transcodieren für die weitere Verwendung
     \item Live-Streaming von Video-Daten, Webcam-Bild und Mikrofon-Ton.
 \end{itemize}    
 LibVLC ist eine Bibliothek für die C-Sprache. Um diese in einem C\#-Projekt verwenden zu können sind Bindings notwendig, welche Zugriff auf die C-Bibliothek geben.
-LibVLC wurde von der Non-Profit-Organisation VideoLAN entwickelt und erstmals am 1. Februar 2001 veröffentlicht wurde.\cite{libvlc-release}\par
+LibVLC wurde von der Non-Profit-Organisation VideoLAN entwickelt und erstmals am 1. Februar 2001 veröffentlicht.\cite[vgl.][]{libvlc-release}\par
 
-Im Xamarin.Forms-Projekt wird die zum Zeitpunkt der App-Entwicklung aktuelle Version 3.4.2 der LibVLC Sharp Bindings verwendet. Bindings erlauben es dem Programmierer auf Programmbibliotheken zuzugreifen, welche für eine andere Sprache geschrieben wurden. Man kann sich Bindings wie Kleber vorstellen, der die Funktionen der einen Programmiersprache mit denen der anderen Sprache verbindet. Die Version 3.4.2 ist inzwischen nicht mehr die neueste Version, jedoch  ist sie in Hinsicht auf Funktionalität deckungsgleich mit der neuesten Version.\par
+Im Xamarin.Forms-Projekt wird die zum Zeitpunkt der App-Entwicklung aktuelle Version 3.4.2 der LibVLC Sharp Bindings verwendet. Bindings erlauben es dem Programmierer, auf Programmbibliotheken zuzugreifen, welche für eine andere Sprache geschrieben wurden. Man kann sich Bindings wie Kleber vorstellen, der die Funktionen der einen Programmiersprache mit denen der anderen Sprache verbindet. Die Version 3.4.2 ist inzwischen nicht mehr die neueste Version, jedoch ist sie in Hinsicht auf Funktionalität deckungsgleich mit der neuesten Version.\par
 
 \subsection{Erwähnenswerte Funktionen}
 Die LibVLC-Sharp-Bindings ermöglichen die Verwendung des MVVM-Modells, welches vom WPF- und Silverlight-Architekten John Gossman im Jahr 2005 auf seinem Blog vorgestellt wurde. \cite[vlg.][The Evolution of Model-View-ViewModel]{msdoc-mvvm}
-Die Philosophie hinter diesem Modell ist die Oberfläche (View) bis auf wenige Schnittstellen komplett vom eigentlichen Code zu trennen.
-Dies ermöglicht es ohne größeren Aufwand die Oberfläche zu ändern oder gar auszutauschen.
+Die Philosophie hinter diesem Modell ist, die Oberfläche (View) bis auf wenige Schnittstellen komplett vom eigentlichen Code zu trennen.
+Dies ermöglicht es ohne größeren Aufwand, die Oberfläche zu ändern oder gar auszutauschen.
 Folgende Terminologie wird in diesem Zusammenhang verwendet:
 \begin{itemize}
-\item Models … beinhalten die Programmdaten. Meist sind einfache Klassen oder Strukturen hierfür verwendet.
+\item Models … beinhalten die Programmdaten. Meist werden einfache Klassen oder Strukturen hierfür verwendet.
 \item Views … Die grafische Oberfläche und deren Elemente wie Buttons, TextBoxen, …
 \item ViewModels … wandeln die Daten der Models so um, dass sie von der Oberfläche dargestellt werden können. ViewModels sind meist als Klasse ausgeführt.
 \end{itemize}
@@ -114,7 +107,7 @@ Beispielsweise verwenden alle Beispielprojekte der LibVLC Sharp Bindings das MVV
 Weiters sind die einzelnen Funktionen zwar auf der Dokumentationsseite aufgelistet, allerdings nicht sehr ausführlich beschrieben. \cite[vgl.][]{libvlc-sharp-doc}
 
 \subsection{Alternativen}
-Während der Recherche wurden wenige Alternativen gefunden. Diese Alternativen sind jedoch seit langem nicht mehr in Entwicklung und sind daher nicht für die Verwendung empfohlen. Die LibVLC-Bibliothek ist momentan die einzige kostenfreie Variante \acs{rtsp}-Streams mit Xamarin auf dem Mobilgerät abspielen zu können. Es gibt Bibliotheken von VASTreaming, jedoch sind diese kostenpflichtig zu erwerben, was für diese Diplomarbeit keine Option ist. \cite[vgl.][Pricing]{vastreaming}
+Während der Recherche wurden wenige Alternativen gefunden. Diese Alternativen sind jedoch seit langem nicht mehr in Entwicklung und sind daher nicht für die Verwendung empfohlen. Die LibVLC-Bibliothek ist momentan die einzige kostenfreie Variante, \acs{rtsp}-Streams mit Xamarin auf dem Mobilgerät abspielen zu können. Es gibt Bibliotheken von VASTreaming, jedoch sind diese kostenpflichtig zu erwerben, was für diese Diplomarbeit keine Option ist. \cite[vgl.][Pricing]{vastreaming}
 
 \section{GStreamer}
 \subsection{Modularität}
@@ -134,7 +127,7 @@ Zwischen diesen können sich beliebig viele Filter befinden, die unterschiedlich
     \item Daten zu einem Netzwerk-Paket zusammenbündeln (z.B. rtph264pay)
     \item etc.
 \end{itemize}
-Ein Filter hat bestimmte Ein- und Ausgangsformate die er unterstützt.
+Ein Filter hat bestimmte Ein- und Ausgangsformate, die er unterstützt.
 Als Beispiel nehmen wir den H264-Encoder:
 dieser unterstützt für das Eingangssignal RAW-Video, also decodierte Binärdaten. Am Ausgang kommt logischerweise ein H264-codierter Video-Stream heraus.\par
 
@@ -157,21 +150,23 @@ Es wurden während der Recherche einige mögliche Alternativen für das GStreame
 \subsection{Vorteile}
 GStreamer wird in diesem Projekt verwendet, da bei Live-Video-Übertragung möglichst wenig Latenz vorkommen soll.
 Das GStreamer-Rahmenwerk ist in dieser Hinsicht den anderen Multimedia-Rahmenwerken weit voraus.
-Zusätzlich gibt es von GStreamer keine einschränkenden Vorgaben was Ein- und Ausgangsformat betrifft.
+Zusätzlich gibt es von GStreamer keine einschränkenden Vorgaben, was Ein- und Ausgangsformat betrifft.
 Es kann jede beliebige Quelle mit jedem beliebigen Output verknüpft werden, solange die richtige Pipeline verwendet wird.
 Weiters ist das Projekt quelloffen, d.h. man ist in Bezug auf die Installationsdateien nicht auf den Hersteller angewiesen, sondern kann das Programm selbst für die jeweilige Plattform kompilieren, wenn der Hersteller das noch nicht getan hat.
-Außerdem kann jeder Entwickler Vorschläge für Änderungen am Code, sowie Bugfixes vorbringen.
+Außerdem kann jeder Entwickler Vorschläge für Änderungen am Code sowie Bugfixes vorbringen.
 \subsection{Funktionsweise}
 Die detaillierte Funktionsweise des GStreamer-Rahmenwerks lässt sich am besten anhand eines realistischen Beispiels erklären.
 In diesem Beispiel wird ein in Echtzeit generiertes Testvideosignal zuerst auf 1280x720 Pixel vergrößert und danach als H264-encodierter Stream via RTP verschickt.
 Mit dem Kommandozeilen-Programm \texttt{gst-launch-1.0.exe} kann ohne großen Aufwand eine Pipeline aufgebaut werden:
-\begin{lstlisting}
+\begin{minted}{csharp}
     gst-launch-1.0 videotestsrc ! video/x-raw,width=1260,height=720,framerate=20/1 ! autovideoconvert ! queue ! x264enc tune=zerolatency bitrate=4096 speed-preset=superfast ! queue ! rtph264pay config-interval=1 mtu=1300 ! udpsink host=127.0.0.1 port=5000
-\end{lstlisting}
+\end{minted}
 Der Filter \enquote{queue} wird hier verwendet, um vor und nach dem Encoding-Vorgang ein kurzes Video-Segment in einem Zwischenspeicher zu behalten. Dies ist notwendig, da der H264-Codec mehrere Video-Frames auf einmal komprimiert.
 
 \subsection{Zusatzmodul}
-gst-rtsp-server ist ein Zusatzmodul für das GStreamer- Rahmenwerk, welches die Verwendung des \acs{rtsp}-Protokolls 
+gst-rtsp-server ist ein Zusatzmodul für das GStreamer- Rahmenwerk, welches die Verwendung des \acs{rtsp}-Protokolls für Server-Applikationen bereitstellt.
+Mit diesem Modul können Medien-Streams, welche mit GStreamer verarbeitet wurden, mittels dem \ac{rtsp}Protokoll den Netzwerk bereitzustellen.
+
 %TODO
 
 \section{Live555 Proxy}

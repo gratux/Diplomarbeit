@@ -21,4 +21,5 @@
 *.bcf
 *.blg
 *.run.xml
-sync.ffs_lock
+*.ffs_lock
+_minted-main/*
