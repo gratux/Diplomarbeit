@@ -29,12 +29,12 @@ AppCenter Push hat in erster Linie die Funktion, den Zugriff auf die verschieden
 Microsoft AppCenter verwaltet alle Server-API-Schlüssel, Zielgerätelisten und ähnliche Einstellungen, um den Prozess des Benachrichtigung-Sendens zu vereinfachen.
 AppCenter Push ist entweder über das Web-Interface unter \url{https://appcenter.ms/} oder über die AppCenter API erreichbar und verwendbar.\par
 
-Die AppCenter Push \acs{sdk} abstrahiert den ganzen Prozess der Geräte-Registration, des Registrieren des Eingangs-Events und versteckt alles hinter einer einzelnen simplen Funktion \texttt{AppCenter.Start(„{App Secret}“, typeof(Push));}. Das App Secret ist der von AppCenter zugewiesene Schlüssel mit dem sichergestellt wird, dass das Gerät für das richtige AppCenter Projekt registriert wird.
-Ohne diese \acs{sdk} müsste in der App viel mehr konfiguriert werden, was einen höheren Programmieraufwand und größere Fehlerrate darstellt. Außerdem würde das Rad neu erfunden werden.\par
+Die AppCenter Push \ac{sdk} abstrahiert den ganzen Prozess der Geräte-Registration, des Registrieren des Eingangs-Events und versteckt alles hinter einer einzelnen simplen Funktion \texttt{AppCenter.Start(„{App Secret}“, typeof(Push));}. Das App Secret ist der von AppCenter zugewiesene Schlüssel mit dem sichergestellt wird, dass das Gerät für das richtige AppCenter Projekt registriert wird.
+Ohne diese \ac{sdk} müsste in der App viel mehr konfiguriert werden, was einen höheren Programmieraufwand und größere Fehlerrate darstellt. Außerdem würde das Rad neu erfunden werden.\par
 
-In der entwickelten App wird die AppCenter-\acs{sdk}-Version 2.6.4 verwendet. Zu beachten ist, dass AppCenter Push nicht mehr weiterentwickelt und irgendwann dieses Jahr der Service abgeschaltet wird, wie es John Wargo in seinem Blog-Post am 3. Februar 2020 schrieb. Als Alternative wird von Microsoft der Azure-Notification-Hubs-Dienst angeboten. Bevor AppCenter Push endgültig terminiert wird, will Microsoft detaillierte Anleitungen zum Umstieg auf Azure bereitstellen.\par
+In der entwickelten App wird die AppCenter-\ac{sdk}-Version 2.6.4 verwendet. Zu beachten ist, dass AppCenter Push nicht mehr weiterentwickelt und irgendwann dieses Jahr der Service abgeschaltet wird, wie es John Wargo in seinem Blog-Post am 3. Februar 2020 schrieb. Als Alternative wird von Microsoft der Azure-Notification-Hubs-Dienst angeboten. Bevor AppCenter Push endgültig terminiert wird, will Microsoft detaillierte Anleitungen zum Umstieg auf Azure bereitstellen.\par
 
-\subsection{Konfiguration des \acs{sdk}}
+\subsection{Konfiguration des \ac{sdk}}
 Um AppCenter Push in der Applikation verwenden zu können, müssen mehrere NuGet-Pakete installiert werden.
 Das AppCenter Paket beinhaltet alle Kernfunktionen wie AppCenter.Start(), das AppCenter-Push-Paket erweitert das Grundpaket um Push-bezogene Funktionen und Datentypen.
 \begin{table}[H]
