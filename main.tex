@@ -172,194 +172,40 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 
 \renewcommand{\authorName}{\MatthiasMair}
 \part{Hardware - \MatthiasMair}
-\chapter{Technische Grundlagen}
-Die im Dokument verwendeten Spannungsangaben sind immer Gleichspannung (DC) und werden nicht jedes Mal ausdrücklich als solche gekennzeichnet. Sollten abweichende Spannungsangaben zur Anwendung kommen, so wird dies explizit angeführt.
-\input{chapters/technische_grundlagen.tex}
 \chapter{Ausgangssituation}
 \input{chapters/ist-situation.tex}
-
+\chapter{Technische Grundlagen}
+\input{chapters/technische_grundlagen.tex}
 \chapter{Berechnung}
-\wip
-\section{Spannungsabfall}
-Herkömmliche CAT5-Ethernetkabel wurden ursprünglich nicht für die Übertragung großer elektrischer Leistungen entwickelt und besitzen daher Leitungen mit einem sehr geringen Ader-Durchmesser.
-Aufgrund dieser Gegebenheit kann es bei weiten Entfernungen oder großen übertragenen Leistungen zu abnormal hohen Spannungsabfällen kommen.
-Um die Anlage in dieser Hinsicht zu überprüfen werden sämtliche Spannungsabfälle und die damit verbundenen Verlustleistungen bei maximaler Belastung durch die Stationen berechnet.
-Zur Berechnung der Spannungsabfälle sind folgende Angaben verwendet worden.
-\begin{itemize}
-	\item Es werden vier Stationen über \ac{poe} versorgt.
-	Die Stationen sind nach Abbildung \crossref{fig:poe-verdrahtung} miteinander verdrahtet.
-	\item Jede Station hat einen maximalen Leistungsverbrauch von 12 W.
-	\item Das Ethernetkabel zwischen den Stationen hat jeweils eine Länge von 10 m.
-	\item Der Querschnitt einer Ader des Ethernet-Kabels beträgt 0.128 mm\textsuperscript{2} \cite[vgl.][]{lapp-cat5-datasheet}.
-	\item Am PSE wird eine Spannung von 30 V in das Netz eingespeist.
-\end{itemize}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.9\linewidth]{images/berechnung/poe_verdrahtung.png}
-	\caption{Verdrahtungsschema}
-	\label{fig:poe-verdrahtung}
-\end{figure}
-Der Leitungswiderstand eines Adernpaares des Ethernetkabels beträgt nach der allgemeinen Drahtwiderstandsformel $R=\frac{l}{\gamma\cdot A}=0.686\Omega$.
-Je nach verwendeter PoE-Type werden mehrere Adernpaare parallel geschaltet, um den Leitungswiderstand zu veringern.
-Anhand der oben beschriebenen Verdrahtung ergeben sich folgende Ersatzschaltungen:
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{images/berechnung/poe2pair.png}
-	\caption{Ersatzschaltung PoE Type 1 und 2}
-\end{figure}
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=\linewidth]{images/berechnung/poe4pair_neu.jpg}
-	\caption{Ersatzschaltung PoE Type 3 und 4}
-\end{figure}
-U\textsubscript{n}\dots Spannung an Station n, I\textsubscript{n}\dots Strom durch Station n, U\textsubscript{0}\dots Quellenspannung;\par
-Anhand dieser Ersatzschaltung ergeben sich folgende Berechnungsformeln:
-\begin{align}
-	U_1 &= U_0-2\cdot R_{Ltg}\cdot (I_1+I_2+I_3+I_4)\\
-	U_2 &= U_1-2\cdot R_{Ltg}\cdot (I_2+I_3+I_4)\\
-	U_3 &= U_2-2\cdot R_{Ltg}\cdot (I_3+I_4)\\
-	U_4 &= U_3-2\cdot R_{Ltg}\cdot I_4\\
-	12W &= U_1\cdot I_1\\
-	12W &= U_2\cdot I_2\\
-	12W &= U_3\cdot I_3\\
-	12W &= U_4\cdot I_4
-\end{align}
-Zur Lösung dieses Gleichungssystems wurde das CAS-System Maxima verwendet.
-Die Eingabe sieht wie folgt aus:
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.9\linewidth]{images/berechnung/max_2pair_30V.png}
-	\caption{Eingabe wxMaxima Type 1 \& 2}
-\end{figure}
-Die Lösungen für das Gleichungssystem werden vom Programm in Textform zurückgegeben.
-Das Programm findet neben der relevanten Lösung noch einige komplexe Lösungen für das Gleichungssystem.
-Diese werden hier wegen Platzgründen und niedriger Relevanz weggelassen.
-\begin{table}
-	\centering
-	\begin{tabular}{|r|c|c|c|c|}
-		\hline
-		&\multicolumn{2}{c|}{Type 1 \& 2}&\multicolumn{2}{c|}{Type 3 \& 4}\\\cline{2-5}
-		&U&I&U&I\\
-		\midrule
-		Station 1&27.35 V&438 mA&28.81 V&416 mA\\\hline
-		Station 2&25.30 V&474 mA&27.91 V&430 mA\\\hline
-		Station 3&23.90 V&502 mA&27.31 V&439 mA\\\hline
-		Station 4&23.19 V&517 mA&27.00 V&444 mA\\
-		\hline
-	\end{tabular}
-	\caption{Maxima-Ergebnisse Spannungsabfall}
-\end{table}
-Man sieht: Der Spannungsabfall ist wie erwartet bei Type 3 und 4 etwa halb so groß wie bei Type 1 und 2.
-
-
+\input{chapters/berechnung.tex}
 \chapter{Verbesserte Hardwarelösung}
-\wip
-\section{Konzept}
-Die neue Lösung sollte den Aufbau einer Station vereinfachen und die Ausfallrate einer Station auf gänzlich null reduzieren.
-Um dieses Ziel zu erreichen werden folgende Ansätze definiert:
-
-\paragraph{Zusammenfassen der Platinen zu einer einzigen:}
-Die Reduktion der Anzahl der Platinen auf eine Platine ermöglicht die Zusammenfassung von verschiedenen Modulen.
-Damit werden die Produktionskosten gesenkt und die Montage in den Stationen vereinfacht.
-
-\paragraph{Reduzierung der Bauteile:}
-Die Zusammenfassung der Module auf eine einzelne Platine ermöglicht die Reduktion von Bauteilen.
-Insbesondere werden Bauteile für die Verbindungstechnik eingespart.
-Dies führt zu einer Kostenreduktion bei gleichzeitiger Senkung der Fehlermöglichkeiten. 
-
-\paragraph{Entfall der Verdrahtung zwischen den Einzelplatinen:}
-Der Entfall der Verdrahtung führt zu einer Steigerung der Übersichtlichkeit und reduziert zusätzlich den Platzbedarf.
-Aufwände für die händische Verdrahtung und die Prüfung der Verbindungen der einzelnen Platinen entfällt.
-Fehlverdrahtung wird konstruktiv durch die Einzelplatine verhindert.
-
-\paragraph{Verbesserung der Spannungsversorgung:}
-Leistungsbeschränkungen sowie die Verwendung eines neuen verbesserten Spannungsreglers verbessern die Spannungsqualität.
-Die verstärkte Spannungsversorgung ermöglicht einen späteren update auf den leistungsstärkeren RPi Model 4.
-
-\paragraph{Einführung WatchDogTimer:}
-Zusätzlich wird ein Watchdog mittels eines Mikroprozessors verbaut.
-Dieser wird benötigt, um eventuelle Ausfälle des RPi und somit der gesamten Station zu erkennen.
-Falls ein Fehler auftritt setzt der Mikroprozessor den RPi zurück und die Station startet neu.
-Nachdem die Station neugestartet ist, wird der Normalbetrieb wieder aufgenommen und der Watchdog nimmt den Zustand des Überwachens wieder ein.
-
-%Lösungen für probleme, zusätzliche vorteile
-\section{Spannungsversorgung}
-\subsection{Anforderungen}
-Um einen möglichst reibungslosen Betrieb zu garantieren, werden an die Spannungsversorgung mehrere Anforderungen gestellt:
-\begin{itemize}
-	\item Der Eingangsspannungsbereich muss mindestens 24 bis 35 V betragen.
-	\item Die gewünschte Ausgangsspannung beträgt 5 V.
-	\item Der Oberwellenanteil (ripple) der Ausgangsspannung soll unter 1\% liegen. 
-	\item Die Strombelastbarkeit muss mindestens 2.5 A betragen.
-\end{itemize}
-Die Versorgungsspannung wird über PoE (Power over Ethernet) zur Verfügung gestellt.
-Der Spannungsregler muss diese Art der Versorgungsspannung unterstützen.
-Der Spannungsregler sollte die 24V auf 5V möglichst verlustarm reduzieren.
-Alle versorgten Komponenten auf der Platine arbeiten mit einer Spannung von 5V.
-Diese Komponenten sind z.B. der RPi, der Mikrocontroller und die Verstärkerschaltung für Mikrofon und Lautsprecher.\par
-
-Die Spannungsversorgung soll bei Spannungsschwankungen kurzzeitig die Versorgung aufrechterhalten, um dem Versagen einer Station vorzubeugen.
-Zur Stützung der Spannungsversorgung werden Kondensatoren auf der Eingangsspannungsseite und auf der Ausgangsspannungsseite benötigt.
-
-\subsection{Auswahl Spannungsregler}
-Aufgrund der oben angeführten Anforderungen wird der Spannungsregler LM33630 ausgewählt.
-Dieser Spannungsregler kann im Bereich von 3.8 V bis 36 V betrieben werden.
-Die Ausgangsspannung ist immer kleiner als die Eingangsspannung und liegt im Bereich von 1 V bis 24 V.
-Der LM33630 ist ein Step-down Spannungsregler, das bedeutet er kann nur von einer höheren auf eine niedrigere Spannung regeln.\par
-
-Um eine Schwingung, die wenig Aufwand zur Glättung benötigt, zu erzeugen verwendet der Spannungsregler eine hohe Schaltfrequenz von 2.1 MHz.
-Der LM33630 hat standardmäßig einen maximalen Ausgangsstrom von 3 A, diese wird auch nahezu vollständig benötigt für den RPi, der bezieht allein bereits ca. 1.5 A und der Lautsprecher mit der Vorschaltung benötigt auch über 0.5 A.\par
-
-Vom LM33630 sind mehrere Varianten verfügbar, es gibt die DDA und RNX Variante.
-Die DDA Variante hat 8 Pins und ein eingebauter Kühlkörper, der mit einen großen Massefeld verbunden werden kann, damit der IC nicht überhitzt.
-Die RNX Variante hat 12 Pins und anstatt eines größeren Kühlfläche mehrere Ground Pins, die ebenfalls zur Kühlung des ICs dienen.
-Zusätzlich gibt es eine weitere Unterteilung bei den zwei Varianten, es gibt verschiedene Schaltfrequenzen und diese sind 400, 1400 und 2100 kHz.\par
-Die technischen Daten dieses Spannungsreglers sind in vollem Umfang im Datenblatt ersichtlich. \cite[vgl.][]{lmr33630-datasheet}
-
-\subsection{Funktion des Spannungsreglers}
-Ein Step-down Spannungsregler arbeitet mit einen PWM Signal, das anschließend mittels einer Induktivität geglättet wird.\par
-Bei der Pulsweitenmodulation (engl. Pulse Width Modulation, abgekürzt PWM) wird das Verhältnis zwischen der Einschaltzeit und Periodendauer eines Rechtecksignals bei fester Grundfrequenz variiert. Das Verhältnis zwischen der Einschaltzeit tein und der Periodendauer T=tein+taus wird als das Tastverhältnis p bezeichnet. (laut DIN-IEC 60469-1: Tastgrad) (engl. Duty Cycle, meist abgekürzt DC, nicht zu verwechseln mit Direct Current = Gleichstrom). \cite[Einleitung]{mikrocontroller-spannungsregler}\par
-
-Über einen Spannungsteiler kann die Ausgangsspannung variiert werden.
-Weiters kann der Spannungsregler abgeschaltet werden, wenn 0V am Enable Pin angelegt werden.
-Dies sorgt für eine komplette Abschaltung der Steuerlogik.
-Die Verwendung dieser Funktion ist jedoch nicht vorgesehen.
-
-\subsection{Zusatzbeschaltung des Spannungsreglers}
-Der Spannungsregler ist universell einsetzbar, weshalb die genauen Betriebseigenschaften über die externe Beschaltung festgelegt werden.
-\paragraph{Eingangskondensator:}
-Auf der Eingangsseite, d.h. der 24V Seite wird ein 820uF Kondensator verbaut.
-Dieser dient in erster Linie zum Abfangen und Ausgleichen von Spannungsschwankungen.
-Diese Spannungsschwankungen können aufgrund von sich schlagartig ändernden Leistungsverbräuchen entstehen.
-
-\paragraph{Ausgangskondensator:}
-Nach dem Spannungsregler auf der 5V Seite werden zwei Kondensatoren mit jeweils der Kapazität von 1mF verbaut, das ergibt eine Gesamtkapazität auf der 5V Seite von 2mF.
-Diese werden zur nahezu vollständigen Glättung der Ausgangsspannung und weiteres Abfangen von Spannungseinbrüchen wegen Leistungsspitzen verwendet.
-
-\paragraph{Spannungsteiler:}
-Der Spannungsteiler (100kOhm; 23,9kOhm) am FB Pin sorgt für die richtige Ausgangsspannung von 5V.
-Dieser Spannungsteiler kann frei über die folgende Formel konfiguriert werden:
-\[R_{FBB}=\frac{R_{FBT}}{\frac{V_{OUT}}{V_{REF}}-1}\]
-Im Datenblatt des Spannungsreglers sind bereits Werte für die am häufigsten verwendeten Spannungen vorgegeben.
-
-\paragraph{Kühlung:}
-Der Spannungsregler muss gekühlt werden, da bei ihm eine nicht vernachlässigbare Verlustleistung auftritt.
-Unter dem IC ist eine große Massenfläche bereitgestellt, die zur Kühlung dient.
-Die Kühlfläche des Spannungsreglers wird mit Durchkontaktierungen (Vias) mit der Massefläche auf der Unterseite der Platine verbunden und somit gekühlt.
-
-\section{Mikrofon-Vorverstärker}
-\section{Lautsprecher-Verstärker}
-\section{Mikrocontroller}
-
+\input{chapters/verbesserte_hardwareloesung.tex}
 \chapter{Verwendete Software}
 \wip
 \section{EAGLE}
-\section{Library Loader}
+Die Software Eagle von Autodesk ist eine CAD Software zur Entwicklung von Leiterplatten (PCB).
+Bis 2016 hat das deutsche Unternehmen CadSoft Computer die Software entwickelt, angefangen im Jahr 1988 mit dem Erscheinen von Eagle, damals noch eine 16 Bit Anwendung für DOS.
+Ab 2000 wurde die Unterstützung für DOS niedergelegt und die Software wurde für Windows und Linux weiterentwickelt.
+Bis 2016 wurde die Software für 64 Bit entwickelt und neue Funktionen wurden hinzugefügt.
+Ab 2016 ist die Software im Besitz von Autodesk, die den einmaligen Kauf der Software auf ein Abo Modell umgestellt haben.\par
 
-\chapter{Hardware-Dokumentation}
-\wip
-\section{Schaltung}
-\section{Platinen-Design}
+Eagle besteht grundsätzlich aus zwei Fenstern, zum einen die Schaltplan-Darstellung und zum anderen der Leiterplattendesigner.
+In der Schaltplan-Darstellung wird dieser erstellt, die einzelnen Bauteile definiert und deren Eigenschaften festgelegt.
+Im Leiterplattendesigner wird die eigentliche Platine erstellt, die Bauteile auf der Platine platziert und mit Leiterbahnen verbunden.
+\subsection{Versionsvergleich}
+\begin{table}
+	\centering
+	\begin{tabular}{|c|c|c|c|c|c|c|}
+		Version&Schaltpläne in einem Projekt&Schichten&PCB Größe&Nutzung&Preis/Monat&Preis/Jahr\\
+		Premium&999&16&4 m²&Kommerziell&USD 65&USD 510\\
+		Schüler und Lehrer&999&16&4 m²&Nur Schüler und Lehrer&Kostenlos&Kostenlos\\
+		Standard&99&4&160 cm²&Kommerziell&USD 15&USD 100\\
+		Kostenlos&2&2&80 cm²&Nur Privatgebrauch&Kostenlos&Kostenlos
+	\end{tabular}
+	\caption{Verfügbare EAGLE-Versionen ab 2016}
+\end{table}
+
+\section{Library Loader}
 
 % \chapter{Testen}
 % Im Zuge der Test sind einige Dinge aufgefallen:
@@ -379,8 +225,7 @@ Die Kühlfläche des Spannungsreglers wird mit Durchkontaktierungen (Vias) mit d
 \printacronyms[heading=chapter*,name=Abkürzungen]\clearpage
 \listoffigures
 Alle Abbildungen ohne Referenzmarke \enquote{[\#]} sind Eigenfotos\clearpage
-\listoftables
-\clearpage
+\listoftables\clearpage
 
 \part{Appendix}
 \chapter{Datenblätter}
@@ -424,33 +269,33 @@ Nachfolgend ein Auszug aus dem Datenblatt mit den wichtigsten technischen Daten,
 \footnotesize\begin{longtable}{lllll}
 	Qty & Value & Package & Parts & Description \\ 
 	\toprule\endhead
-	1 & 470nF & C0603 & C13 & Capacitor \\
-	1 & 820µF/35V & E5-10,5 & C2 & polarized Capacitor \\
-	2 & 1mF/6.3V & E3,5-8 & C3, C14 & polarized Capacitor \\
-	3 & 2.2µF & C0805 & C4, C5, C6 & Capacitor \\
-	4 & 1µF & C0603 & C8, C10, C12, C18 & Capacitor \\
-	4 & 100nF & C0603 & C9, C15, C16, C17 & Capacitor \\
+	1 & 470 nF & C0603 & C13 & Capacitor \\
+	1 & 820 µF/35 V & E5-10,5 & C2 & polarized Capacitor \\
+	2 & 1 mF/6.3 V & E3,5-8 & C3, C14 & polarized Capacitor \\
+	3 & 2.2 µF & C0805 & C4, C5, C6 & Capacitor \\
+	4 & 1 µF & C0603 & C8, C10, C12, C18 & Capacitor \\
+	4 & 100 nF & C0603 & C9, C15, C16, C17 & Capacitor \\
 	1 & LMR33630CDDAR & DDA0008J & IC1 & Buck Converter \\
 	1 & PAM8403 & SOP-16 & IC2 & Dual channel audio amplifier \\
-	1 & 3.5mm/4 conductor & SJ-43515RS-SMT & J1 & Audio Jack \\
-	1 & 10µH/2.9A & MSS7348-103MEB & L1 & Inductor \\
-	1 & 6Mhz & CSTCR6M00G53Z & Q1 & Resonator \\
-	1 & 1M\tOmega & R0603 & R11 & Resistor \\
-	2 & 10k\tOmega & R0603 & R1, R5 & Resistor \\
-	1 & 100k\tOmega & R0603 & R13 & Resistor \\
-	1 & 24.9k\tOmega & R0603 & R14 & Resistor \\
-	1 & 47k\tOmega & R0603 & R2 & Resistor \\
-	1 & 5.6k\tOmega & R0603 & R3 & Resistor \\
-	1 & 3.9k\tOmega & R0603 & R4 & Resistor \\
-	1 & 2.2k\tOmega & R0603 & R6 & Resistor \\
-	1 & 5k\tOmega & POT\_33/64W & R7 & Potentiometer \\
+	1 & 3.5 mm/4 conductor & SJ-43515RS-SMT & J1 & Audio Jack \\
+	1 & 10 µH/2.9 A & MSS7348-103MEB & L1 & Inductor \\
+	1 & 6 Mhz & CSTCR6M00G53Z & Q1 & Resonator \\
+	1 & 1 M\tOmega & R0603 & R11 & Resistor \\
+	2 & 10 k\tOmega & R0603 & R1, R5 & Resistor \\
+	1 & 100 k\tOmega & R0603 & R13 & Resistor \\
+	1 & 24.9 k\tOmega & R0603 & R14 & Resistor \\
+	1 & 47 k\tOmega & R0603 & R2 & Resistor \\
+	1 & 5.6 k\tOmega & R0603 & R3 & Resistor \\
+	1 & 3.9 k\tOmega & R0603 & R4 & Resistor \\
+	1 & 2.2 k\tOmega & R0603 & R6 & Resistor \\
+	1 & 5 k\tOmega & POT\_33/64 W & R7 & Potentiometer \\
 	1 & 10\tOmega & R0603 & R8 & Resistor \\
-	2 & 10k\tOmega & R0603 & R9, R12 & Resistor \\
-	2 & 2x3pin & MA03-2 & SV1, SV2 & Pin Header \\
+	2 & 10 k\tOmega & R0603 & R9, R12 & Resistor \\
+	2 & 2x3 pin & MA03-2 & SV1, SV2 & Pin Header \\
 	3 & BC847 & SOT23 & T1, T2, T3 & NPN Transistor \\
 	1 & ATmega328P & TQFP32-08 & U1 & Microcontroller \\
-	1 & 3pin & RS-CONN-2.54-3P & X1 & Screw Terminal \\
-	1 & 2pin & RS-CONN-2.54-2P & X2 & Screw Terminal \\
-	1 & 10pin & RS-CONN-2.54-10P & X3 & Screw Terminal \\
+	1 & 3 pin & RS-CONN-2.54-3P & X1 & Screw Terminal \\
+	1 & 2 pin & RS-CONN-2.54-2P & X2 & Screw Terminal \\
+	1 & 10 pin & RS-CONN-2.54-10P & X3 & Screw Terminal \\
 \end{longtable}
 \end{document}
