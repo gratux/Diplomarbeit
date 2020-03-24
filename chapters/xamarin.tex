@@ -7,7 +7,9 @@ Diese Vorlage beinhält nur eine Haupt-Oberflächenseite ohne jeglichen Beispiel
 
 Der immer wieder vorkommende Name PiBell ist eine freigeistliche Erfindung. PiBell ist der Projektname, der sich aus \acl{rpi} und \enquote{Bell}, dem englischen Wort für Klingel oder Glocke, zusammensetzt.
 
-Visual Studio organisiert alle Programmteile in einer sogenannten Solution, welche diesen Projektnamen trägt. In diesem Fall beinhält die Solution \enquote{PiBell} drei Programmteile oder \enquote{Projects}:
+Visual Studio organisiert alle Programmteile in einer sogenannten Solution, welche diesen Projektnamen trägt. In diesem Fall beinhält die Solution \enquote{PiBell} drei Programmteile oder \enquote{Projects}.
+Dieser Aufbau wird in Abbildung \ref{fig:solution} dargestellt.
+
 \paragraph{PiBell} ist das portable Projekt, auch \ac{dotnet}-Standard-Projekt genannt.
 Dieses beinhaltet den ganzen plattformunabhängigen Code, sowie die Definition der \ac{ui}-Oberfläche mittels \ac{xaml}-Dateien.
 In diesem Projekt befindet sich der größte entwickelte Code-Anteil, da die meisten Funktionen, wie das Abspielen von Videos mit Hilfe der LibVLC-Bindings, plattformunabhängig funktionieren und deswegen geteilt werden können.
@@ -18,9 +20,10 @@ Die Mikrofon-Aufnahme erfolgt auf einer sehr hardwarenahen Ebene, was die Plattf
 
 \paragraph{PiBell.iOS} beinhaltet wie PiBell.Android den plattformspezifischen Code für die iOS-Platt\-form. Aufgrund mangelnder Entwicklungswerkzeuge wird dieser Teil nicht großartig behandelt.\par
 
-\begin{figure}[H]
+\begin{figure}
 \centering\includegraphics[width=0.9\linewidth]{images/xamarin/struktur.pdf}
 \caption{Aufbau der Solution}
+\label{fig:solution}
 \end{figure}
 
 %besteht aus drei teilen
@@ -82,7 +85,7 @@ In einer \ac{xaml}-Datei wird das Aussehen der Oberfläche nach dem \ac{wysiwym}
 \paragraph{3-8:} Am Anfang der \ac{xaml}-Datei wird der allgemeine Seiten-Typ, gemeinsam mit einigen Quell-Abkürzungen (Namenspräfix für Xamarin-fremde Elemente) definiert. In diesem Fall handelt es sich um eine simple ContentPage mit den Standard-Abkürzungen. Zur Verwendung der LibVLC wurde in Zeile 7 eine zusätzliche Quelle definiert. Die neu hinzugefügte Quelle erlaubt den Zugriff auf Elemente wie die VideoView, welche ein Video als Teil der Oberfläche darstellt.
 \paragraph{9:} Mit x:Class wird die Programmklasse angegeben, die den Code der Oberfläche beinhält. In dieser Klasse finden sich alle Event-Handler für jegliche Oberflächenereignisse, wie das Drücken eines Buttons.
 \paragraph{10:} Das Festlegen der Title-Variable ist in diesem Fall optional. Falls eine Master-Detail-Page-Struktur verwendet werden würde, wäre der Titel oben in der Kopfzeile der App zu sehen. Da es sich hier aber um ein Sigle-Page-Layout handelt, ist der Titel nicht zwingend notwendig.
-\paragraph{11:} Mit der Variable BackgroundColor wird die Hintergrundfarbe der Oberfläche definiert. Die gewünschte Farbe wird als HEX-Zahl mit dem Format Alpha-Rot-Grün-Blau angegeben. Der Alpha-Wert legt die Durchsichtigkeit der Farbe fest. Es wird ein dunkles Design verwendet, da dieses in einer wenig beleuchteten Umgebung die Augen besser schont.
+\paragraph{11:} Mit der Variable BackgroundColor wird die Hintergrundfarbe der Oberfläche definiert. Die gewünschte Farbe wird als Hexadezimal-Zahl mit dem Format Alpha-Rot-Grün-Blau angegeben. Der Alpha-Wert legt die Durchsichtigkeit der Farbe fest. Es wird ein dunkles Design verwendet, da dieses in einer wenig beleuchteten Umgebung die Augen besser schont.
 
 \begin{minted}[firstnumber=12]{xml}
 <ContentPage.Content>
@@ -103,7 +106,7 @@ In einer \ac{xaml}-Datei wird das Aussehen der Oberfläche nach dem \ac{wysiwym}
 
 <shared:VideoView x:Name="VideoView" Grid.Column="0" Grid.Row="1" MediaPlayer="{Binding MediaPlayer}"/>
 \end{minted}
-\paragraph{23:} Hier wird das erste eigenständige Oberflächen-Element erzeugt. Es handelt sich um ein Text-Eingabe-Feld (Entry), mit dem zu Testzwecken die Serveradresse eingegeben werden kann. Dies ist notwendig, da die finale Serveradresse noch nicht bekannt ist und sich diese im Zuge der Entwicklung ständig ändert. Für den späteren Betrieb könnte dieses Problem umgangen werde, indem die aktuelle Server-Adresse per Push-Benachrichtigung mitgeschickt wird. Hier ist auch eine Anwendung des MVVM-Modells erkennbar: es wird mit Hilfe des Binding-Schlüsselwortes der Speicherort des angezeigten Textes festgelegt. Mode=TwoWay beschreibt die Richtung der Synchronisierung der Daten. Egal, ob sich der Wert im Speicher oder der Wert in der Anzeige ändert, wird die jeweils andere Seite aktualisiert. Mit Grid.Row und Grid.Column wird die Position im vorhin definierten Grid gesetzt.
+\paragraph{23:} Hier wird das erste eigenständige Oberflächen-Element erzeugt. Es handelt sich um ein Text-Eingabe-Feld (Entry), mit dem zu Testzwecken die Serveradresse eingegeben werden kann. Dies ist notwendig, da die finale Serveradresse noch nicht bekannt ist und sich diese im Zuge der Entwicklung ständig ändert. Für den späteren Betrieb könnte dieses Problem umgangen werde, indem die aktuelle Server-Adresse per Push-Benachrichtigung mitgeschickt wird. Hier ist auch eine Anwendung des \ac{mvvm}-Modells erkennbar: es wird mit Hilfe des Binding-Schlüsselwortes der Speicherort des angezeigten Textes festgelegt. Mode=TwoWay beschreibt die Richtung der Synchronisierung der Daten. Egal, ob sich der Wert im Speicher oder der Wert in der Anzeige ändert, wird die jeweils andere Seite aktualisiert. Mit Grid.Row und Grid.Column wird die Position im vorhin definierten Grid gesetzt.
 \paragraph{25:} Das zweite Oberflächen-Element, eine VideoView der LibVLC, wird hier erzeugt. Da die Komponente VideoView nicht standardmäßig in Xamarin enthalten ist, wird das am Anfang der Datei definierte Namenspräfix „shared:“ benötigt.
 
 \begin{minted}[firstnumber=36]{xml}
@@ -111,7 +114,7 @@ In einer \ac{xaml}-Datei wird das Aussehen der Oberfläche nach dem \ac{wysiwym}
              Grid.Column="0" Margin="10"
              Clicked="BtConnect_Clicked"/>
 \end{minted}
-\paragraph{36:} Ein ImageButton kann im Vergleich zu einem normalen Button als Inhalt ein Bild anzeigen. Die Bildquelle wird mit der „Source“-Property gesetzt. Es gibt mehrere mögliche Bildformate, wobei hier PNG aufgrund von Transparenz-Unterstützung gewählt wurde. Ohne Definition der „BackgroundColor“ würde der ImageButton mit der Default-Farbe grau gefüllt werden.
+\paragraph{36:} Ein ImageButton kann im Vergleich zu einem normalen Button als Inhalt ein Bild anzeigen. Die Bildquelle wird mit der „Source“-Property gesetzt. Es gibt mehrere mögliche Bildformate, wobei hier \ac{png} aufgrund von Transparenz-Unterstützung gewählt wurde. Ohne Definition der „BackgroundColor“ würde der ImageButton mit der Default-Farbe grau gefüllt werden.
 \paragraph{38:} Mit dem EventHandler „Clicked“ kann die Funktion, die aufgerufen wird, wenn der ImageButton gedrückt wird, spezifiziert werden.
 \begin{minted}[firstnumber=43]{xml}
 <ImageButton x:Name="BtToggleSpeaker" Source="SpeakerMute.png" BackgroundColor="Transparent"
@@ -135,14 +138,16 @@ In einer \ac{xaml}-Datei wird das Aussehen der Oberfläche nach dem \ac{wysiwym}
     </VisualStateManager.VisualStateGroups>
 </ImageButton>
 \end{minted}
-\paragraph{47-62:} Mit dem VisualStateManager können für die meisten Oberflächen-Elemente bestimmte Zustände definiert werden (z.B. wenn sie gedrückt sind). Hier werden zwei Zustände definiert, die das angezeigte Bild dem Lautsprecher-Zustand anpassen.
-\begin{figure}[H]
-    \centering\includegraphics[width=.9\linewidth]{images/xamarin/VisualStateManager.png}
+\paragraph{47-62:} Mit dem VisualStateManager können für die meisten Oberflächen-Elemente bestimmte Zustände definiert werden (z.B. wenn sie gedrückt sind). Hier werden zwei Zustände definiert, die das angezeigte Bild dem Lautsprecher-Zustand anpassen. Über den Code-Behind werden die richtigen VisualStates aufgerufen, was in dem in Abbildung \ref{fig:visualstatemanager} gezeigten Verhalten resultiert.
+\begin{figure}
+    \centering\includegraphics[width=.8\linewidth]{images/xamarin/VisualStateManager.png}
     \caption{VisualStateManager}
+    \label{fig:visualstatemanager}
 \end{figure}
+
 Die hier beschriebenen Konzepte werden mehrmals verwendet, um die Oberfläche aufzubauen. Die Datei als Gesamtheit ergibt die in Bild \crossref{fig:mainpage} gezeigte Oberfläche.
-\begin{figure}[H]
-    \centering\includegraphics[width=.9\linewidth]{images/xamarin/MainPage.png}
+\begin{figure}
+    \centering\includegraphics[width=.7\linewidth]{images/xamarin/MainPage.png}
     \caption{App-Oberfläche}
     \label{fig:mainpage}
 \end{figure}
@@ -182,7 +187,7 @@ Wenn ein anderer Compiler-Modus ausgewählt ist, werden diese Teile ignoriert.
 Wenn der Datensatz \texttt{mrl} enthalten ist, wird dessen Wert in \texttt{\_player.Mrl} gespeichert.
 Der Wert stellt die Server-Adresse dar, von der der Video-Stream abgerufen werden soll.
 \paragraph{51-55:} Der Benutzer wird per Popup gefragt, ob der Anruf entgegengenommen werden soll (Abb. \crossref{fig:inc-call}).
-\begin{figure}[H]
+\begin{figure}
     \centering
     \includegraphics[width=.5\linewidth]{images/xamarin/IncomingCall.png}
     \caption{Abfrage Anrufannahme}
@@ -227,7 +232,7 @@ Falls davor ein Video gespielt wurde, wird dieses fortgesetzt und die Variable f
 \begin{minted}[firstnumber=84]{csharp}
 BindingContext = _player;
 \end{minted}
-\paragraph{84:} Der BindingContext gibt für das MVVM-Modell an, wo die Variablen, die mit der Oberfläche verknüpft sind, sich befinden.
+\paragraph{84:} Der BindingContext gibt für das \ac{mvvm}-Modell an, wo die Variablen, die mit der Oberfläche verknüpft sind, sich befinden.
 In diesem Fall sind alle Variablen in der Player-Instanz \texttt{\_player} zu finden.
 
 An folgender Funktion wird das Verhältnis von Oberflächenereignissen mit dem entsprechenden Code-Behind erklärt.
@@ -294,7 +299,7 @@ Grundsätzlich finden sich hier zwei Klassen:
     \item Streamer, mit der das Zurückschicken der Mikrofon-Rohdaten erfolgen soll
 \end{itemize}
 \subsubsection{Player}
-Die Player-Klasse implementiert das MVVM-Modell, um die MediaPlayer-Komponente mit der Oberfläche zu verknüpfen.
+Die Player-Klasse implementiert das \ac{mvvm}-Modell, um die MediaPlayer-Komponente mit der Oberfläche zu verknüpfen.
 Um die Anzeige über eine Änderung der Variablen zu informieren, muss der \texttt{PropertyChanged}-EventHandler mit dem Variablennamen als Argument aufgerufen werden.
 Um die Lesbarkeit den Codes zu vereinfachen, wird dieser Aufruf meist in einem Unterprogramm versteckt, welches von Visual Studio automatisch generiert werden kann.
 Daher wird auf den genauen Aufbau dieses Unterprogrammes nicht genauer eingegangen.
@@ -359,7 +364,7 @@ public string Mrl
 Diese kann auch dann \texttt{private} und somit nach außen versteckt sein, wenn die Property selbst \texttt{public}, also von außen zugänglich ist.
 \paragraph{57:} Die \texttt{get}-Funktion ist bei den meisten Properties so definiert, dass der Wert der internen Variablen einfach weitergegeben wird, da beim Auslesen in den meisten Fällen keine zusätzliche Aktion erforderlich ist.
 \paragraph{58-62:} In der \texttt{set}-Funktion wird hier nicht nur der Wert der internen Variable mit dem neuen Wert überschrieben, sondern auch das System über eine Änderung informiert.
-Dies ist für die Funktion des MVVM-Modells essenziell.
+Dies ist für die Funktion des \ac{mvvm}-Modells essenziell.
 \subsubsection{Streamer}
 Die Streamer-Klasse ist deutlich kürzer, als die Player-Klasse, da die Streamer-Klasse selbst keine wirkliche Funktionalität beinhaltet.
 Vielmehr dient diese Klasse als Interface zu den plattformspezifischen Softwaremodulen, die für die Audioaufnahme zuständig sind.
@@ -403,10 +408,13 @@ if (CheckSelfPermission(Manifest.Permission.RecordAudio) != Permission.Granted)
 \paragraph{33-36:} Es wird überprüft, ob die Berechtigung für die Audio-Aufnahme bereits erteilt ist.
 Wenn das nicht der Fall ist, wird diese beim System angefragt.
 Der Benutzer erhält dann ein PopUp, mit dem er gefragt wird, ob die Berechtigung erteilt werden soll.
-\begin{figure}[H]
+Der Benutzer kann anschließen entweder, wie in Abbildung \ref{fig:permission} gezeigt, die Berechtigung erteilen oder verweigern.
+In letzterem Fall kann die Applikation nicht richtig funktionieren.
+\begin{figure}
     \centering
     \includegraphics[width=.5\linewidth]{images/xamarin/permissionRequest.png}
     \caption{Anfrage für Berechtigung}
+    \label{fig:permission}
 \end{figure}
 
 \begin{minted}[firstnumber=39]{csharp}

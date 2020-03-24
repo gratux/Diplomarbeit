@@ -6,7 +6,19 @@
 \usepackage[hyperref=true]{acro}
 \usepackage[backend=biber, style=ieee]{biblatex}
 \usepackage[final]{minted}
-\usepackage{fancyhdr, graphicx, datetime2, fontspec, float, hologo, csquotes, longtable, pdfpages, multirow, tabulary, amsmath, blindtext}
+\usepackage{fancyhdr, 
+	graphicx,
+	datetime2,
+	fontspec,
+	float,
+	hologo,
+	csquotes,
+	longtable,
+	pdfpages,
+	multirow,
+	tabulary,
+	amsmath,
+	blindtext}
 \usepackage[protrusion=true,final]{microtype}
 \usepackage[final]{hyperref}
 \usepackage[all]{hypcap}
@@ -42,6 +54,12 @@
 	breakafter=;:\=\,.
 }
 \setminted[text]{
+	numbers=both,
+	breaklines=true,
+	%breakbefore=;:\=\,.,
+	breakafter=;:\=\,.
+}
+\setminted[arduino]{
 	numbers=both,
 	breaklines=true,
 	%breakbefore=;:\=\,.,
@@ -97,6 +115,7 @@
 \newcommand{\crossref}[1]{\emph{\ref{#1} \nameref{#1}}}
 \newcommand{\wip}{{\color{red}Nachfolgender Teil ist noch in Bearbeitung durch \authorName}}
 \newcommand{\tOmega}{Ω}
+\newcommand{\tdelta}{Δ}
 
 % text formatting ----------------------------------------------------------
 %\setlength{\parindent}{0pt}% Remove paragraph indentation
@@ -180,32 +199,70 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \input{chapters/berechnung.tex}
 \chapter{Verbesserte Hardwarelösung}
 \input{chapters/verbesserte_hardwareloesung.tex}
+\chapter{Hardware-Programmierung}
+\input{chapters/hardware-programmierung.tex}
 \chapter{Verwendete Software}
 \wip
 \section{EAGLE}
-Die Software Eagle von Autodesk ist eine CAD Software zur Entwicklung von Leiterplatten (PCB).
-Bis 2016 hat das deutsche Unternehmen CadSoft Computer die Software entwickelt, angefangen im Jahr 1988 mit dem Erscheinen von Eagle, damals noch eine 16 Bit Anwendung für DOS.
-Ab 2000 wurde die Unterstützung für DOS niedergelegt und die Software wurde für Windows und Linux weiterentwickelt.
+Die Software \ac{eagle} von Autodesk ist eine \ac{cad} Software zur Entwicklung von Leiterplatten (\ac{pcb}).
+Bis 2016 hat das deutsche Unternehmen CadSoft Computer die Software entwickelt, angefangen im Jahr 1988 mit dem Erscheinen von Eagle, damals noch eine 16 Bit Anwendung für \ac{dos}.
+Ab 2000 wurde die Unterstützung für \ac{dos} niedergelegt und die Software wurde für Windows und Linux weiterentwickelt.
 Bis 2016 wurde die Software für 64 Bit entwickelt und neue Funktionen wurden hinzugefügt.
 Ab 2016 ist die Software im Besitz von Autodesk, die den einmaligen Kauf der Software auf ein Abo Modell umgestellt haben.\par
 
-Eagle besteht grundsätzlich aus zwei Fenstern, zum einen die Schaltplan-Darstellung und zum anderen der Leiterplattendesigner.
+Eagle besteht grundsätzlich aus zwei Fenstern, zum einen die schematische bzw. Schaltplan-Darstellung und zum anderen der Leiterplattendesigner.
 In der Schaltplan-Darstellung wird dieser erstellt, die einzelnen Bauteile definiert und deren Eigenschaften festgelegt.
 Im Leiterplattendesigner wird die eigentliche Platine erstellt, die Bauteile auf der Platine platziert und mit Leiterbahnen verbunden.
 \subsection{Versionsvergleich}
 \begin{table}
 	\centering
 	\begin{tabular}{|c|c|c|c|c|c|c|}
-		Version&Schaltpläne in einem Projekt&Schichten&PCB Größe&Nutzung&Preis/Monat&Preis/Jahr\\
+		Version&Schaltpläne in einem Projekt&Schichten&\ac{pcb} Größe&Nutzung&Preis/Monat&Preis/Jahr\\
 		Premium&999&16&4 m²&Kommerziell&USD 65&USD 510\\
 		Schüler und Lehrer&999&16&4 m²&Nur Schüler und Lehrer&Kostenlos&Kostenlos\\
 		Standard&99&4&160 cm²&Kommerziell&USD 15&USD 100\\
 		Kostenlos&2&2&80 cm²&Nur Privatgebrauch&Kostenlos&Kostenlos
 	\end{tabular}
-	\caption{Verfügbare EAGLE-Versionen ab 2016}
+	\caption{Verfügbare \ac{eagle}-Versionen ab 2016}
 \end{table}
 
-\section{Library Loader}
+
+\subsection{Entwicklung mit EAGLE}
+\subsubsection{Schaltplan}
+Zuserst wird in \ac{eagle} der Schaltplan erstellt.
+Dabei werden alle benötigten Komponenten eingefügt und miteinander verbunden.
+Eagle verfügt bereits über eine große Bibliothek an Komponenten von verschiedenen Herstellern.
+Jedoch müssen für speziellere Komponenten Bibliotheken gesucht werden oder selbst erstellt werden.
+Eagle unterstützt die Erstellung und Bearbeitung von Bibliotheken.
+Diese Bibliotheken können anschließend direkt in ein Projekt miteingebunden werden.\par
+
+Nachdem der Schaltplan erstellt wurde kann die Schaltung mittels \ac{erc} überprüft werden.
+Diese Funktion überprüft ob alle grundlegenden Anforderungen einer Schaltung erfüllt wurden, z.B. ob alle Anschlüsse verbunden worden sind oder ob alle Bauteile einen Wert haben.
+
+\subsubsection{Layout}
+Im Layout-Fenster wird die eigentliche Platine erstellt.
+Um das Platinen Design Fenster zu öffnen wird der Befehl Board in der Schaltplanansicht eingegeben.
+Alle Komponenten aus dem Schaltplan werden übernommen und die Verbindungen der Komponenten werden durch gelbe Linien gekennzeichnet.\par
+
+Zuerst werden die Bauteile positioniert. Dabei werden alle Komponenten, die miteinander verbunden werden müssen in nahe beisammen platziert.
+Nachdem alle Teile platziert wurden können die Leiterbahnen eingezeichnet werden.
+Es kann per Hand mit dem Befehl Route gezeichnet werden oder mittels den Autorouter kann die Platine erstellt werden.
+Der Autorouter benötigt jedoch viel Erfahrung, um korrekt genutzt zu werden und das Ergebnis ist meist nicht ideal.
+Mit Hand zeichnen ist am Anfang deutlich einfacher.\par
+
+Nachdem die Leiterbahnen erstellt wurden kann die Platine mit dem \ac{drc} geprüft werden.
+Dieser Befehl prüft wiederrum ob alle grundlegenden Anforderungen erfüllt wurden, z.B. Mindestabstand der Leiterbahnen eingehalten oder ob noch nicht vollständig geroutete Leiterbahnen vorhanden sind.
+
+\section{Hardware-Ausblick}
+\subsection{Gehäuse für Platine}
+Momentan wird die Platine mit Hilfe von Heißkleber ohne Gehäuse in der Station fixiert.
+\ac{eagle} bietet in der neuesten Version eine Exportfunktion in die A360-Cloud von Autodesk an, mit welcher die Platine inklusive der verwendeten Bauteile als 3D-Modell exportiert werden kann.
+Dieses Modell kann in dafür geeigneten Autodesk-Programmen wie Fusion 360 geöffnet und für die Planung eines Gehäuses verwendet werden.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=.9\linewidth]{images/hardware-ausblick/fusion360.png}
+	\caption{Exportierte Platine in Fusion 360}
+\end{figure}
 
 % \chapter{Testen}
 % Im Zuge der Test sind einige Dinge aufgefallen:
@@ -221,13 +278,13 @@ Im Leiterplattendesigner wird die eigentliche Platine erstellt, die Bauteile auf
 %\printbibheading
 %\printbibliography[heading=subbibliography,type=online,title={Online-Quellen}]
 %\printbibliography[heading=subbibliography,nottype=online,title={Andere Quellen}]
+\part{Appendix}
 \printbibliography[title={Literatur und Quellen}]\clearpage
-\printacronyms[heading=chapter*,name=Abkürzungen]\clearpage
+\printacronyms[heading=chapter,name=Abkürzungen]\clearpage
 \listoffigures
 Alle Abbildungen ohne Referenzmarke \enquote{[\#]} sind Eigenfotos\clearpage
 \listoftables\clearpage
 
-\part{Appendix}
 \chapter{Datenblätter}
 \section{Mikrocontroller Atmel ATmega328P}
 Nachfolgend ein Auszug aus dem Datenblatt mit den wichtigsten technischen Daten, der Pinbelegung und einem Blockdiagramm. Die vollständige Dokumentation umfasst über 294 Seiten und kann unter nachfolgender Adresse abgerufen werden.\par

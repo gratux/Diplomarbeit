@@ -6,7 +6,7 @@ Die geforderten Funktionen für dieses Projekt beinhalten:
 \begin{itemize}
     \item eine einfache Entwicklung der Multiplattform-App. Wenn möglich soll nur eine App geschrieben werden, die dann auf allen Zielplattformen (Android, iOS) lauffähig ist.
     \item Die Programmierung sollte in einer bereits bekannten Programmiersprache möglich sein.
-    Für die Fachrichtung Elektrotechnik der HTL Anichstraße werden momentan die Sprachen C, C++ und C\#, in untergeordnetem Ausmaß auch JavaScript für Webseiten-Entwicklung unterrichtet.
+    Für die Fachrichtung Elektrotechnik der \ac{htl} Anichstraße werden momentan die Sprachen C, C++ und C\#, in untergeordnetem Ausmaß auch JavaScript für Webseiten-Entwicklung unterrichtet.
     \item Das Rahmenwerk und die dazugehörige Entwicklungsumgebung sollten für nichtkommerzielle Anwendungen wie diese Diplomarbeit frei zur Verfügung stehen.
     \item Die Entwicklungswerkzeuge sollten das Windows-, optional das Linux-Betriebs\-sys\-tem unterstützen.
 \end{itemize}
@@ -37,7 +37,7 @@ Später wurde neben der Closed-Source-Version auch eine quelloffene Version unte
 
 Apps werden mittels gängiger Webtechnologie, wie zum Beispiel JavaScript, \ac{css} und ähnlichen, entwickelt und realisiert, weshalb das Rahmenwerk alle gängigen Plattformen unterstützt.
 Der Vorteil von Cordova und ähnlichen Rahmenwerken liegt im enormen Support dieser Webtechnologien, jedoch sind Sprachen wie JavaScript für Back-End-Programmierung weniger geeignet.
-Noch dazu kommt, dass an der HTL Anichstraße großteils die Programmierung nur in C und C\# gelehrt wird, weshalb die Entwicklung mit JavaScript im vereinbarten Zeitrahmen der Diplomarbeit nicht realistisch umsetzbar ist.
+Noch dazu kommt, dass an der \ac{htl} Anichstraße großteils die Programmierung nur in C und C\# gelehrt wird, weshalb die Entwicklung mit JavaScript im vereinbarten Zeitrahmen der Diplomarbeit nicht realistisch umsetzbar ist.
 
 Aufgrund der oben erläuterten Vor- und Nachteile der möglichen Ansätze wurde die Verwendung von Xamarin für diese Diplomarbeit festgelegt.
 
@@ -50,47 +50,48 @@ Diese beinhält alle wichtigen Entwicklungswerkzeuge wie zum Beispiel die automa
 Für die Nutzung wird nach den ersten 30 Tagen ein Microsoft-Konto benötigt.\par
 
 Neben der Community-Edition existieren auch noch die Professional- und die Enterprise-Edition.
-Diese unterstützen zusätzliche Funktionen an:
-\begin{table}
-    \centering\begin{tabular}{|c|c|c|c|}
-        \hline
-        Function & Community & Professional & Enterprise\\
+Die Unterschiede der Funktionsumfänge sind in Tabelle \ref{tab:vs-comp} zusammengefasst.
+\begin{table}[htbp!]
+    \centering\begin{tabular}{c | c | c | c}
         \toprule
-        \multicolumn{4}{|c|}{Supported Usage Scenarios}\\
-        \hline
+        \textbf{Function} & \textbf{Community} & \textbf{Professional} & \textbf{Enterprise}\\
+        \toprule
+        \multicolumn{4}{c}{Supported Usage Scenarios}\\
+        \midrule
         Enterprise & & Yes & Yes\\
         \midrule
-        \multicolumn{4}{|c|}{IDE}\\
-        \hline
+        \multicolumn{4}{c}{\ac{ide-dev}}\\
+        \midrule
         Live Dependency Validation&&&Yes\\
         Architectural Layer Diagrams&&&Yes\\
         Architecture Validation&&&Yes\\
         Code Clone&&&Yes\\
         CodeLens&Partial&Yes&Yes\\
         \midrule
-        \multicolumn{4}{|c|}{Advanced Debugging And Diagnostics}\\
-        \hline
+        \multicolumn{4}{c}{Advanced Debugging And Diagnostics}\\
+        \midrule
         IntelliTrace&&&Yes\\
         Code Map Debugger Integration&&&Yes\\
-        .NET Memory Dump Analysis&&&Yes\\
+        \ac{dotnet} Memory Dump Analysis&&&Yes\\
         Snapshot Debugger&&&Yes\\
         Time Travel Debugging (Preview)&&&Yes\\
         \midrule
-        \multicolumn{4}{|c|}{Testing Tools}\\
-        \hline
+        \multicolumn{4}{c}{Testing Tools}\\
+        \midrule
         Live Unit Testing&&&Yes\\
         IntelliTest&&&Yes\\
         Microsoft Fakes (Unit Test Isolation)&&&Yes\\
         Code Coverage&&&Yes\\
         \midrule
-        \multicolumn{4}{|c|}{Cross-platform Development}\\
-        \hline
+        \multicolumn{4}{c}{Cross-platform Development}\\
+        \midrule
         Embedded Assemblies&&&Yes\\
         Xamarin Inspector&&&Yes\\
         Xamarin Profiler&&&Yes\\
         \bottomrule
     \end{tabular}
     \caption{Unterschiede Visual-Studio-Editionen \cite[vgl.][]{ms-vs-compare}}
+    \label{tab:vs-comp}
 \end{table}
 %versionsvergleich hier https://visualstudio.microsoft.com/vs/compare/
 
@@ -102,24 +103,29 @@ Ein Projekt kann bereits für sich lauffähig oder nur Teil eines größeren Pro
 Visual Studio 2019 unterstützt viele verschiedene Einsatzbereiche, die bei der Installation ausgewählt werden müssen.
 Eine volle Installation mit allen Funktionen und Projektarten ist zwar möglich, benötigt allerdings bis zu 210 GB Speicherplatz des Systems.
 Eine typische Xamarin-Installation benötigt etwa 6.25 GB Festplattenspeicher.
-Für eine solche Installation muss im Visual Studio Installer das \enquote{Mobile development with \ac{dotnet}}-Paket ausgewählt und installiert werden.
-\begin{figure}[H]
+Für eine solche Installation muss im Visual Studio Installer das \enquote{Mobile development with \ac{dotnet}}-Paket ausgewählt und installiert werden. Siehe hierfür Abbildung \ref{fig:auswahl-xamarin}.
+\begin{figure}[htbp!]
     \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/installation.png}    
     \caption{Auswahl des Xamarin-Rahmenwerks bei der Installation}
+    \label{fig:auswahl-xamarin}
 \end{figure}
+
 Es empfiehlt sich, zusätzlich das Paket für \enquote{\ac{dotnet} desktop development} zu installieren, damit neue, noch nicht bekannte \ac{dotnet}-Technologien in einer einfacheren Konsolen-Anwen\-dung ausprobiert werden können.
 Das Paket benötigt ungefähr weitere 0.8 GB.\par
 Auf nähere Details der Installation von Visual Studio wird hier nicht eingegangen, diese können aber auf der Microsoft-Dokumentationsseite \cite[vgl.][]{msdoc-vs-install} nachgeschlagen werden.
 %Betriebssystem, Hardwareanforderungen
 %
 \subsection{Android \ac{sdk}}
-Um Xamarin-Applikationen für Android-Geräte entwickeln zu können wird das von Google bereitgestellte Android \ac{sdk} benötigt, um das Programm in ein \ac{apk} umzuwandeln. Die einzelnen Komponenten können im Android-\ac{sdk}-Manager des Visual Studio installiert werden.
-Dieser ist im Menüband unter \enquote{Tools\textbackslash Android\textbackslash Android \ac{sdk} Manager} zu finden.
-\begin{figure}[H]
+Um Xamarin-Applikationen für Android-Geräte entwickeln zu können wird das von Google bereitgestellte Android \ac{sdk} benötigt.
+Die einzelnen Komponenten können im Android-\ac{sdk}-Manager des Visual Studio installiert werden.
+Dieser ist wie in Abbildung \ref{fig:android-sdk-manager} dargestellt über das Menüband aufrufbar.
+\begin{figure}[htbp!]
     \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/android_sdk_installation.png}    
     \caption{Android \ac{sdk} Manager}
+    \label{fig:android-sdk-manager}
 \end{figure}
-Der \ac{sdk}-Manager ist in zwei Seiten unterteilt - \enquote{Platforms} und \enquote{Tools}.\par
+
+Der \ac{sdk}-Manager ist in zwei Seiten unterteilt -- \enquote{Platforms} und \enquote{Tools}.\par
 
 Auf der \enquote{Plat\-forms}-Seite können die benötigten \ac{sdk}-Teile für jede Android-Version installiert werden.
 Benötigt wird nur die Version, mit der das Projekt später kompiliert werden soll.
@@ -128,32 +134,34 @@ Außerdem kann man auf dieser Seite des \ac{sdk}-Managers System-Abbilder für d
 Über die \enquote{Tools}-Seite können verschiedenste Entwicklungswerkzeuge installiert werden.
 Grundsätzlich erforderlich sind \enquote{Android \ac{sdk} Tools}, \enquote{Android \ac{sdk} Platform Tools} und \enquote{Android \ac{sdk} Build Tools}, um Android-Apps mit Xamarin entwickeln zu können.
 Für dieses Projekt werden Push-Benachrichtigungen via Google Cloud Messaging verwendet, daher werden noch zusätzlich die Pakete für die \enquote{Google Play Services} sowie die \enquote{Google Cloud Messaging for Android Library} installiert.
-Wie Push-Benachrichtigungen genauer funktionieren, wird später im Kapitel \crossref{ch:push} auf Seite \pageref{ch:push} behandelt.
-\begin{figure}[H]
+Die dafür notwendige Auswahl wird in Abbildung \ref{fig:android-sdk-tools} dargestellt.
+Wie Push-Benachrichtigungen genauer funktionieren, wird im Kapitel \ref{ch:push} behandelt.
+\begin{figure}[htbp!]
     \centering\includegraphics[width=0.8\linewidth]{images/auswahl_rahmenwerk/android_sdk_auswahl.png}    
-    \caption{Notwendige Teile des Android SDK}
+    \caption{Notwendige Teile des Android \ac{sdk}}
+    \label{fig:android-sdk-tools}
 \end{figure}
 
 \subsection{Build-Vorgang}
 Um den geschriebenen Code in eine lauffähige Applikation umzuwandeln, wird ein sogenannter Compiler benötigt.
-Die Aufgabe des Compilers ist es, die geschriebene Hochsprache entweder direkt in \ac{cpu}-Maschinensprache bzw. eine Art Zwischencode zu kompilieren, d.h. umzuwandeln. Im Fall einer einfachen C\#-Konsolenanwendung ist der Build-Vorgang noch relativ simpel:
-\begin{enumerate}
-    \item Alle einzelnen Code-Dateien werden nacheinander vom Compiler in \ac{cil}, eine Zwischensprache des \ac{dotnet}, umgewandelt.
-    \item Der Linker fügt die einzelnen Teile zu einem Gesamten zusammen.
-    Das Resultat ist eine Datei, die wie eine ausführbare .EXE-Datei erscheint.
-    \item Wenn das zusammengefügte Programm gestartet wird, kompiliert die \ac{clr} den Zwischencode in einen direkt ausführbaren Maschinen-Code.
-    Die \ac{cpu} des Systems kann diesen dann ausführen.
-\end{enumerate}
-\begin{figure}[H]
-    \centering\includegraphics[height=12cm]{images/auswahl_rahmenwerk/dotnet-compilation.png}
+Die Aufgabe des Compilers ist es, die geschriebene Hochsprache entweder direkt in \ac{cpu}-Maschinensprache bzw. eine Art Zwischencode zu kompilieren, d.h. umzuwandeln.
+Im Fall einer einfachen C\#-Konsolenanwendung ist der Build-Vorgang noch relativ simpel.\par
+
+Zuerst wird der gesamte Code vom Compiler in \ac{cil}, eine Zwischensprache des \ac{dotnet}, umgewandelt.
+Die Idee dahinter ist, dass diese \ac{cil}-Anweisungen plattformunabhängig sind und später auf der Zielplattform fertig kompiliert werden können.
+Die \ac{cil}-Anweisungen erscheinen nach außen als eine ausführbare .EXE-Datei.
+Wenn diese ausgeführt wird, wird jedoch zuvor das Programm von der \ac{clr} in die von der \ac{cpu} ausführbare Maschinensprache übersetzt.
+Der gesamte Vorgang ist in Abbildung \ref{fig:cs-compilation} dargestellt.
+\begin{figure}[htbp!]
+    \centering\includegraphics[width=.9\linewidth]{images/auswahl_rahmenwerk/dotnet-compilation.png}
     \caption{Build-Vorgang einer \ac{dotnet}-Applikation \cite{wiki-cli}}
-    %\footfullcite[]{wiki-cli}
+    \label{fig:cs-compilation}
 \end{figure}
 
 Ähnlich funktioniert dieser Vorgang auch bei einer Xamarin.Forms-App, allerdings wesentlich komplexer.
 Eine Xamarin.Forms-Solution besteht aus drei Einzel-Projekten (PiBell, PiBell.Android, PiBell.iOS), wobei das \ac{dotnet}-Standard-Projekt als Teil der anderen zwei verbaut werden muss.
-Dadurch ergibt sich ein in Abbildung \crossref{fig:build-forms} dargestellter Build-Vorgang.
-\begin{figure}
+Dadurch ergibt sich ein wie in Abbildung \ref{fig:build-forms} dargestellter Build-Vorgang.
+\begin{figure}[htbp!]
     \centering\includegraphics[width=0.9\linewidth]{images/auswahl_rahmenwerk/build-vorgang.pdf}
     \caption{Build-Vorgang einer Xamarin.Forms-Solution}
     \label{fig:build-forms}

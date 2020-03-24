@@ -1,5 +1,12 @@
 \wip
 \section{Gesicherte Verbindung}% VPN-Zugriff
+Die im Zuge dieser Arbeit entwickelte Applikation verschickt bzw. empfängt alle Daten-Streams unverschlüsselt und ohne Benutzerverifizierung.
+Bevor die Applikation im Feld verwendet werden kann, sollte eine gesicherte Verbindung zum Server konfiguriert werden.
+Dies kann zum Beispiel per \ac{vpn} erfolgen.
+Hier wird ein verschlüsselter Tunnel zu einem gemeinsamen Server aufgebaut, in dem alle Daten verschickt werden.
+Dieses neu erzeugte Netzwerk ist virtuell, d.h. es existiert nur in der Softwarewelt und benötigt keine zusätzliche physikalische Verbindung.\par
+Man könnte entweder auf kommerzielle \ac{vpn}-Anbieter zurückgreifen oder mit Open\-VPN und einem eigenen Server eine gesicherte Verbindung ermöglichen.
+Im letzteren Fall kann auch der Medienserver die Rolle des \ac{vpn}-Servers übernehmen.
 \section{Weitere mobile Plattformen}
 Neben dem ausprogrammierten Android-System gibt es noch das weit verbreitete iOS der Apple-Geräte.
 Mit Xamarin.Forms lässt sich dieses verglichen mit anderen Entwicklungsmethoden einfach unterstützen.
@@ -11,5 +18,5 @@ Im Fall der iOS-Plattform wird ein Apple Mac für die Übertragung und ein Apple
 
 Für Testzwecke kann die Applikation auf bis zu fünf iPhones installiert und getestet werden.
 Wenn die App schlussendlich veröffentlicht werden soll, ist eine kostenpflichtige Mitgliedschaft beim Apple Developer Program notwendig.
-Diese beläuft sich auf etwa USD 99 pro Jahr \cite[vgl.][Integrated Development Environment (IDE) Availability]{msdoc-xamarin-fundamentals}
+Diese beläuft sich auf etwa USD 99 pro Jahr \cite[vgl.][Integrated Development Environment Availability]{msdoc-xamarin-fundamentals}
 %\blindtext
