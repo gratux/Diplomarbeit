@@ -114,7 +114,7 @@ In einer \ac{xaml}-Datei wird das Aussehen der Oberfläche nach dem \ac{wysiwym}
              Grid.Column="0" Margin="10"
              Clicked="BtConnect_Clicked"/>
 \end{minted}
-\paragraph{36:} Ein ImageButton kann im Vergleich zu einem normalen Button als Inhalt ein Bild anzeigen. Die Bildquelle wird mit der „Source“-Property gesetzt. Es gibt mehrere mögliche Bildformate, wobei hier \ac{png} aufgrund von Transparenz-Unterstützung gewählt wurde. Ohne Definition der „BackgroundColor“ würde der ImageButton mit der Default-Farbe grau gefüllt werden.
+\paragraph{36:} Ein ImageButton kann im Vergleich zu einem normalen Button als Inhalt ein Bild anzeigen. Die Bildquelle wird mit der „Source“-Property gesetzt. Es gibt mehrere mögliche Bildformate, wobei hier PNG aufgrund von Transparenz-Unterstützung gewählt wurde. Ohne Definition der „BackgroundColor“ würde der ImageButton mit der Default-Farbe grau gefüllt werden.
 \paragraph{38:} Mit dem EventHandler „Clicked“ kann die Funktion, die aufgerufen wird, wenn der ImageButton gedrückt wird, spezifiziert werden.
 \begin{minted}[firstnumber=43]{xml}
 <ImageButton x:Name="BtToggleSpeaker" Source="SpeakerMute.png" BackgroundColor="Transparent"
@@ -145,7 +145,7 @@ In einer \ac{xaml}-Datei wird das Aussehen der Oberfläche nach dem \ac{wysiwym}
     \label{fig:visualstatemanager}
 \end{figure}
 
-Die hier beschriebenen Konzepte werden mehrmals verwendet, um die Oberfläche aufzubauen. Die Datei als Gesamtheit ergibt die in Bild \crossref{fig:mainpage} gezeigte Oberfläche.
+Die hier beschriebenen Konzepte werden mehrmals verwendet, um die Oberfläche aufzubauen. Die Datei als Gesamtheit ergibt die in Bild \ref{fig:mainpage} gezeigte Oberfläche.
 \begin{figure}
     \centering\includegraphics[width=.7\linewidth]{images/xamarin/MainPage.png}
     \caption{App-Oberfläche}
@@ -186,7 +186,7 @@ Wenn ein anderer Compiler-Modus ausgewählt ist, werden diese Teile ignoriert.
 \paragraph{42-49:} Mit einer Schleife werden alle Zusatzdaten der Benachrichtigung überprüft.
 Wenn der Datensatz \texttt{mrl} enthalten ist, wird dessen Wert in \texttt{\_player.Mrl} gespeichert.
 Der Wert stellt die Server-Adresse dar, von der der Video-Stream abgerufen werden soll.
-\paragraph{51-55:} Der Benutzer wird per Popup gefragt, ob der Anruf entgegengenommen werden soll (Abb. \crossref{fig:inc-call}).
+\paragraph{51-55:} Der Benutzer wird per Popup gefragt, ob der Anruf entgegengenommen werden soll (Abb. \ref{fig:inc-call}).
 \begin{figure}
     \centering
     \includegraphics[width=.5\linewidth]{images/xamarin/IncomingCall.png}
@@ -246,7 +246,7 @@ private void BtConnect_Clicked(object sender, EventArgs e)
 \paragraph{109:} Eine Funktion für ein Button-Event hat grundsätzlich als Rückgabe-Typ \texttt{void}, also nichts.
 Auf die Funktion kann nur aus der selben Klasse zugegriffen werden, was mit dem \texttt{private}-Schlüsselwort bekanntgegeben wird.
 Als Parameter werden Informationen zum Event-Auslöser und zum Event selbst mitgegeben.
-\paragraph{111-112:} Wenn der grüne \enquote{Anrufen}-Button gedrückt wird, beginnen \texttt{\_player} und \texttt{\_streamer} damit, die Daten abzurufen bzw. bereitzustellen. Diese Funktionen werden im Abschnitt \crossref{ssec:classes} genauer beschrieben.
+\paragraph{111-112:} Wenn der grüne \enquote{Anrufen}-Button gedrückt wird, beginnen \texttt{\_player} und \texttt{\_streamer} damit, die Daten abzurufen bzw. bereitzustellen. Diese Funktionen werden im Abschnitt \ref{ssec:classes} genauer beschrieben.
 
 Im letzten Abschnitt dieser Datei wird das Verhalten beim Wechseln zwischen Hoch- und Querformat festgelegt.
 \begin{minted}[firstnumber=121]{csharp}
@@ -397,7 +397,7 @@ Dieses Projekt beinhaltet den gesamten nativen Code für die Android-Plattform.
 Dazu gehören das Berechtigungs-Management, sowie die Audio-Aufnahme.
 
 \subsection{MainActivity.cs}
-Ähnlich wie bei \crossref{ssec:app-xaml-cs} wird hier das native Android-Projekt initialisiert.
+Ähnlich wie bei Abschnitt \ref{ssec:app-xaml-cs} wird hier das native Android-Projekt initialisiert.
 Dazu gehört das Laden aller Runtime-Ressourcen und des benötigten Programm-Codes, sowie Überprüfen bzw. Anfragen der Berechtigungen.
 \begin{minted}[firstnumber=33]{csharp}
 if (CheckSelfPermission(Manifest.Permission.RecordAudio) != Permission.Granted)
@@ -430,7 +430,7 @@ protected override void OnRestart()
     MessagingCenter.Send("app", "OnRestart");
 }
 \end{minted}
-\paragraph{39-49:} Das in \crossref{ssec:mainpage-xaml-cs} beschriebene Verhalten beim Wechsel der App von und in den Hintergrund benötigt ein vom nativen Projekt ausgelöstes Ereignis.
+\paragraph{39-49:} Das in Abschnitt \ref{ssec:mainpage-xaml-cs} beschriebene Verhalten beim Wechsel der App von und in den Hintergrund benötigt ein vom nativen Projekt ausgelöstes Ereignis.
 Über das MessagingCenter wird eine Nachricht an das portable Projekt geschickt, damit dieses den Zustandswechsel mitbekommt und darauf reagieren kann.
 %\blindtext
 %audio recording service

@@ -1,5 +1,5 @@
 % !TeX spellcheck = de_DE
-\documentclass[a4paper, twoside, 12pt, openright]{memoir}
+\documentclass[a4paper, twoside, 12pt, openright, final]{memoir}
 \usepackage[T1]{fontenc}
 \usepackage[margin=2cm, bindingoffset=10mm, includeheadfoot, headheight=14.7pt]{geometry}
 \usepackage[british, ngerman]{babel}
@@ -18,11 +18,15 @@
 	multirow,
 	tabulary,
 	amsmath,
-	blindtext}
+	blindtext
+	}
+%\usepackage[printwatermark]{xwatermark}
 \usepackage[protrusion=true,final]{microtype}
 \usepackage[final]{hyperref}
+\usepackage{xurl}
 \usepackage[all]{hypcap}
 
+%\newwatermark[allpages,color=gray!25,angle=45,scale=3,xpos=0,ypos=0]{DRAFT}
 %\overfullrule=1mm
 
 \addbibresource{sources.bib}
@@ -112,7 +116,6 @@
 \newcommand{\AndreasGrain}{Andreas Grain}
 \newcommand{\MatthiasMair}{Matthias Mair}
 \newcommand{\authorName}{\AndreasGrain\ / \MatthiasMair}
-\newcommand{\crossref}[1]{\emph{\ref{#1} \nameref{#1}}}
 \newcommand{\wip}{{\color{red}Nachfolgender Teil ist noch in Bearbeitung durch \authorName}}
 \newcommand{\tOmega}{Ω}
 \newcommand{\tdelta}{Δ}
@@ -172,7 +175,7 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \mainmatter
 \chapter{Einleitung}
 \input{chapters/einleitung.tex}
-\cleartoverso
+\clearpage
 
 \renewcommand{\authorName}{\AndreasGrain}
 \part{Software - \AndreasGrain}
@@ -181,13 +184,12 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \chapter{Verwendete Software-Module}
 \input{chapters/software_module.tex}
 \chapter{Push-Benachrichtigung}
-\label{ch:push}
 \input{chapters/push_notification.tex}
 \chapter{Programm-Dokumentation}
 \input{chapters/xamarin.tex}
 \chapter{Software-Ausblick}
 \input{chapters/software-ausblick.tex}
-\cleartoverso
+\clearpage
 
 \renewcommand{\authorName}{\MatthiasMair}
 \part{Hardware - \MatthiasMair}
@@ -201,77 +203,11 @@ Es wird an dieser Stelle darauf hingewiesen, dass die ausschließliche Verwendun
 \input{chapters/verbesserte_hardwareloesung.tex}
 \chapter{Hardware-Programmierung}
 \input{chapters/hardware-programmierung.tex}
-\chapter{Verwendete Software}
-\wip
-\section{EAGLE}
-Die Software \ac{eagle} von Autodesk ist eine \ac{cad} Software zur Entwicklung von Leiterplatten (\ac{pcb}).
-Bis 2016 hat das deutsche Unternehmen CadSoft Computer die Software entwickelt, angefangen im Jahr 1988 mit dem Erscheinen von Eagle, damals noch eine 16 Bit Anwendung für \ac{dos}.
-Ab 2000 wurde die Unterstützung für \ac{dos} niedergelegt und die Software wurde für Windows und Linux weiterentwickelt.
-Bis 2016 wurde die Software für 64 Bit entwickelt und neue Funktionen wurden hinzugefügt.
-Ab 2016 ist die Software im Besitz von Autodesk, die den einmaligen Kauf der Software auf ein Abo Modell umgestellt haben.\par
-
-Eagle besteht grundsätzlich aus zwei Fenstern, zum einen die schematische bzw. Schaltplan-Darstellung und zum anderen der Leiterplattendesigner.
-In der Schaltplan-Darstellung wird dieser erstellt, die einzelnen Bauteile definiert und deren Eigenschaften festgelegt.
-Im Leiterplattendesigner wird die eigentliche Platine erstellt, die Bauteile auf der Platine platziert und mit Leiterbahnen verbunden.
-\subsection{Versionsvergleich}
-\begin{table}
-	\centering
-	\begin{tabular}{|c|c|c|c|c|c|c|}
-		Version&Schaltpläne in einem Projekt&Schichten&\ac{pcb} Größe&Nutzung&Preis/Monat&Preis/Jahr\\
-		Premium&999&16&4 m²&Kommerziell&USD 65&USD 510\\
-		Schüler und Lehrer&999&16&4 m²&Nur Schüler und Lehrer&Kostenlos&Kostenlos\\
-		Standard&99&4&160 cm²&Kommerziell&USD 15&USD 100\\
-		Kostenlos&2&2&80 cm²&Nur Privatgebrauch&Kostenlos&Kostenlos
-	\end{tabular}
-	\caption{Verfügbare \ac{eagle}-Versionen ab 2016}
-\end{table}
-
-
-\subsection{Entwicklung mit EAGLE}
-\subsubsection{Schaltplan}
-Zuserst wird in \ac{eagle} der Schaltplan erstellt.
-Dabei werden alle benötigten Komponenten eingefügt und miteinander verbunden.
-Eagle verfügt bereits über eine große Bibliothek an Komponenten von verschiedenen Herstellern.
-Jedoch müssen für speziellere Komponenten Bibliotheken gesucht werden oder selbst erstellt werden.
-Eagle unterstützt die Erstellung und Bearbeitung von Bibliotheken.
-Diese Bibliotheken können anschließend direkt in ein Projekt miteingebunden werden.\par
-
-Nachdem der Schaltplan erstellt wurde kann die Schaltung mittels \ac{erc} überprüft werden.
-Diese Funktion überprüft ob alle grundlegenden Anforderungen einer Schaltung erfüllt wurden, z.B. ob alle Anschlüsse verbunden worden sind oder ob alle Bauteile einen Wert haben.
-
-\subsubsection{Layout}
-Im Layout-Fenster wird die eigentliche Platine erstellt.
-Um das Platinen Design Fenster zu öffnen wird der Befehl Board in der Schaltplanansicht eingegeben.
-Alle Komponenten aus dem Schaltplan werden übernommen und die Verbindungen der Komponenten werden durch gelbe Linien gekennzeichnet.\par
-
-Zuerst werden die Bauteile positioniert. Dabei werden alle Komponenten, die miteinander verbunden werden müssen in nahe beisammen platziert.
-Nachdem alle Teile platziert wurden können die Leiterbahnen eingezeichnet werden.
-Es kann per Hand mit dem Befehl Route gezeichnet werden oder mittels den Autorouter kann die Platine erstellt werden.
-Der Autorouter benötigt jedoch viel Erfahrung, um korrekt genutzt zu werden und das Ergebnis ist meist nicht ideal.
-Mit Hand zeichnen ist am Anfang deutlich einfacher.\par
-
-Nachdem die Leiterbahnen erstellt wurden kann die Platine mit dem \ac{drc} geprüft werden.
-Dieser Befehl prüft wiederrum ob alle grundlegenden Anforderungen erfüllt wurden, z.B. Mindestabstand der Leiterbahnen eingehalten oder ob noch nicht vollständig geroutete Leiterbahnen vorhanden sind.
-
-\section{Hardware-Ausblick}
-\subsection{Gehäuse für Platine}
-Momentan wird die Platine mit Hilfe von Heißkleber ohne Gehäuse in der Station fixiert.
-\ac{eagle} bietet in der neuesten Version eine Exportfunktion in die A360-Cloud von Autodesk an, mit welcher die Platine inklusive der verwendeten Bauteile als 3D-Modell exportiert werden kann.
-Dieses Modell kann in dafür geeigneten Autodesk-Programmen wie Fusion 360 geöffnet und für die Planung eines Gehäuses verwendet werden.
-\begin{figure}[H]
-	\centering
-	\includegraphics[width=.9\linewidth]{images/hardware-ausblick/fusion360.png}
-	\caption{Exportierte Platine in Fusion 360}
-\end{figure}
-
-% \chapter{Testen}
-% Im Zuge der Test sind einige Dinge aufgefallen:
-% \begin{itemize}
-% 	\item Bei Station, welche am weitesten von der Spannungsversorgung entfernt ist, hängt sich das System immer wieder auf und reagiert nicht mehr auf äußere Befehle. Alle anderen Stationen waren von diesem Problem nicht betroffen. Auch nach einer Überprüfung der Hardware konnte kein Fehler 
-% \end{itemize}
-
-% \section{Erster Prototyp} %oder Fertigung
-\cleartoverso
+\chapter{Platinen-Entwicklung}
+\input{chapters/platinen-entwicklung.tex}
+\chapter{Hardware-Ausblick}
+\input{chapters/hardware-ausblick.tex}
+\clearpage
 
 \renewcommand{\authorName}{\AndreasGrain\ / \MatthiasMair}
 \appendix
@@ -279,80 +215,17 @@ Dieses Modell kann in dafür geeigneten Autodesk-Programmen wie Fusion 360 geöf
 %\printbibliography[heading=subbibliography,type=online,title={Online-Quellen}]
 %\printbibliography[heading=subbibliography,nottype=online,title={Andere Quellen}]
 \part{Appendix}
-\printbibliography[title={Literatur und Quellen}]\clearpage
-\printacronyms[heading=chapter,name=Abkürzungen]\clearpage
-\listoffigures
-Alle Abbildungen ohne Referenzmarke \enquote{[\#]} sind Eigenfotos\clearpage
-\listoftables\clearpage
-
 \chapter{Datenblätter}
-\section{Mikrocontroller Atmel ATmega328P}
-Nachfolgend ein Auszug aus dem Datenblatt mit den wichtigsten technischen Daten, der Pinbelegung und einem Blockdiagramm. Die vollständige Dokumentation umfasst über 294 Seiten und kann unter nachfolgender Adresse abgerufen werden.\par
-\fullcite{at328p-datasheet}
-\includepdf[pages={-}, templatesize={140mm}{260mm}]{images/appendix/Atmega328.pdf} %http://ww1.microchip.com/downloads/en/DeviceDoc/Atmel-7810-Automotive-Microcontrollers-ATmega328P_Datasheet.pdf
-\section{Audio-Verstärker PAM8403}
-Nachfolgend ein Auszug aus dem Datenblatt mit den wichtigsten technischen Daten, der Pinbelegung und einem Blockdiagramm. Die vollständige Dokumentation umfasst über 11 Seiten und kann unter nachfolgender Adresse abgerufen werden.\par
-\fullcite{pam8403-datasheet}
-\includepdf[pages={1-4}, templatesize={140mm}{260mm}]{images/appendix/PAM8403.pdf}
-%https://www.diodes.com/assets/Datasheets/PAM8403.pdf
-\section{Spannungsregler LMR33630CDDAR}
-Nachfolgend ein Auszug aus dem Datenblatt mit den wichtigsten technischen Daten, der Pinbelegung und einem Blockdiagramm. Die vollständige Dokumentation umfasst über 11 Seiten und kann unter nachfolgender Adresse abgerufen werden.\par
-\fullcite{lmr33630-datasheet}
-\includepdf[pages={1,4,6,11,12}, templatesize={140mm}{260mm}]{images/appendix/lmr33630.pdf}
+\input{chapters/datenblaetter.tex}
 \chapter{Fertigungsdokumentation}
-\section{Code-Listing}
-\includepdf[pages={-}]{images/appendix/Listing.pdf}
-\section{Schaltpläne}
-\includegraphics[width=15.5cm]{images/appendix/schematics.pdf}
-\section{Platinen-Design}
-\begin{center}
-	\begin{minipage}[t]{0.475\linewidth}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=\textwidth]{images/appendix/topLayer.pdf}
-			\caption{Platine TOP-Layer}
-		\end{figure}
-	\end{minipage}
-	\begin{minipage}[t]{0.475\linewidth}
-		\begin{figure}[H]
-			\centering
-			\includegraphics[width=\textwidth]{images/appendix/botLayer.pdf}
-			\caption{Platine BOT-Layer}
-		\end{figure}
-	\end{minipage}
-\end{center}
-
-\section{Stückliste}
-\footnotesize\begin{longtable}{lllll}
-	Qty & Value & Package & Parts & Description \\ 
-	\toprule\endhead
-	1 & 470 nF & C0603 & C13 & Capacitor \\
-	1 & 820 µF/35 V & E5-10,5 & C2 & polarized Capacitor \\
-	2 & 1 mF/6.3 V & E3,5-8 & C3, C14 & polarized Capacitor \\
-	3 & 2.2 µF & C0805 & C4, C5, C6 & Capacitor \\
-	4 & 1 µF & C0603 & C8, C10, C12, C18 & Capacitor \\
-	4 & 100 nF & C0603 & C9, C15, C16, C17 & Capacitor \\
-	1 & LMR33630CDDAR & DDA0008J & IC1 & Buck Converter \\
-	1 & PAM8403 & SOP-16 & IC2 & Dual channel audio amplifier \\
-	1 & 3.5 mm/4 conductor & SJ-43515RS-SMT & J1 & Audio Jack \\
-	1 & 10 µH/2.9 A & MSS7348-103MEB & L1 & Inductor \\
-	1 & 6 Mhz & CSTCR6M00G53Z & Q1 & Resonator \\
-	1 & 1 M\tOmega & R0603 & R11 & Resistor \\
-	2 & 10 k\tOmega & R0603 & R1, R5 & Resistor \\
-	1 & 100 k\tOmega & R0603 & R13 & Resistor \\
-	1 & 24.9 k\tOmega & R0603 & R14 & Resistor \\
-	1 & 47 k\tOmega & R0603 & R2 & Resistor \\
-	1 & 5.6 k\tOmega & R0603 & R3 & Resistor \\
-	1 & 3.9 k\tOmega & R0603 & R4 & Resistor \\
-	1 & 2.2 k\tOmega & R0603 & R6 & Resistor \\
-	1 & 5 k\tOmega & POT\_33/64 W & R7 & Potentiometer \\
-	1 & 10\tOmega & R0603 & R8 & Resistor \\
-	2 & 10 k\tOmega & R0603 & R9, R12 & Resistor \\
-	2 & 2x3 pin & MA03-2 & SV1, SV2 & Pin Header \\
-	3 & BC847 & SOT23 & T1, T2, T3 & NPN Transistor \\
-	1 & ATmega328P & TQFP32-08 & U1 & Microcontroller \\
-	1 & 3 pin & RS-CONN-2.54-3P & X1 & Screw Terminal \\
-	1 & 2 pin & RS-CONN-2.54-2P & X2 & Screw Terminal \\
-	1 & 10 pin & RS-CONN-2.54-10P & X3 & Screw Terminal \\
-\end{longtable}
+\input{chapters/dokumentation.tex}
+\printbibliography[title={Literatur und Quellen}]
+\clearpage
+\addcontentsline{toc}{chapter}{Abkürzungen}
+\printacronyms[heading=chapter*,name=Abkürzungen]
+\clearpage
+\listoffigures
+Alle Abbildungen ohne Referenzmarke \enquote{[\#]} sind Eigenfotos
+\clearpage
+\listoftables
 \end{document}

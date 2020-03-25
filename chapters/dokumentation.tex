@@ -1,0 +1,63 @@
+\section{Code-Listing}
+\includepdf[pages={-}]{images/appendix/Listing.pdf}
+
+\section{Schaltpläne}
+\includegraphics[width=15.5cm]{images/appendix/schematics.pdf}
+
+\section{Platinen-Design}
+\begin{center}
+	\begin{minipage}[t]{0.475\linewidth}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=\textwidth]{images/appendix/topLayer.pdf}
+			\caption{Platine TOP-Layer}
+		\end{figure}
+	\end{minipage}
+	\begin{minipage}[t]{0.475\linewidth}
+		\begin{figure}[H]
+			\centering
+			\includegraphics[width=\textwidth]{images/appendix/botLayer.pdf}
+			\caption{Platine BOT-Layer}
+		\end{figure}
+	\end{minipage}
+\end{center}
+
+\section{Stückliste}
+{
+	\footnotesize
+	\begin{longtable}{lllll}
+		\bottomrule\endfoot
+		\bottomrule\caption{Platine Stückliste}\endlastfoot
+		\toprule
+		\textbf{Qty} & \textbf{Value} & \textbf{Package} & \textbf{Parts} & \textbf{Description} \\ 
+		\midrule\endhead
+		1 & 470 nF & C0603 & C13 & Capacitor \\
+		1 & 820 µF/35 V & E5-10,5 & C2 & polarized Capacitor \\
+		2 & 1 mF/6.3 V & E3,5-8 & C3, C14 & polarized Capacitor \\
+		3 & 2.2 µF & C0805 & C4, C5, C6 & Capacitor \\
+		4 & 1 µF & C0603 & C8, C10, C12, C18 & Capacitor \\
+		4 & 100 nF & C0603 & C9, C15, C16, C17 & Capacitor \\
+		1 & LMR33630CDDAR & DDA0008J & IC1 & Buck Converter \\
+		1 & PAM8403 & SOP-16 & IC2 & Dual channel audio amplifier \\
+		1 & 3.5 mm/4 conductor & SJ-43515RS-SMT & J1 & Audio Jack \\
+		1 & 10 µH/2.9 A & MSS7348-103MEB & L1 & Inductor \\
+		1 & 6 Mhz & CSTCR6M00G53Z & Q1 & Resonator \\
+		1 & 1 M\tOmega & R0603 & R11 & Resistor \\
+		2 & 10 k\tOmega & R0603 & R1, R5 & Resistor \\
+		1 & 100 k\tOmega & R0603 & R13 & Resistor \\
+		1 & 24.9 k\tOmega & R0603 & R14 & Resistor \\
+		1 & 47 k\tOmega & R0603 & R2 & Resistor \\
+		1 & 5.6 k\tOmega & R0603 & R3 & Resistor \\
+		1 & 3.9 k\tOmega & R0603 & R4 & Resistor \\
+		1 & 2.2 k\tOmega & R0603 & R6 & Resistor \\
+		1 & 5 k\tOmega & POT\_33/64 W & R7 & Potentiometer \\
+		1 & 10\tOmega & R0603 & R8 & Resistor \\
+		2 & 10 k\tOmega & R0603 & R9, R12 & Resistor \\
+		2 & 2x3 pin & MA03-2 & SV1, SV2 & Pin Header \\
+		3 & BC847 & SOT23 & T1, T2, T3 & NPN Transistor \\
+		1 & ATmega328P & TQFP32-08 & U1 & Microcontroller \\
+		1 & 3 pin & RS-CONN-2.54-3P & X1 & Screw Terminal \\
+		1 & 2 pin & RS-CONN-2.54-2P & X2 & Screw Terminal \\
+		1 & 10 pin & RS-CONN-2.54-10P & X3 & Screw Terminal \\
+	\end{longtable}
+}

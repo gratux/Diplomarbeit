@@ -1,12 +1,11 @@
-\wip
 \section{Spannungsabfall}
 Herkömmliche Cat5-Ethernetkabel wurden ursprünglich nicht für die Übertragung großer elektrischer Leistungen entwickelt und besitzen daher Leitungen mit einem sehr geringen Ader-Durchmesser.
 Aufgrund dieser Gegebenheit kann es bei weiten Entfernungen oder großen übertragenen Leistungen zu abnormal hohen Spannungsabfällen kommen.
-Um die Anlage in dieser Hinsicht zu überprüfen werden sämtliche Spannungsabfälle und die damit verbundenen Verlustleistungen bei maximaler Belastung durch die Stationen berechnet.
+Um die Anlage in dieser Hinsicht zu überprüfen, werden sämtliche Spannungsabfälle und die damit verbundenen Verlustleistungen bei maximaler Belastung durch die Stationen berechnet.
 Zur Berechnung der Spannungsabfälle sind folgende Angaben verwendet worden.
 \begin{itemize}
 	\item Es werden vier Stationen über \ac{poe} versorgt.
-	Die Stationen sind nach Abbildung \crossref{fig:poe-verdrahtung} miteinander verdrahtet.
+	Die Stationen sind nach Abbildung \ref{fig:poe-verdrahtung} miteinander verdrahtet.
 	\item Jede Station hat einen maximalen Leistungsverbrauch von 12 W.
 	\item Das Ethernetkabel zwischen den Stationen hat jeweils eine Länge von 10 m.
 	\item Der Querschnitt einer Ader des Ethernet-Kabels beträgt 0.128 mm\textsuperscript{2} \cite[vgl.][]{lapp-cat5-datasheet}.
@@ -37,7 +36,9 @@ Die Stationen (Verbraucher) sind als Widerstand gezeichnet, wobei sie sich nicht
 	\label{fig:ers-type34}
 \end{figure}
 
-Anhand der in den Abbildungen \ref{fig:ers-type12} und \ref{fig:ers-type34} dargestellten Ersatzschaltungen ergibt sich ein Gleichungssystem in 8 Variablen. Die Quellenspannung ist mit U\textsubscript{0} bezeichnet, der Strom und die Spannung der Station n mit I\textsubscript{n} bzw. U\textsubscript{n}.
+Anhand der in den Abbildungen \ref{fig:ers-type12} dargestellten Ersatzschaltung ergibt sich ein Gleichungssystem in 8 Variablen.
+Für die in Abbildung \ref{fig:ers-type34} dargestelle Ersatzschaltung halbiert sich der Leitungswiderstand, wodurch der Faktor 2 vor diesem in den Gleichungen verschwindet.
+Die Quellenspannung ist mit U\textsubscript{0} bezeichnet, der Strom und die Spannung der Station n mit I\textsubscript{n} bzw. U\textsubscript{n}.
 \begin{align}
 	U_1 &= U_0-2\cdot R_{Ltg}\cdot (I_1+I_2+I_3+I_4)\\
 	U_2 &= U_1-2\cdot R_{Ltg}\cdot (I_2+I_3+I_4)\\
@@ -53,7 +54,7 @@ Dieses Gleichungssystem von Hand zu lösen, würde viel Zeit in Anspruch nehmen.
 Daher wurde für die Lösung auf das Computerprogramm wxMaxima zurückgegriffen.
 Die Eingabe der Gleichungen erfolgt in Textform (siehe Abbildung \ref{fig:maxima-input})\par
 
-wxMaxima ist eine dokumentenbasierte Schnittstelle für das Computeralgebrasystem Maxima. wxMaxima bietet Menüs und Dialoge für viele gängige Maxima-Befehle, Autovervollständigung, Inline-Plots und einfache Animationen. wxMaxima wird unter der \ac{gpl}-Lizenz vertrieben. \cite[aus dem Englischen übersetzt]{wxmaxima}\par
+wxMaxima ist eine dokumentenbasierte Schnittstelle für das Computeralgebrasystem Maxima. wxMaxima bietet Menüs und Dialoge für viele gängige Maxima-Befehle, Autovervollständigung, Inline-Plots und einfache Animationen. wxMaxima wird unter der \ac{gpl} vertrieben. \cite[aus dem Englischen übersetzt]{wxmaxima}\par
 
 \begin{figure}[htbp!]
 	\centering
@@ -64,8 +65,8 @@ wxMaxima ist eine dokumentenbasierte Schnittstelle für das Computeralgebrasyste
 
 Die Lösungen für das Gleichungssystem werden vom Programm in Textform zurückgegeben.
 Das Programm findet neben der relevanten Lösung noch einige komplexe Lösungen für das Gleichungssystem.
-Diese werden hier wegen Platzgründen und niedriger Relevanz weggelassen.
-\begin{table}[H]
+Diese werden hier aus Platzgründen und geringer Relevanz weggelassen.
+\begin{table}[htbp!]
 	\centering
 	\begin{tabular}{r|ccc|ccc}
 		\toprule
@@ -85,7 +86,7 @@ Diese werden hier wegen Platzgründen und niedriger Relevanz weggelassen.
 Bei einer Quellenspannung von 30 V und einem Gesamtstrom von 1.931 A (Type 1 \& 2) bzw. 1.729 A (Type 3 \& 4) ergibt sich eine Gesamtleistung von 57.93 bzw. 51.87 W.
 Bei Type 3 \& 4 ist die Belastung der Quelle um 10 \% niedriger als bei Type 1 \& 2.
 
-Man sieht: Der Spannungsabfall ist wie erwartet bei Type 3 und 4 weniger als halb so groß wie bei Type 1 und 2.
+Man sieht: Der Spannungsabfall ist wie erwartet bei Type 3 und 4 weniger als halb so groß als bei Type 1 und 2.
 Dadurch ist auch die gesamte Verlustleistung der Leitungen geringer, was eine niedrigere Belastung der Quelle bedeutet.
 
 Aus der obigen Rechnung ergibt sich, dass für die gegebene Anlage eine Versorgung nach Type 3 bzw. 4 empfehlenswert ist.

@@ -35,7 +35,8 @@ In Tabelle \ref{tab:rtsp-req} sind sämtliche Anfragen des \ac{rtsp}-Protokolls 
     \end{tabular}\bigskip\par
     Richtung: C\dots Client, S\dots Server\par
     Objekt: P\dots Präsentation, S\dots Streams
-    \caption{Anfrage-Arten des \ac{rtsp}-Protokolls}
+    \caption[Anfrage-Arten des \ac{rtsp}-Protokolls \cite{ietf-rtsp}]
+            {Anfrage-Arten des \ac{rtsp}-Protokolls \cite[aus dem Englischen übersetzt]{ietf-rtsp}}
     \label{tab:rtsp-req}
 \end{table}
 Das Aussehen einer solchen Anfrage wird anhand des Beispiels der DESCRIBE-Methode veranschaulicht.
@@ -82,13 +83,14 @@ LibVLC wurde von der Non-Profit-Organisation VideoLAN entwickelt und erstmals am
 Im Xamarin.Forms-Projekt wird die zum Zeitpunkt der App-Entwicklung aktuelle Version 3.4.2 der LibVLC Sharp Bindings verwendet. Bindings erlauben es dem Programmierer, auf Programmbibliotheken zuzugreifen, welche für eine andere Sprache geschrieben wurden. Man kann sich Bindings wie Kleber vorstellen, der die Funktionen der einen Programmiersprache mit denen der anderen Sprache verbindet. Die Version 3.4.2 ist inzwischen nicht mehr die neueste Version, jedoch ist sie in Hinsicht auf Funktionalität deckungsgleich mit der neuesten Version.\par
 
 \subsection{Erwähnenswerte Funktionen}
-Die LibVLC-Sharp-Bindings ermöglichen die Verwendung des \ac{mvvm}-Modells, welches vom \ac{wpf}- und Silverlight-Architekten John Gossman im Jahr 2005 auf seinem Blog vorgestellt wurde. \cite[vlg.][The Evolution of Model-View-ViewModel]{msdoc-mvvm}
+Die LibVLC-Sharp-Bindings ermöglichen die Verwendung des \ac{mvvm}-Modells, welches vom \ac{wpf}- und Silver\-light-Architekten John Gossman im Jahr 2005 auf seinem Blog vorgestellt wurde. \cite[vlg.][The Evolution of Model-View-ViewModel]{msdoc-mvvm}\par
+
 Die Philosophie hinter diesem Modell ist, die Oberfläche (View) bis auf wenige Schnittstellen komplett vom eigentlichen Code zu trennen.
 Dies ermöglicht es ohne größeren Aufwand, die Oberfläche zu ändern oder gar auszutauschen.
 Folgende Terminologie wird in diesem Zusammenhang verwendet:
 \begin{itemize}
 \item Models … beinhalten die Programmdaten. Meist werden einfache Klassen oder Strukturen hierfür verwendet.
-\item Views … Die grafische Oberfläche und deren Elemente wie Buttons, TextBoxen, …
+\item Views … Die grafische Oberfläche und deren Elemente wie Buttons, TextBoxen, und ähnliche
 \item ViewModels … wandeln die Daten der Models so um, dass sie von der Oberfläche dargestellt werden können. ViewModels sind meist als Klasse ausgeführt.
 \end{itemize}
 
@@ -105,8 +107,8 @@ Die hier beschriebenen Vorgänge sind in Abbildung \ref{fig:mvvm-flow} nochmals 
 Das \ac{mvvm}-Modell bietet sich auch an, wenn die Daten des Programms oft in eine andere Form gebracht werden müssen, bevor sie dargestellt werden können. Zum Beispiel wird vom Model die aktuelle Zeit als Ganzzahl abgespeichert, welche nur die vergangenen Millisekunden seit einem bestimmten Zeitpunkt zählt; um die Zeit allerdings darstellen zu können, muss diese Ganzzahl zuerst in ein lesbares Datumsformat gebracht werden. Diese Aufgabe würde das ViewModel übernehmen.
 
 \subsection{Nachteile}
-Sowohl die ursprüngliche LibVLC-Bibliothek, als auch die entsprechenden C\#-Bindings sind auf der offiziellen Dokumentationsseite nur spärlich dokumentiert. \cite[vgl.][]{libvlc-sharp-doc}
-%quelle
+Sowohl die ursprüngliche LibVLC-Bibliothek, als auch die entsprechenden C\#-Bindings sind auf der offiziellen Dokumentationsseite nur spärlich dokumentiert. \cite[vgl.][]{libvlc-sharp-doc}\par
+
 Beispielsweise verwenden alle Beispielprojekte der LibVLC Sharp Bindings das \ac{mvvm}-Modell, daher ist nicht bekannt, ob eine Implementierung ohne dieses Modell überhaupt möglich ist.
 Weiters sind die einzelnen Funktionen zwar auf der Dokumentationsseite aufgelistet, allerdings nicht sehr ausführlich beschrieben. \cite[vgl.][]{libvlc-sharp-doc}
 
@@ -172,7 +174,7 @@ gst-rtsp-server ist ein Zusatzmodul für das GStreamer- Rahmenwerk, welches die 
 Mit diesem Modul können Medien-Streams, welche mit GStreamer verarbeitet wurden, mittels dem \ac{rtsp}Protokoll den Netzwerk bereitzustellen.
 
 Das GitHub-Repository des Zusatzmoduls beinhält einige Beispielapplikationen, darunter auch \texttt{test-launch}.
-Dieses Anwendungsbeispiel nimmt ähnlich wie \texttt{gst-launch-1.0} als Kommandozeilenargument eine GStreamer-Pipeline an.
+Dieses Anwendungsbeispiel nimmt ähnlich wie das vorhin beschriebene \texttt{gst-launch-1.0} als Kommandozeilenargument eine GStreamer-Pipeline an.
 Der resultierende Medienstream wird von der Anwendung in einen \ac{rtsp}-Stream verpackt und dem Netzwerk bereitgestellt.
 
 \section{Live555 Proxy}

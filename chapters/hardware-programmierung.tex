@@ -1,4 +1,3 @@
-\wip
 \section{Programm-Entwicklung}
 Die für diese Diplomarbeit entwickelte Hardware enthält intelligente Komponenten, die auch programmiert werden müssen.
 Diese sind zum einen der bereits vorher existierende \ac{rpi} und der neu hinzugefügte ATMega 328P Mikrocontroller.
@@ -7,10 +6,10 @@ Diese sind zum einen der bereits vorher existierende \ac{rpi} und der neu hinzug
 Die \ac{ide-dev} von Arduino ist eine plattformübergreifende Anwendung (für Windows, MacOS, Linux), die in Funktionen aus C und C++ geschrieben ist.
 Sie wird zum Schreiben und Hochladen von Programmen auf Arduino-kompatible Boards, aber auch, mit Hilfe von 3rd-Party-Cores, auf Entwicklungsboards anderer Hersteller verwendet.
 
-Der Quellcode für die \ac{ide-dev} wurde unter der \ac{gnu} \ac{gpl} Version 2, veröffentlicht.
+Der Quellcode für die \ac{ide-dev} wurde unter der GNU \ac{gpl} Version 2, veröffentlicht.
 Die Arduino \ac{ide-dev} unterstützt die Sprachen C und C++ unter Verwendung spezieller Regeln der Code-Strukturierung.
 Die Arduino \ac{ide-dev} liefert eine Software-Bibliothek aus dem Wiring-Projekt, die viele gängige Ein- und Ausgabeprozeduren zur Verfügung stellt.
-Benutzergeschriebener Code benötigt nur zwei grundlegende Funktionen, zum Starten des Sketch und der Hauptprogrammschleife, die kompiliert und mit einem Programmstub main() zu einem ausführbaren zyklischen Ausführungsprogramm mit der \ac{gnu}-Toolchain, die ebenfalls in der \ac{ide-dev}-Distribution enthalten ist, verknüpft werden.
+Der benutzergeschriebene Code benötigt nur zwei grundlegende Funktionen, \texttt{setup()} zum Starten des Sketch und der Hauptprogrammschleife \texttt{loop()}, die kompiliert und mit einem Programmstub \texttt{main()} zu einem ausführbaren zyklischen Ausführungsprogramm mit der GNU-Toolchain, die ebenfalls in der \ac{ide-dev}-Distribution enthalten ist, verknüpft werden.
 %quelle!!
 
 \subsubsection{Programmierung}
@@ -20,11 +19,12 @@ Als Programmiergerät wurde ein Arduino-Mega-Entwicklungsboard gewählt. Dieses 
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=8cm]{images/hardware-programmierung/ICSPHeader.jpg}
-    \caption{\ac{icsp} Schnittstelle}
+    \caption[\ac{icsp} Schnittstelle \cite{arduino-isp}]
+            {\ac{icsp} Schnittstelle \cite[How to wire your boards]{arduino-isp}}
     \label{fig:icsp-header}
 \end{figure}
 
-Das Arduino-Board, welches als Programmiergerät verwendet wird, muss mit Hilfe des mitgelieferten Programmes als \ac{isp}-Programmiergerät konfiguriert werden. Das Programm ist in der Arduino \ac{ide-dev} wie in Abbildung \ref{fig:arduino-isp-sketch} dargestellt zu finden.
+Das Arduino-Board, welches als Programmiergerät verwendet wird, muss mit Hilfe des mitgelieferten Programmes als \ac{isp}-Programmiergerät konfiguriert werden. Das Programm ist in der Arduino \ac{ide-dev}, wie in Abbildung \ref{fig:arduino-isp-sketch} dargestellt, zu finden.
 \begin{figure}[htbp!]
     \centering
     \includegraphics[width=.9\linewidth]{images/hardware-programmierung/arduino-isp-sketch.png}
@@ -75,7 +75,7 @@ Das liegt daran, dass die Zuordnung auf einem Arduino-Entwicklungs-Board basiert
 \paragraph{3-4:}
 Weiters werden alle globalen Variablen definiert.
 Das volatile-Schlüsselwort wird gebraucht, wenn die Variable in einer Interrupt Service Routine verändert wird.
-Das Schlüsselwort hat zur Wirkung, dass der Wert der Variable nicht zwischengespeichert, sondern immer der aktuelle Wert abgerufen wird.
+Das Schlüsselwort hat zur Folge, dass der Wert der Variable nicht zwischengespeichert, sondern immer der aktuelle Wert abgerufen wird.
 Dies ist notwendig, da die \ac{isr} den Programmablauf jederzeit unterbrechen und den Wert zu einem ungünstigen Zeitpunkt verändern kann.
 
 \begin{minted}[firstnumber=6]{arduino}
@@ -101,16 +101,16 @@ Mit pinMode() wird festgelegt, ob ein \ac{io}-Pin als Ausgang oder als Eingang k
 Die serielle \ac{uart}-Schnittstelle kann mit dem Serial-Objekt manipuliert werden.
 Zum Initialisieren muss die Übertragungsrate in Bit/s angegeben werden, da \ac{uart} keine Taktleitung hat.
 Weiters wird das Timeout auf 1 Sekunde gesetzt.
-Die Serial.find()-Funktion, welche im Hauptteil verwendet wird, versucht so lange eine Zeichensequenz in der Datenübertragung zu finden, bis das Timeout abgelaufen ist.
+Die \texttt{Serial.find()}-Funktion, welche im Hauptteil verwendet wird, versucht so lange eine Zeichensequenz in der Datenübertragung zu finden, bis das Timeout abgelaufen ist.
 
 \paragraph{14-15:}
 An dieser Stelle wird die TimerOne-Bibliothek initialisiert.
 Zuerst wird die Periodendauer zwischen den Interrupts in µs definiert.
 10 Sekunden sind für diese Anwendung ausreichend schnell, während die Schnittstelle nicht unnötig viel verwendet wird.
-Mit attachInterrupt() kann die Funktion für die \ac{isr} definiert werden.
+Mit \texttt{attachInterrupt()} kann die Funktion für die \ac{isr} definiert werden.
 
 \paragraph{16:}
-Mit digitalWrite kann der Zustand eines digitalen Ausgangs festgelegt werden.
+Mit \texttt{digitalWrite()} kann der Zustand eines digitalen Ausgangs festgelegt werden.
 Hier wird der Ausgang, welcher den Lautsprecher-Verstärker abschaltet, auf logisch 1 gesetzt.
 Dies verhindert etwaige Störgeräusche am Lautsprecher, wenn dieser nicht gebraucht wird.
 Der \ac{rpi} kann mit einem Befehl über die \ac{uart}-Schnittstelle den Lautsprecher freigeben.
@@ -127,7 +127,7 @@ void Check()
 Die \ac{isr} sollte generell sehr kurz gehalten werden, da sie den normalen Programmablauf unterbricht.
 Funktionen der seriellen Kommunikation werden deswegen hier nicht verwendet.
 Stattdessen wird eine Variable gesetzt, welche im Hauptprogramm einen alternativen Ausführungszweig auslöst.
-Wichtig ist, dass die Variable wie oben bereits beschrieben als volatile deklariert wurde.
+Wichtig ist, dass die Variable wie oben bereits beschrieben als \texttt{volatile} deklariert wurde.
 
 \begin{minted}[firstnumber=24]{arduino}
 void loop()
@@ -157,20 +157,19 @@ void loop()
         }
     }
 \end{minted}
-Die Loop Funktion ist eine Endlosschleife, in welcher sich die Hauptfunktionalität des Programms befindet.
 
 \paragraph{26:}
-Die erste if-Abfrage stellt fest ob der Watchdog seine Überprüfung durchführen soll.
-Als Bedingungen für eine Überprüfung des \ac{rpi} sind hier definiert, dass der \ac{rpi} nicht gerade neustartet und die Watchdog-Zeit abgelaufen ist.
+Die erste \texttt{if}-Abfrage stellt fest, ob der Watchdog seine Überprüfung durchführen soll.
+Als Bedingungen für eine Überprüfung des \ac{rpi} wird hier definiert, dass der \ac{rpi} nicht gerade neustartet und die Watchdog-Zeit abgelaufen ist.
 
 \paragraph{28-40:}
 Die Überprüfung wird durchgeführt.
 Der Mikrocontroller sendet „Hello\textbackslash n“ (\textbackslash n signalisiert das Ende der Übertragung) und wartet auf die Antwort „Imthere“ des \ac{rpi}.
-Nach 1000ms ohne Antwort setzt der Mikrocontroller den \ac{rpi} mit Hilfe des Reset-Pins zurück.
-Zusätzlich wird die Variable Reboot gesetzt, um den \ac{rpi} nicht während dem Neustarten erneut zurückzusetzen.
+Nach 1000 ms ohne Antwort setzt der Mikrocontroller den \ac{rpi} mit Hilfe des Reset-Pins zurück.
+Zusätzlich wird die Variable Reboot gesetzt, um den \ac{rpi} nicht während des Neustarts erneut zurückzusetzen.
 
 \paragraph{42-49:}
-Die else if Anweisung sorgt beim Neustart des \ac{rpi} für Schutz vor ungewolltes Rücksetzen.
+Die \texttt{else if}-Anweisung sorgt beim Neustart des \ac{rpi} für Schutz vor ungewolltem Rücksetzen.
 Die Rebooted-Variable wird erst dann wieder zurückgesetzt, wenn der \ac{rpi} die Nachricht „Rebooted“ schickt.
 Diese signalisiert, dass der \ac{rpi} vollständig hochgefahren ist und auf weitere Anfragen reagieren kann.
 
@@ -191,8 +190,8 @@ Diese signalisiert, dass der \ac{rpi} vollständig hochgefahren ist und auf weit
 \end{minted}
 
 \paragraph{51-59:}
-Innerhalb dieser if-Abfrage wird auf sonstige Ereignisse, die der \ac{rpi} auslösen kann reagiert.
-Wenn der \ac{rpi} neustartet, sendet er die Nachricht „Imclosing“ and den Mikrocontroller, damit dieser den Watchdog-Timer temporär ausschaltet.
+Innerhalb dieser \texttt{if}-Abfrage wird auf sonstige Ereignisse, die der \ac{rpi} auslösen kann reagiert.
+Wenn der \ac{rpi} neustartet, sendet er die Nachricht „Imclosing“ an den Mikrocontroller, damit dieser den Watchdog-Timer temporär ausschaltet.
 Mit „Enable“ und „Disable“ kann der \ac{rpi} den Lautsprecher-Verstärker ein- bzw. ausschalten.
 
 \paragraph{61-62:}
@@ -200,3 +199,76 @@ Als letztes wird die Diebstahlsicherung für eine Station über den Mikrocontrol
 Falls die Diebstahlsicherung anschlägt wird zum \ac{rpi} eine Nachricht übermittelt, dass dieser entsprechend reagiert.
 
 \subsection{Raspberry Pi}
+Als Gegenstück zum Mirkocontroller muss auf dem \ac{rpi} ein weiteres Programm laufen, welches auf die Anfragen des Watchdogs antwortet und Befehle zur Steuerung des Audio-Chips an den Mikrocontroller schickt.
+Dieses Programm soll automatisch gestartet werden und sich mit dem Mikrocontroller verbinden.\par
+
+Das Programm wird wie die eigentliche Oberfläche der Station in C\# geschrieben.
+Als Entwicklungsumgebung hat man sich daher für Visual Studio 2019 entschieden.
+Die kompilierte Anwendung wird mit Hilfe des \ac{ssh}-Protokolls auf den \ac{rpi} übertragen und dort mit Hilfe der Mono-Runtime ausgeführt.
+
+\begin{minted}[firstnumber=13]{csharp}
+static SerialPort port = new SerialPort("/dev/ttyS0", 9600, Parity.None, 8, StopBits.One);
+static void Main(string[] args)
+{
+    AppDomain.CurrentDomain.ProcessExit += new EventHandler(CurrentDomain_ProcessExit);
+\end{minted}
+
+\paragraph{13:}
+Das .NET-Framework stellt Klassen für die serielle Kommunikation via UART zur Verfügung.
+Die \texttt{SerialPort}-Klasse benötigt für die Initialisierung alle wichtigen Informationen über die Verbindung, wie die Adresse des Ports, die Übertragungsgeschwindigkeit und wieviele Daten-Bits in einem Frame enthalten sind.
+
+\paragraph{14-16:}
+Eine .NET-Konsolenapplikation hat als Standard-Einspringpunkt die \texttt{Main}-Funktion, welche die optionalen Kommandozeilen-Argumente über ein Array annimmt.
+Um die Verbindung mit dem Mikrocontroller kontrolliert abzubrechen, wenn der \ac{rpi} manuell heruntergefahren wird, wird das \texttt{ProcessExit}-Ereignis verwendet.
+Dieses wird unmittelbar vor dem Beenden des Programms aufgerufen.
+
+\begin{minted}[firstnumber=17]{csharp}
+    try
+    {
+        port.Open();
+        port.Write("Rebooted");
+        while (true)
+        {
+            if (port.ReadTo("\n").ToString().Contains("Hello"))
+                port.WriteLine("Imthere");
+        }
+    }
+    catch (Exception exc)
+    {
+        Console.Write(exc);
+    }
+}
+\end{minted}
+
+\paragraph{17:}
+Mit der \texttt{try}-Funktion wird ein kritischer Runtime-Fehler abgefangen, damit das Programm nicht sofort abstürzt.
+In diesem Fall wird der auftretende Fehler vor dem Beenden in der Konsole ausgegeben.
+EIn solcher Runtime-Fehler kann in diesem Fall bei allen Operationen mit dem \texttt{SerialPort}-Objekt auftreten, wenn z.B. der angegebene Port bereits vergeben ist oder garnicht existiert.
+
+\paragraph{19-20:}
+Als erstes wird die Verbindung mit dem Mikrocontroller aufgebaut.
+Der \ac{rpi} sendet die Nachricht \enquote{Rebooted}, um dem Mikrocontroller zu signalisieren, dass er auf Watchdog-Anfragen reagieren kann.
+
+\paragraph{21-25:}
+Der \ac{rpi} wechselt nun in die Endlosschleife und überprüft bei jedem Durchlauf, ob der Mikrocontroller eine Watchdog-Anfrage geschickt hat.
+Sollte das der Fall sein, antwortet der \ac{rpi} auf diese.
+
+\begin{minted}[firstnumber=32]{csharp}
+static void CurrentDomain_ProcessExit(object sender, EventArgs e)
+{
+    if (port.IsOpen)
+    {
+        port.Write("Imclosing");
+        port.Close();
+    }
+}
+\end{minted}
+
+\paragraph{34-38:}
+Bevor das Programm beendet wird, überprüft der \ac{rpi}, ob er noch mit dem Mikrocontroller verbunden ist, um einen Runtime-Fehler zu umgehen.
+Sollte das der Fall sein, wird der Mikrocontroller über das Abschalten informiert, und die Verbindung wird getrennt.
+Danach wird das Programm vollständig beendet.
+
+Um das hier beschriebene Programm automatisch nach dem Hochfahren des \ac{rpi} zu starten, wird \enquote{systemd} verwendet.
+\enquote{systemd} ist ein Linux-Programm für die Verwaltung und das automatische Starten von Systemprozessen und Diensten.
+Die genaue Vorgehensweise kann dem in der Linux-Welt bekannten Arch Linux Wiki entnommen werden. \cite[vgl.][Writing unit files]{arch-systemd}
