@@ -1,13 +1,13 @@
 \label{ch:prog-doc}
 \section{Übersicht}
-Das im Zuge dieser Diplomarbeit entwickelte Software-Projekt basiert auf einer der von Microsoft bereitgestellten Xamarin.Forms-Vorlagen, welche als Teil von Visual Studio bereitgestellt werden.
+Das im Zuge dieser Diplomarbeit entwickelte Software-Projekt basiert auf einer den von Microsoft bereitgestellten Xamarin.Forms-Vorlagen, welche als Teil von Visual Studio bereitgestellt werden.
 Es gibt mehrere Auswahlmöglichkeiten, wobei alle Vorlagen bis auf \enquote{Blank} Beispielcode beinhalten.
 Da der Beispielcode der anderen Vorlagen für dieses Projekt nicht relevant ist und ohnehin gelöscht werden müsste, wird die \enquote{Blank}-Vorlage verwendet.
-Diese Vorlage beinhält nur eine Haupt-Oberflächenseite ohne jeglichen Beispielcode.
+Diese Vorlage beinhaltet nur eine Haupt-Oberflächenseite ohne jeglichen Beispielcode.
 
 Der immer wieder vorkommende Name PiBell ist eine freigeistliche Erfindung. PiBell ist der Projektname, der sich aus \acl{rpi} und \enquote{Bell}, dem englischen Wort für Klingel oder Glocke, zusammensetzt.
 
-Visual Studio organisiert alle Programmteile in einer sogenannten Solution, welche diesen Projektnamen trägt. In diesem Fall beinhält die Solution \enquote{PiBell} drei Programmteile oder \enquote{Projects}.
+Visual Studio organisiert alle Programmteile in einer sogenannten Solution, welche diesen Projektnamen trägt. In diesem Fall beinhaltet die Solution \enquote{PiBell} drei Programmteile oder \enquote{Projects}.
 Dieser Aufbau wird in Abbildung \ref{fig:solution} dargestellt.
 
 \paragraph{PiBell} ist das portable Projekt, auch \ac{dotnet}-Standard-Projekt genannt.
@@ -18,7 +18,7 @@ In diesem Projekt befindet sich der größte entwickelte Code-Anteil, da die mei
 Unter anderem ist hier die Android-Implementation des Mikrofon-Auf\-nahme-Services, sowie das Berechtigungs-Management enthalten.
 Die Mikrofon-Aufnahme erfolgt auf einer sehr hardwarenahen Ebene, was die Plattform-Abhängigkeit erklärt.
 
-\paragraph{PiBell.iOS} beinhaltet wie PiBell.Android den plattformspezifischen Code für die iOS-Platt\-form. Aufgrund mangelnder Entwicklungswerkzeuge wird dieser Teil nicht großartig behandelt.\par
+\paragraph{PiBell.iOS} beinhaltet wie PiBell.Android den plattformspezifischen Code für die iOS-Platt\-form. Aufgrund mangelnder Entwicklungswerkzeuge wird dieser Teil nur am Rande gestreift.\par
 
 \begin{figure}
 \centering\includegraphics[width=0.9\linewidth]{images/xamarin/struktur.png}
@@ -42,7 +42,7 @@ Die von Microsoft vorgefertigten Teile werden nicht behandelt.
 Der Fokus liegt damit auf den selbst erstellten Programmteilen.
 Die Programmteile werden generell in derselben Reihenfolge behandelt, wie sie vom Programm aufgerufen werden.\par
 
-Textsegmente mit vorgestellter Zeilennummer sind direkt vom Programm eingefügt.
+Textsegmente mit vorgestellter Zeilennummer sind direkt vom Programm eingefügt worden.
 Der beschreibende Text bezieht sich auf den Programmteil mit Hilfe der Zeilennummern.
 
 \subsection{App.xaml.cs}
@@ -64,9 +64,9 @@ public App()
         typeof(Analytics), typeof(Crashes), typeof(Push));
 }
 \end{minted}
-\paragraph{19-20:} Die Funktionen InitializeComponent() und Core.Initialize sind vorgefertigte Funktionen; diese sind zu verwenden, um die Applikation und alle benötigten Bibliotheken zu initialisieren.
+\paragraph{19-20:} Die Funktionen InitializeComponent() und Core.Initialize sind vorgefertigte Funktionen; diese werden dazu verwendet, um die Applikation und alle benötigten Bibliotheken zu initialisieren.
 \paragraph{21:} Die Anweisung MainPage = new MainPage() erzeugt eine neue Oberfläche, mit der der Benutzer mit der App interagiert. Diese Oberfläche erscheint nach dem App-Start am Bildschirm und passt sich automatisch der physikalischen Bildschirmgröße an.
-\paragraph{24-28:} Mit AppCenter.LogLevel kann festgelegt werden, welche Log-Nachrichten angezeigt werden. In diesem Fall werden Alle Nachrichten aktiviert.
+\paragraph{24-28:} Mit AppCenter.LogLevel kann festgelegt werden, welche Log-Nachrichten angezeigt werden. In diesem Fall werden alle Nachrichten aktiviert.
 Anschließend wird das AppCenter \ac{sdk} mit AppCenter.Start(..) gestartet. Am Ende dieser Anweisung werden alle Module (Analytics, Crashes und Push), die dazu gestartet werden sollen, angegeben.
 
 \subsection{MainPage.xaml}
@@ -83,7 +83,7 @@ In einer \ac{xaml}-Datei wird das Aussehen der Oberfläche nach dem \ac{wysiwym}
              BackgroundColor="#ff1b1b1b">
 \end{minted}
 \paragraph{3-8:} Am Anfang der \ac{xaml}-Datei wird der allgemeine Seiten-Typ, gemeinsam mit einigen Quell-Abkürzungen (Namenspräfix für Xamarin-fremde Elemente) definiert. In diesem Fall handelt es sich um eine simple ContentPage mit den Standard-Abkürzungen. Zur Verwendung der LibVLC wurde in Zeile 7 eine zusätzliche Quelle definiert. Die neu hinzugefügte Quelle erlaubt den Zugriff auf Elemente wie die VideoView, welche ein Video als Teil der Oberfläche darstellt.
-\paragraph{9:} Mit x:Class wird die Programmklasse angegeben, die den Code der Oberfläche beinhält. In dieser Klasse finden sich alle Event-Handler für jegliche Oberflächenereignisse, wie das Drücken eines Buttons.
+\paragraph{9:} Mit x:Class wird die Programmklasse angegeben, die den Code der Oberfläche beinhaltet. In dieser Klasse finden sich alle Event-Handler für jegliche Oberflächenereignisse, wie das Drücken eines Buttons.
 \paragraph{10:} Das Festlegen der Title-Variable ist in diesem Fall optional. Falls eine Master-Detail-Page-Struktur verwendet werden würde, wäre der Titel oben in der Kopfzeile der App zu sehen. Da es sich hier aber um ein Sigle-Page-Layout handelt, ist der Titel nicht zwingend notwendig.
 \paragraph{11:} Mit der Variable BackgroundColor wird die Hintergrundfarbe der Oberfläche definiert. Die gewünschte Farbe wird als Hexadezimal-Zahl mit dem Format Alpha-Rot-Grün-Blau angegeben. Der Alpha-Wert legt die Durchsichtigkeit der Farbe fest. Es wird ein dunkles Design verwendet, da dieses in einer wenig beleuchteten Umgebung die Augen besser schont.
 
@@ -194,7 +194,7 @@ Der Wert stellt die Server-Adresse dar, von der der Video-Stream abgerufen werde
     \label{fig:inc-call}
 \end{figure}
 Wenn die Applikation in den Hintergrund geht, verliert die LibVLC die Referenz auf die VideoView und kann den Video-Stream nicht mehr darstellen.
-Daher muss die Wiedergabe gestoppt werden, sobald die App in den Hintergrund geht und neu gestartet werden, wenn die App wieder im Vordergrund ist.
+Daher muss die Wiedergabe gestoppt werden, sobald die App in den Hintergrund geht, und neu gestartet werden, wenn die App wieder im Vordergrund ist.
 Da die Benachrichtigung über den Vorder- bzw. Hintergrundstatus der Applikation nur über das native Projekt funktioniert, muss diese Information vom nativen Projekt zum portablen Projekt übertragen werden.
 Dies geschieht mit der MessagingCenter-Komponente.
 \begin{minted}[firstnumber=57]{csharp}
@@ -225,7 +225,7 @@ MessagingCenter.Subscribe<string>(this, "OnRestart", app =>
 Bevor dies geschieht, wird die aktuelle Wiedergabe-Position in einer Variablen gespeichert und die Wiedergabe gestoppt.
 Anschließend wird die VideoView von der Oberfläche entfernt, damit sie später neu hinzugefügt werden kann.
 \paragraph{67-78:} Das \texttt{OnRestart}-Event wird aufgerufen, wenn die App vom Hintergrund wieder in den Vordergrund geht.
-Hier geschieht derselbe Vorgang wie davor, jedoch in sinngemäß umgekehrter Reihenfolge.
+Hier läuft derselbe Vorgang wie davor ab, jedoch in sinngemäß umgekehrter Reihenfolge.
 Als erstes wird die VideoView der Oberfläche wieder hinzugefügt, damit die LibVLC eine Referenz dazu bilden kann.
 Falls davor ein Video gespielt wurde, wird dieses fortgesetzt und die Variable für die vorherige Wiedergabeposition wird gelöscht.
 
@@ -284,7 +284,7 @@ protected override void OnSizeAllocated(double width, double height)
 \paragraph{121:} Die \texttt{OnSizeAllocated()}-Funktion ist eine vorgefertigte Funktion, die aufgerufen wird, wenn sich die Abmessungen der Oberfläche geändert haben.
 Die neuen Abmessungen sind über die Parameter \texttt{width} und \texttt{height} verfügbar.
 \paragraph{124-164:} Wenn die Abmessungen anders sind, als die Abmessungen beim letzten Aufruf wird das Oberflächen-Layout entsprechend angepasst.
-Falls die Höhe größer als die Breite ist, greift der erste Teil der If-Else-Struktur, ansonsten der zweite.
+Falls die Höhe länger als die Breite ist, greift der erste Teil der If-Else-Struktur, ansonsten der zweite.
 \paragraph{130-144:} Zuerst werden die Reihen- und Spalten-Definitionen gelöscht, um sie neu zuweisen zu können.
 Für das Hochformat werden eine Spalte und drei Reihen benötigt.
 Diese werden mit den richtigen relativen Maßen hinzugefügt.
@@ -301,7 +301,7 @@ Grundsätzlich finden sich hier zwei Klassen:
 \subsubsection{Player}
 Die Player-Klasse implementiert das \ac{mvvm}-Modell, um die MediaPlayer-Komponente mit der Oberfläche zu verknüpfen.
 Um die Anzeige über eine Änderung der Variablen zu informieren, muss der \texttt{PropertyChanged}-EventHandler mit dem Variablennamen als Argument aufgerufen werden.
-Um die Lesbarkeit den Codes zu vereinfachen, wird dieser Aufruf meist in einem Unterprogramm versteckt, welches von Visual Studio automatisch generiert werden kann.
+Um die Lesbarkeit des Codes zu vereinfachen, wird dieser Aufruf meist in einem Unterprogramm versteckt, welches von Visual Studio automatisch generiert werden kann.
 Daher wird auf den genauen Aufbau dieses Unterprogrammes nicht genauer eingegangen.
 Die Initialisierung beinhaltet keine besonderen Funktionen und wird daher ebenfalls nicht behandelt.
 
@@ -408,7 +408,7 @@ if (CheckSelfPermission(Manifest.Permission.RecordAudio) != Permission.Granted)
 \paragraph{33-36:} Es wird überprüft, ob die Berechtigung für die Audio-Aufnahme bereits erteilt ist.
 Wenn das nicht der Fall ist, wird diese beim System angefragt.
 Der Benutzer erhält dann ein PopUp, mit dem er gefragt wird, ob die Berechtigung erteilt werden soll.
-Der Benutzer kann anschließen entweder, wie in Abbildung \ref{fig:permission} gezeigt, die Berechtigung erteilen oder verweigern.
+Der Benutzer kann anschließend entweder, wie in Abbildung \ref{fig:permission} gezeigt, die Berechtigung erteilen oder verweigern.
 In letzterem Fall kann die Applikation nicht richtig funktionieren.
 \begin{figure}
     \centering

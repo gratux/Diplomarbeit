@@ -71,7 +71,7 @@ S->C: RTSP/1.0 200 OK
 
 \section{LibVLC Sharp}
 LibVLC ist ein Multimedia-Rahmenwerk der Non-Profit-Organisation VideoLAN, welche durch den VLC Media Player und dessen Funktionsumfang bekannt wurde. Der VLC Media Player funktioniert sozusagen als grafische Oberfläche zur LibVLC-Programmbibliothek.
-Die Bibliothek beinhält viele nützliche Funktionen, darunter die folgenden:
+Die Bibliothek beinhaltet viele nützliche Funktionen, darunter die folgenden:
 \begin{itemize}
     \item Videos nahezu beliebigen Formates decodieren und darstellen
     \item Video und Audio aufnehmen und transcodieren für die weitere Verwendung
@@ -89,9 +89,9 @@ Die Philosophie hinter diesem Modell ist, die Oberfläche (View) bis auf wenige 
 Dies ermöglicht es ohne größeren Aufwand, die Oberfläche zu ändern oder gar auszutauschen.
 Folgende Terminologie wird in diesem Zusammenhang verwendet:
 \begin{itemize}
-\item Models … beinhalten die Programmdaten. Meist werden einfache Klassen oder Strukturen hierfür verwendet.
-\item Views … Die grafische Oberfläche und deren Elemente wie Buttons, TextBoxen, und ähnliche
-\item ViewModels … wandeln die Daten der Models so um, dass sie von der Oberfläche dargestellt werden können. ViewModels sind meist als Klasse ausgeführt.
+\item Model … beinhaltet die Programmdaten. Meist werden einfache Klassen oder Strukturen hierfür verwendet.
+\item View … Die grafische Oberfläche und deren Elemente wie Buttons, TextBoxen, und ähnliche
+\item ViewModel … wandelt die Daten der Models so um, dass sie von der Oberfläche dargestellt werden können. ViewModel sind meist als Klasse ausgeführt.
 \end{itemize}
 
 Die Daten der Oberfläche und die Daten des Models bleiben zueinander konsistent.
@@ -171,9 +171,9 @@ Der Filter \enquote{queue} wird hier verwendet, um vor und nach dem Encoding-Vor
 
 \subsection{Zusatzmodul}
 gst-rtsp-server ist ein Zusatzmodul für das GStreamer- Rahmenwerk, welches die Verwendung des \ac{rtsp}-Protokolls für Server-Applikationen bereitstellt.
-Mit diesem Modul können Medien-Streams, welche mit GStreamer verarbeitet wurden, mittels dem \ac{rtsp}Protokoll den Netzwerk bereitzustellen.
+Mit diesem Modul können Medien-Streams, welche mit GStreamer verarbeitet wurden, mittels dem \ac{rtsp}-Protokoll dem Netzwerk bereitgestellt werden.
 
-Das GitHub-Repository des Zusatzmoduls beinhält einige Beispielapplikationen, darunter auch \texttt{test-launch}.
+Das GitHub-Repository des Zusatzmoduls beinhaltet einige Beispielapplikationen, darunter auch \texttt{test-launch}.
 Dieses Anwendungsbeispiel nimmt ähnlich wie das vorhin beschriebene \texttt{gst-launch-1.0} als Kommandozeilenargument eine GStreamer-Pipeline an.
 Der resultierende Medienstream wird von der Anwendung in einen \ac{rtsp}-Stream verpackt und dem Netzwerk bereitgestellt.
 
